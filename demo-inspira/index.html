@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspira Motion Kit — Modern Micro-Interaction & UI Component Playground</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            motion: {
+              950: '#030014',
+              900: '#080020',
+              850: '#10003b',
+              800: '#1a0459',
+              accent: '#ec4899',
+              violet: '#8b5cf6',
+              cyan: '#06b6d4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Magnetic & Fluid Spring Animation Effects */
+    .glow-box {
+      position: relative;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(236, 72, 153, 0.15), transparent 70%), rgba(16, 0, 59, 0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(236, 72, 153, 0.25);
+      transition: border-color 0.3s;
+    }
+    .glow-box:hover {
+      border-color: rgba(236, 72, 153, 0.6);
+    }
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-motion-950 text-slate-200 font-sans antialiased min-h-screen flex flex-col selection:bg-pink-500/30 selection:text-pink-200">
+
+  <!-- TOP BAR -->
+  <header class="sticky top-0 z-40 bg-motion-900/90 backdrop-blur-md border-b border-pink-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-3">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-pink-500/30 font-black text-lg">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-base text-white tracking-tight leading-none flex items-center gap-2">
+              <span>Inspira Motion Kit</span>
+              <span class="px-2 py-0.5 rounded-full bg-pink-500/20 text-pink-300 text-[10px] font-mono border border-pink-500/30">CSS Physics</span>
+            </div>
+            <div class="text-[10px] text-pink-400 font-mono mt-0.5">Micro-Interaction &amp; Glassmorphic UI Playground</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="../index.html" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold border border-white/10 flex items-center gap-1.5 transition">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Back to Portfolio</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PLAYGROUND -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    
+    <!-- Hero Header -->
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-mono">
+        <span class="w-2 h-2 rounded-full bg-pink-400 animate-ping"></span>
+        <span>INTERACTIVE COMPONENT DESIGN SYSTEM</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+        Fluid Animations &amp; <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400">Micro-Interactions Playground</span>
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+        Test interactive glassmorphism shaders, 3D mouse parallax cards, magnetic buttons, and copy production-ready Tailwind CSS code snippets.
+      </p>
+    </div>
+
+    <!-- Interactive Grid 1: Mouse Radial Glow & 3D Tilt Card -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Component 1: 3D Mouse Parallax Tilt Card -->
+      <div class="glow-box rounded-3xl p-8 border border-pink-500/30 flex flex-col justify-between tilt-card" id="parallax-card" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 font-bold">Interactive 3D Tilt</span>
+            <span class="text-slate-400">Hover &amp; Move Cursor</span>
+          </div>
+          <h3 class="text-2xl font-extrabold text-white">Dynamic 3D Inertia Card</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Moves dynamically based on your cursor coordinates with realistic depth and specular highlights.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-white/10 flex items-center justify-between">
+          <button onclick="copySnippet('tilt')" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-1.5">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span>Copy Tailwind Code</span>
+          </button>
+          <span class="text-[11px] font-mono text-cyan-300">GPU Accelerated</span>
+        </div>
+      </div>
+
+      <!-- Component 2: Interactive Glassmorphic Customizer -->
+      <div class="glow-box rounded-3xl p-8 border border-purple-500/30 space-y-6">
+        <div class="flex items-center justify-between text-xs font-mono">
+          <span class="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 font-bold">Glassmorphism Studio</span>
+          <span class="text-emerald-400">Live Customizer</span>
+        </div>
+
+        <!-- Live Preview Target Box -->
+        <div id="live-glass-box" class="p-6 rounded-2xl border border-white/20 text-center space-y-2 transition-all" style="background: rgba(255,255,255,0.08); backdrop-filter: blur(12px);">
+          <div class="text-sm font-bold text-white">Live Shader Preview</div>
+          <div class="text-xs text-slate-300">Adjust blur &amp; opacity sliders below</div>
+        </div>
+
+        <!-- Controls -->
+        <div class="space-y-3 text-xs">
+          <div>
+            <div class="flex justify-between text-slate-400 mb-1">
+              <span>Backdrop Blur</span>
+              <span id="blur-val" class="font-mono text-cyan-300">12px</span>
+            </div>
+            <input type="range" min="0" max="30" value="12" oninput="updateGlassBlur(this.value)" class="w-full accent-pink-500 cursor-pointer">
+          </div>
+          <div>
+            <div class="flex justify-between text-slate-400 mb-1">
+              <span>Surface Opacity</span>
+              <span id="opacity-val" class="font-mono text-pink-300">0.08</span>
+            </div>
+            <input type="range" min="1" max="50" value="8" oninput="updateGlassOpacity(this.value)" class="w-full accent-pink-500 cursor-pointer">
+          </div>
+        </div>
+
+        <button onclick="copySnippet('glass')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition flex items-center justify-center gap-2">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <span>Copy Glass CSS Preset</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Interactive Grid 2: Micro-Interaction Buttons & Spring Physics -->
+    <div class="glow-box rounded-3xl p-8 border border-cyan-500/30 space-y-6">
+      <div class="flex items-center justify-between text-xs font-mono">
+        <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">Micro-Button Kinetic Sandbox</span>
+        <span class="text-slate-400">Click Buttons for Physics States</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <button class="p-4 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-xs shadow-xl shadow-pink-500/25 transition transform active:scale-95 flex items-center justify-center gap-2">
+          <i data-lucide="sparkle" class="w-4 h-4"></i>
+          <span>Magnetic Spring Button</span>
+        </button>
+
+        <button class="p-4 rounded-2xl bg-white/10 hover:bg-cyan-500 hover:text-motion-950 text-cyan-300 border border-cyan-500/40 font-bold text-xs shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Glow Border Surge</span>
+        </button>
+
+        <button class="p-4 rounded-2xl bg-purple-900/60 hover:bg-purple-800 text-purple-200 border border-purple-400/30 font-bold text-xs shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+          <i data-lucide="activity" class="w-4 h-4"></i>
+          <span>Elastic Pulse Action</span>
+        </button>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-6 right-6 z-50 bg-motion-900 border border-pink-500/40 text-pink-300 px-5 py-3.5 rounded-2xl shadow-2xl font-mono text-xs flex items-center gap-3 transition-all duration-300 opacity-0 translate-y-8 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-text">Code snippet copied to clipboard!</span>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function showToast(message) {
+      const toast = document.getElementById('toast-banner');
+      const text = document.getElementById('toast-text');
+      text.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3000);
+    }
+
+    // 3D Parallax Tilt Handler
+    function handleTilt(e, card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+      card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+    }
+
+    function resetTilt(card) {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    }
+
+    // Glassmorphism Customizer
+    let currentBlur = 12;
+    let currentOpacity = 0.08;
+
+    function updateGlassBlur(val) {
+      currentBlur = val;
+      document.getElementById('blur-val').textContent = val + 'px';
+      applyGlassStyles();
+    }
+    function updateGlassOpacity(val) {
+      currentOpacity = (val / 100).toFixed(2);
+      document.getElementById('opacity-val').textContent = currentOpacity;
+      applyGlassStyles();
+    }
+    function applyGlassStyles() {
+      const box = document.getElementById('live-glass-box');
+      box.style.background = `rgba(255, 255, 255, ${currentOpacity})`;
+      box.style.backdropFilter = `blur(${currentBlur}px)`;
+    }
+
+    function copySnippet(type) {
+      let code = '';
+      if (type === 'tilt') {
+        code = `<div class="tilt-card transition transform hover:scale-105 bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-pink-500/30">...</div>`;
+      } else {
+        code = `background: rgba(255, 255, 255, ${currentOpacity});\nbackdrop-filter: blur(${currentBlur}px);\nborder: 1px solid rgba(255, 255, 255, 0.2);`;
+      }
+      navigator.clipboard.writeText(code);
+      showToast('Snippet copied to clipboard!');
+    }
+  </script>
+</body>
+</html>

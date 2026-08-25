@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyBuddy AI — Flutter & Gemini GenAI Mobile App Showcase</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            app: {
+              bg: '#0F121E',
+              surface: '#171B2C',
+              card: '#1E2337',
+              primary: '#4F46E5',
+              primaryLight: '#6366F1',
+              accentTeal: '#06B6D4',
+              accentPurple: '#8B5CF6',
+              textMain: '#F8FAFC',
+              textMuted: '#94A3B8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Phone Mockup Frame Elevation */
+    .phone-mockup-frame {
+      width: 360px;
+      height: 750px;
+      border-radius: 46px;
+      box-shadow: 0 0 0 8px #1E2337, 0 0 0 10px #334155, 0 30px 70px -15px rgba(0, 0, 0, 0.8);
+      background-color: #0F121E;
+    }
+    @media (max-width: 640px) {
+      .phone-mockup-frame {
+        width: 100%;
+        max-width: 340px;
+        height: 710px;
+      }
+    }
+
+    .phone-scroll::-webkit-scrollbar {
+      width: 3px;
+    }
+    .phone-scroll::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.4);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-500/30 selection:text-indigo-200">
+
+  <!-- ======================================================== -->
+  <!-- TOP SHOWCASE HEADER                                      -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-indigo-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-3">
+        
+        <!-- App Monogram & Info -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 font-black text-lg">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-base text-white tracking-tight leading-none flex items-center gap-2">
+              <span>StudyBuddy AI</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-mono border border-indigo-500/30">Flutter 3.x Native</span>
+            </div>
+            <div class="text-[10px] text-cyan-300 font-mono mt-0.5">By Khadija Yaseen &bull; Full Flutter UI Replica</div>
+          </div>
+        </div>
+
+        <!-- Social Action Buttons -->
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/khadijayaseen" target="_blank" class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 text-xs font-semibold border border-white/10 transition">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://lnkd.in/p/dVChg5BR" target="_blank" class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs font-semibold border border-blue-500/30 transition">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
+            <span>LinkedIn Post &amp; Video</span>
+          </a>
+          <a href="../index.html" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-xs font-bold shadow-lg shadow-indigo-500/20 flex items-center gap-1.5 transition">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Portfolio</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN DUAL-PANEL SHOWCASE                                 -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- ====================================================== -->
+      <!-- LEFT COLUMN: REALISTIC FLUTTER SMARTPHONE APP REPLICA  -->
+      <!-- ====================================================== -->
+      <div class="lg:col-span-5 flex flex-col items-center justify-center">
+        
+        <div class="relative phone-mockup-frame border-2 border-slate-700 overflow-hidden flex flex-col justify-between text-app-textMain">
+          
+          <!-- Top Status Bar -->
+          <div class="pt-3 px-5 pb-1 flex items-center justify-between text-[11px] font-mono select-none z-30 bg-app-bg text-slate-400">
+            <span class="font-bold text-slate-200" id="phone-clock">5:29 PM</span>
+            <div class="flex items-center gap-1.5 text-[10px]">
+              <i data-lucide="wifi" class="w-3 h-3 text-slate-300"></i>
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-[9px] text-slate-300 border border-slate-700">31</span>
+            </div>
+          </div>
+
+          <!-- ==================================================== -->
+          <!-- PHONE SCREEN VIEWPORT                                -->
+          <!-- ==================================================== -->
+          <div id="phone-screen-viewport" class="flex-1 overflow-hidden flex flex-col bg-app-bg relative">
+            
+            <!-- -------------------------------------------------- -->
+            <!-- 1. AUTH SCREEN (login_screen.dart)                 -->
+            <!-- -------------------------------------------------- -->
+            <div id="pscreen-auth" class="pscreen hidden flex-1 flex flex-col justify-center items-center p-6 space-y-5 bg-slate-100 dark:bg-app-bg text-slate-900 dark:text-white">
+              
+              <!-- App Logo Box -->
+              <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-indigo-700 via-purple-600 to-cyan-400 p-0.5 shadow-2xl shadow-indigo-500/40">
+                <div class="w-full h-full bg-slate-950 rounded-[22px] flex items-center justify-center text-cyan-300">
+                  <i data-lucide="sparkles" class="w-9 h-9"></i>
+                </div>
+              </div>
+
+              <!-- Title & Toggle -->
+              <div class="text-center space-y-1">
+                <div class="flex items-center justify-center gap-2">
+                  <h2 class="text-xl font-black tracking-tight">StudyBuddy AI</h2>
+                  <span class="w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border border-slate-400 inline-block"></span>
+                </div>
+                <p class="text-[11px] text-slate-400 max-w-[220px]">Sign in to access your AI tutor &amp; smart quizzes</p>
+              </div>
+
+              <!-- Form Card -->
+              <div class="w-full bg-white dark:bg-app-surface p-4 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg space-y-3">
+                <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-2xl bg-slate-50 dark:bg-app-bg border border-slate-200 dark:border-slate-700 text-xs">
+                  <i data-lucide="mail" class="w-4 h-4 text-indigo-500"></i>
+                  <span class="text-slate-400">Email Address</span>
+                </div>
+
+                <div class="flex items-center justify-between px-3.5 py-3 rounded-2xl bg-slate-50 dark:bg-app-bg border border-slate-200 dark:border-slate-700 text-xs">
+                  <div class="flex items-center gap-2.5">
+                    <i data-lucide="lock" class="w-4 h-4 text-indigo-500"></i>
+                    <span class="text-slate-400">Password</span>
+                  </div>
+                  <i data-lucide="eye" class="w-4 h-4 text-slate-400"></i>
+                </div>
+
+                <div class="text-right">
+                  <span class="text-[10px] text-indigo-500 font-bold cursor-pointer">Forgot Password?</span>
+                </div>
+
+                <button onclick="switchAppScreen('home')" class="w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition">
+                  <span>Sign In</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <div class="text-[11px] text-slate-400">
+                Don't have an account? <span class="text-indigo-500 font-bold cursor-pointer">Sign Up</span>
+              </div>
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- 2. HOME SCREEN (home_screen.dart)                  -->
+            <!-- -------------------------------------------------- -->
+            <div id="pscreen-home" class="pscreen flex-1 overflow-y-auto phone-scroll p-4 space-y-4 bg-app-bg">
+              
+              <!-- Header -->
+              <div class="flex items-center justify-between pt-1">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-black flex items-center justify-center text-sm shadow-md">
+                    K
+                  </div>
+                  <div>
+                    <div class="text-[10px] text-slate-400 font-medium">Good evening 👋</div>
+                    <div class="font-extrabold text-sm text-white flex items-center gap-1">
+                      <span>khadija</span>
+                      <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400 fill-emerald-400/20"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Top Icons -->
+                <div class="flex items-center gap-1.5">
+                  <button onclick="switchAppScreen('security')" class="p-2 rounded-xl bg-app-surface text-slate-300 hover:text-white border border-slate-700">
+                    <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <button class="p-2 rounded-xl bg-app-surface text-slate-300 hover:text-white border border-slate-700">
+                    <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <button onclick="switchAppScreen('auth')" class="p-2 rounded-xl bg-app-surface text-rose-400 border border-slate-700">
+                    <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- AI Supercharge Hero Card -->
+              <div class="p-4 rounded-3xl bg-gradient-to-r from-indigo-900/90 to-purple-900/80 border border-indigo-500/30 text-white shadow-xl relative overflow-hidden space-y-2">
+                <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[9px] font-bold font-mono">
+                  <i data-lucide="zap" class="w-2.5 h-2.5"></i>
+                  <span>AI Ready</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="space-y-1 max-w-[200px]">
+                    <h3 class="font-extrabold text-xs leading-snug">Supercharge your learning with AI assistance</h3>
+                    <p class="text-[10px] text-slate-300">Attach notes, code, PDFs &amp; photos to generate active-recall quizzes</p>
+                  </div>
+                  <div class="w-10 h-10 rounded-2xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center shadow-inner">
+                    <i data-lucide="brain" class="w-5 h-5"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Actions -->
+              <div class="space-y-2">
+                <div class="text-[11px] font-extrabold text-slate-300 uppercase tracking-wider">Quick Actions</div>
+                <div class="grid grid-cols-2 gap-2.5">
+                  
+                  <button onclick="openNewSessionModal()" class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 hover:border-indigo-500 text-left space-y-1.5 transition">
+                    <div class="w-7 h-7 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                      <i data-lucide="message-square" class="w-4 h-4"></i>
+                    </div>
+                    <div class="font-bold text-white text-xs">New Study Chat</div>
+                    <div class="text-[10px] text-slate-400">Discuss topics &amp; notes</div>
+                  </button>
+
+                  <button onclick="switchAppScreen('quiz')" class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 hover:border-cyan-500 text-left space-y-1.5 transition">
+                    <div class="w-7 h-7 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+                      <i data-lucide="help-circle" class="w-4 h-4"></i>
+                    </div>
+                    <div class="font-bold text-white text-xs">Generate Quiz</div>
+                    <div class="text-[10px] text-slate-400">Code, Docs &amp; Photos</div>
+                  </button>
+
+                </div>
+              </div>
+
+              <!-- Session Filter Pills -->
+              <div class="flex items-center gap-2 pt-1 text-[11px] font-semibold">
+                <button class="px-3 py-1.5 rounded-xl bg-app-surface text-slate-400 border border-slate-800">All Chats</button>
+                <button class="px-3 py-1.5 rounded-xl bg-app-surface text-slate-400 border border-slate-800 flex items-center gap-1">
+                  <span>⭐ Starred</span>
+                </button>
+                <button class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white shadow-md">Past Quizzes</button>
+              </div>
+
+              <!-- Past Quizzes List -->
+              <div class="space-y-2 text-xs">
+                
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                      <i data-lucide="trophy" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-white text-xs">scd lab</div>
+                      <div class="text-[10px] text-amber-400 font-mono">Score: 3 / 5 (60% Mastery)</div>
+                    </div>
+                  </div>
+                  <button onclick="switchAppScreen('quiz')" class="px-3 py-1 rounded-xl bg-slate-800 text-cyan-300 hover:bg-slate-700 text-[10px] font-bold border border-cyan-500/30 transition">
+                    Retake
+                  </button>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                      <i data-lucide="trophy" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-white text-xs">flutter</div>
+                      <div class="text-[10px] text-emerald-400 font-mono">Score: 4 / 5 (80% Mastery)</div>
+                    </div>
+                  </div>
+                  <button onclick="switchAppScreen('quiz')" class="px-3 py-1 rounded-xl bg-slate-800 text-cyan-300 hover:bg-slate-700 text-[10px] font-bold border border-cyan-500/30 transition">
+                    Retake
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- Floating Action Button for New Quiz -->
+              <div class="pt-2 flex justify-end">
+                <button onclick="switchAppScreen('quiz')" class="px-4 py-2.5 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/30 flex items-center gap-1.5 transition">
+                  <i data-lucide="zap" class="w-3.5 h-3.5 fill-slate-950"></i>
+                  <span>New Quiz</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- 3. AI CHAT SCREEN (chat_screen.dart)               -->
+            <!-- -------------------------------------------------- -->
+            <div id="pscreen-chat" class="pscreen hidden flex-1 flex flex-col bg-app-bg">
+              
+              <!-- Chat Top App Bar -->
+              <div class="p-3 bg-app-surface border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <button onclick="switchAppScreen('home')" class="p-1 text-slate-400 hover:text-white">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                  </button>
+                  <div>
+                    <div class="text-xs font-bold text-white">DSA</div>
+                    <div class="text-[9px] text-emerald-400 font-mono flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Claude Direct Tutor
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 text-slate-400">
+                  <i data-lucide="sun" class="w-4 h-4"></i>
+                  <i data-lucide="star" class="w-4 h-4"></i>
+                  <i data-lucide="more-vertical" class="w-4 h-4"></i>
+                </div>
+              </div>
+
+              <!-- Mode Buttons Bar -->
+              <div class="px-3 py-2 bg-app-surface/60 border-b border-slate-800 flex items-center gap-1.5 text-[10px] font-bold overflow-x-auto no-scrollbar">
+                <span class="px-2.5 py-1 rounded-xl bg-app-card text-slate-300 border border-slate-700 flex items-center gap-1">
+                  <i data-lucide="graduation-cap" class="w-3 h-3"></i> Direct Mode
+                </span>
+                <button onclick="switchAppScreen('quiz')" class="px-2.5 py-1 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow flex items-center gap-1">
+                  <span>📋 🧠 Quiz Me</span>
+                </button>
+                <button onclick="switchAppScreen('flashcards')" class="px-2.5 py-1 rounded-xl bg-app-card text-cyan-300 border border-cyan-500/40 flex items-center gap-1">
+                  <span>📇 Flashcards</span>
+                </button>
+              </div>
+
+              <!-- Chat Message Stream -->
+              <div id="pscreen-chat-stream" class="flex-1 overflow-y-auto phone-scroll p-3 space-y-3 text-xs">
+                
+                <!-- AI Intro Bubble -->
+                <div class="flex gap-2">
+                  <div class="w-6 h-6 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 text-[10px]">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  </div>
+                  <div class="bg-app-surface p-3 rounded-2xl border border-slate-800 max-w-[85%] text-slate-200 space-y-2 text-[11px] leading-relaxed shadow-sm">
+                    <p class="font-bold text-cyan-300">4. If you hit a snag:</p>
+                    <p class="text-slate-300">Paste the relevant concept or attach lecture notes and I'll help you troubleshoot.</p>
+                    <p>Happy exploring! 🚀</p>
+                    <div class="flex items-center justify-between pt-1 border-t border-slate-800 text-[9px] font-mono text-slate-400">
+                      <span class="text-indigo-400">▶ Resume</span>
+                      <span>📋 Copy &bull; 5:44 PM</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- User Message Bubble (explain ddos with attachment) -->
+                <div class="flex gap-2 justify-end">
+                  <div class="bg-indigo-600 text-white p-3 rounded-2xl max-w-[85%] text-[11px] space-y-1.5 shadow-md">
+                    <p class="font-bold">explain ddos.</p>
+                    <div class="px-2 py-1 rounded-lg bg-black/20 text-[10px] font-mono flex items-center gap-1 text-cyan-200">
+                      <span>📌 Attached: 15. ch07 Ddos.ppt</span>
+                    </div>
+                    <div class="text-[9px] text-indigo-200 text-right">✏️ Edit &bull; 5:46 PM</div>
+                  </div>
+                </div>
+
+                <!-- AI Response Bubble -->
+                <div class="flex gap-2">
+                  <div class="w-6 h-6 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 text-[10px]">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  </div>
+                  <div class="bg-app-surface p-3 rounded-2xl border border-slate-800 max-w-[85%] text-slate-200 space-y-2 text-[11px] leading-relaxed shadow-sm">
+                    <p class="font-extrabold text-white text-xs flex items-center gap-1">
+                      <span>📡 What Is a <strong>DDoS</strong> Attack?</span>
+                    </p>
+                    <p class="text-slate-300 text-[11px]">
+                      <strong>DDoS (Distributed Denial of Service)</strong> is a malicious attempt to disrupt normal network traffic by overwhelming the target with a flood of Internet traffic from compromised botnet devices.
+                    </p>
+                    <ul class="list-disc list-inside text-[10px] text-slate-400 space-y-0.5">
+                      <li><strong>Volumetric:</strong> UDP / ICMP flood</li>
+                      <li><strong>Protocol:</strong> SYN Floods</li>
+                      <li><strong>Application:</strong> HTTP GET / POST Floods</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Chat Input Bar -->
+              <div class="p-2.5 bg-app-surface border-t border-slate-800">
+                <form id="pscreen-chat-form" onsubmit="handleScreenChatSubmit(event)" class="flex items-center gap-2">
+                  <button type="button" onclick="openFileAttachmentModal()" class="p-2 text-slate-400 hover:text-cyan-400">
+                    <i data-lucide="paperclip" class="w-4 h-4"></i>
+                  </button>
+                  <input type="text" id="pscreen-chat-input" placeholder="Ask about DSA..." class="flex-1 px-3 py-2 rounded-xl bg-app-bg border border-slate-800 text-[11px] text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+                  <button type="submit" class="w-8 h-8 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center shadow">
+                    <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                  </button>
+                </form>
+              </div>
+
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- 4. QUIZ SCREEN (quiz_screen.dart)                  -->
+            <!-- -------------------------------------------------- -->
+            <div id="pscreen-quiz" class="pscreen hidden flex-1 flex flex-col p-4 bg-app-bg space-y-3">
+              
+              <!-- Quiz Header -->
+              <div class="flex items-center justify-between pb-2">
+                <div class="flex items-center gap-2">
+                  <button onclick="switchAppScreen('home')" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                  </button>
+                  <div>
+                    <h3 class="text-xs font-black text-white">ddos quizz Quiz</h3>
+                    <div class="text-[9px] text-slate-400">Question 1 of 5</div>
+                  </div>
+                </div>
+                <!-- Timer Pill -->
+                <div class="px-2.5 py-1 rounded-full bg-purple-900/60 text-purple-300 text-[10px] font-mono font-bold flex items-center gap-1 border border-purple-500/30">
+                  <i data-lucide="clock" class="w-3 h-3"></i>
+                  <span>30 s</span>
+                </div>
+              </div>
+
+              <!-- Top Blue Progress Bar -->
+              <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                <div class="bg-indigo-500 h-full w-1/5"></div>
+              </div>
+
+              <!-- Question Card -->
+              <div class="p-4 rounded-3xl bg-app-surface border border-slate-800 space-y-2">
+                <span class="px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-[9px] font-bold">Q1 &bull; Single Choice</span>
+                <p class="font-extrabold text-white text-xs leading-relaxed">
+                  Which of the following best describes a volumetric DDoS attack?
+                </p>
+              </div>
+
+              <!-- Options Grid -->
+              <div class="space-y-2 text-xs">
+                
+                <button onclick="selectQuizOpt(this, false)" class="quiz-btn w-full p-3 rounded-2xl bg-app-surface border border-slate-800 hover:border-indigo-500 text-left flex items-start gap-2.5 transition">
+                  <span class="w-5 h-5 rounded-lg bg-slate-800 text-slate-300 text-[10px] font-bold flex items-center justify-center shrink-0">A</span>
+                  <span class="text-[11px] text-slate-300">It exploits weaknesses in the application layer to exhaust server resources.</span>
+                </button>
+
+                <button onclick="selectQuizOpt(this, true)" class="quiz-btn w-full p-3 rounded-2xl bg-app-surface border border-slate-800 hover:border-indigo-500 text-left flex items-start gap-2.5 transition">
+                  <span class="w-5 h-5 rounded-lg bg-slate-800 text-slate-300 text-[10px] font-bold flex items-center justify-center shrink-0">B</span>
+                  <span class="text-[11px] text-slate-300">It overwhelms the target's network bandwidth with a massive amount of traffic.</span>
+                </button>
+
+                <button onclick="selectQuizOpt(this, false)" class="quiz-btn w-full p-3 rounded-2xl bg-app-surface border border-slate-800 hover:border-indigo-500 text-left flex items-start gap-2.5 transition">
+                  <span class="w-5 h-5 rounded-lg bg-slate-800 text-slate-300 text-[10px] font-bold flex items-center justify-center shrink-0">C</span>
+                  <span class="text-[11px] text-slate-300">It targets the TCP handshake process to consume connection tables.</span>
+                </button>
+
+                <button onclick="selectQuizOpt(this, false)" class="quiz-btn w-full p-3 rounded-2xl bg-app-surface border border-slate-800 hover:border-indigo-500 text-left flex items-start gap-2.5 transition">
+                  <span class="w-5 h-5 rounded-lg bg-slate-800 text-slate-300 text-[10px] font-bold flex items-center justify-center shrink-0">D</span>
+                  <span class="text-[11px] text-slate-300">It uses malformed packets to crash network devices.</span>
+                </button>
+
+              </div>
+
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- 5. ACCOUNT & SECURITY (account_security_screen)    -->
+            <!-- -------------------------------------------------- -->
+            <div id="pscreen-security" class="pscreen hidden flex-1 overflow-y-auto phone-scroll p-4 space-y-4 bg-app-bg">
+              
+              <!-- Header -->
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <button onclick="switchAppScreen('home')" class="text-slate-400 hover:text-white">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                  </button>
+                  <h3 class="text-sm font-bold text-white">Account &amp; Security</h3>
+                </div>
+                <button class="text-indigo-400"><i data-lucide="rotate-cw" class="w-4 h-4"></i></button>
+              </div>
+
+              <!-- Profile Card -->
+              <div class="p-4 rounded-3xl bg-gradient-to-r from-indigo-900/80 to-purple-900/70 border border-indigo-500/30 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white font-black flex items-center justify-center text-base shadow-lg">
+                  K
+                </div>
+                <div>
+                  <div class="font-extrabold text-white text-sm">Khadija</div>
+                  <div class="text-[10px] text-slate-300 font-mono">khadijayaseen36@gmail.com</div>
+                </div>
+              </div>
+
+              <!-- Security Actions List -->
+              <div class="space-y-2 text-xs">
+                
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 space-y-1">
+                  <div class="font-bold text-white text-xs">Send Password Reset Link</div>
+                  <div class="text-[10px] text-slate-400">Send a reset link to khadijayaseen36@gmail.com</div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 space-y-1">
+                  <div class="font-bold text-white text-xs">Change Password Directly</div>
+                  <div class="text-[10px] text-slate-400">Enter current password and set a new password</div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 space-y-1">
+                  <div class="font-bold text-white text-xs">Change Email Address</div>
+                  <div class="text-[10px] text-slate-400">Update account email with password verification</div>
+                </div>
+
+              </div>
+
+              <!-- Advanced Protection -->
+              <div class="space-y-2 pt-2">
+                <div class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Advanced Protection</div>
+                
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 flex items-center justify-between">
+                  <div class="space-y-0.5 max-w-[210px]">
+                    <div class="font-bold text-white text-xs">Two-Factor Auth (2FA) &amp; Protection</div>
+                    <div class="text-[10px] text-slate-400">SMS / OTP setup, security verification audit</div>
+                  </div>
+                  <!-- Switch Toggle -->
+                  <div class="w-10 h-5 rounded-full bg-indigo-600 p-0.5 flex items-center justify-end cursor-pointer">
+                    <div class="w-4 h-4 rounded-full bg-white shadow-sm"></div>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-app-surface border border-slate-800 flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white text-xs">Email Verification Status</div>
+                    <div class="text-[10px] text-emerald-400 font-mono font-bold">🟢 Verified Account</div>
+                  </div>
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- MODAL: START NEW STUDY SESSION                     -->
+            <!-- -------------------------------------------------- -->
+            <div id="modal-new-session" class="absolute inset-0 bg-black/80 backdrop-blur-xs z-40 flex items-end justify-center p-3 hidden">
+              <div class="w-full bg-app-surface border border-indigo-500/40 rounded-3xl p-5 space-y-4 shadow-2xl">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-extrabold text-sm text-white">Start New Study Session</h3>
+                  <button onclick="closeNewSessionModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                  </button>
+                </div>
+                <p class="text-[11px] text-slate-400">Enter a subject or topic name for your AI study session.</p>
+
+                <div class="p-3 rounded-2xl bg-app-bg border border-indigo-500/40 flex items-center gap-2 text-xs">
+                  <i data-lucide="graduation-cap" class="w-4 h-4 text-indigo-400"></i>
+                  <input type="text" id="session-topic-input" value="DSA" class="bg-transparent text-white font-bold focus:outline-none w-full">
+                </div>
+
+                <button onclick="startSessionChat()" class="w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2">
+                  <i data-lucide="sparkles" class="w-4 h-4"></i>
+                  <span>Start Study Chat</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- MODAL: DOWNLOADS FILE PICKER (Frame 16)            -->
+            <!-- -------------------------------------------------- -->
+            <div id="modal-file-picker" class="absolute inset-0 bg-black/90 backdrop-blur-xs z-40 flex flex-col p-4 hidden">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <button onclick="closeFilePicker()" class="text-slate-400"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+                  <span class="font-bold text-white text-xs">Download</span>
+                </div>
+                <div class="flex gap-2 text-slate-400">
+                  <i data-lucide="search" class="w-4 h-4"></i>
+                  <i data-lucide="more-vertical" class="w-4 h-4"></i>
+                </div>
+              </div>
+
+              <!-- Grid of files -->
+              <div class="grid grid-cols-2 gap-2.5 pt-3 flex-1 overflow-y-auto phone-scroll">
+                
+                <button onclick="attachDocFile('15. ch07 Ddos.ppt')" class="p-3 rounded-2xl bg-app-surface border border-slate-800 text-left space-y-2 hover:border-indigo-500 transition">
+                  <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-500 font-bold flex items-center justify-center text-sm">P</div>
+                  <div>
+                    <div class="font-bold text-white text-[11px] truncate">15. ch07 Ddos.ppt</div>
+                    <div class="text-[9px] text-slate-400 font-mono">1.77 MB &bull; 31 May</div>
+                  </div>
+                </button>
+
+                <button onclick="attachDocFile('09 - SCD Lab.docx')" class="p-3 rounded-2xl bg-app-surface border border-slate-800 text-left space-y-2 hover:border-indigo-500 transition">
+                  <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 font-bold flex items-center justify-center text-sm">W</div>
+                  <div>
+                    <div class="font-bold text-white text-[11px] truncate">09 - SCD Lab ...</div>
+                    <div class="text-[9px] text-slate-400 font-mono">13.33 kB &bull; 3 Jun</div>
+                  </div>
+                </button>
+
+                <button onclick="attachDocFile('13. ch08 Intrusion.ppt')" class="p-3 rounded-2xl bg-app-surface border border-slate-800 text-left space-y-2 hover:border-indigo-500 transition">
+                  <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-500 font-bold flex items-center justify-center text-sm">P</div>
+                  <div>
+                    <div class="font-bold text-white text-[11px] truncate">13. ch08 Intru...</div>
+                    <div class="text-[9px] text-slate-400 font-mono">1.18 MB &bull; 31 May</div>
+                  </div>
+                </button>
+
+                <button onclick="attachDocFile('Assignment3.docx')" class="p-3 rounded-2xl bg-app-surface border border-slate-800 text-left space-y-2 hover:border-indigo-500 transition">
+                  <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 font-bold flex items-center justify-center text-sm">W</div>
+                  <div>
+                    <div class="font-bold text-white text-[11px] truncate">Assignment3_...</div>
+                    <div class="text-[9px] text-slate-400 font-mono">15.97 kB &bull; 31 May</div>
+                  </div>
+                </button>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Home Bar -->
+          <div class="h-4 bg-app-bg flex items-center justify-center pb-1">
+            <div class="w-28 h-1 bg-slate-700 rounded-full"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- RIGHT COLUMN: TECHNICAL SPEC & EMBEDDED VOICEOVER     -->
+      <!-- ====================================================== -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-3">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>100% FLUTTER APP REPLICA &bull; EXACT DESIGN SYSTEM</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            StudyBuddy AI — Mobile Application
+          </h1>
+          <p class="text-sm sm:text-base text-slate-300 mt-2 leading-relaxed">
+            Recreated with exact fidelity matching Khadija's Flutter app video: <strong>Home Dashboard</strong>, <strong>Gemini/Claude Study Chat with Attachments</strong>, <strong>Diagnostic DDoS Quiz</strong>, and <strong>Account Security Portal</strong>.
+          </p>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- INTERACTIVE VOICEOVER AUDIO WALKTHROUGH PLAYER       -->
+        <!-- ==================================================== -->
+        <div class="p-5 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border-2 border-indigo-500/40 shadow-2xl space-y-4 relative overflow-hidden">
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white flex items-center justify-center shadow-md">
+                <i data-lucide="mic" class="w-4 h-4 text-white animate-pulse"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-extrabold text-white">Khadija's Project Audio Walkthrough</h3>
+                  <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-mono font-bold border border-emerald-500/30">🎙️ Official Voice</span>
+                </div>
+                <div class="text-[10px] text-cyan-300 font-mono">Original Audio Narration &bull; Listen Online</div>
+              </div>
+            </div>
+            
+            <!-- Live Audio Visualizer Bars -->
+            <div id="audio-visualizer" class="flex items-end gap-1 h-5 px-2">
+              <span class="w-1 bg-indigo-500 rounded-full h-2"></span>
+              <span class="w-1 bg-cyan-400 rounded-full h-4"></span>
+              <span class="w-1 bg-purple-400 rounded-full h-1"></span>
+              <span class="w-1 bg-indigo-400 rounded-full h-5"></span>
+              <span class="w-1 bg-cyan-300 rounded-full h-3"></span>
+            </div>
+          </div>
+
+          <!-- Hidden Native Audio Element (Points to Khadija's Official Voice Recording) -->
+          <audio id="walkthrough-audio" preload="auto">
+            <source src="./khadija_voiceover.mp3" type="audio/mpeg">
+            <source src="./khadija_voiceover.ogg" type="audio/ogg">
+            <source src="./studybuddy_voiceover.wav" type="audio/wav">
+          </audio>
+
+          <!-- Audio Progress & Controls -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-3">
+              <button onclick="toggleAudioPlay()" id="audio-play-btn" class="w-10 h-10 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 transition transform hover:scale-105 active:scale-95">
+                <i data-lucide="play" class="w-4 h-4 ml-0.5" id="play-icon"></i>
+              </button>
+
+              <div class="flex-1 space-y-1">
+                <input type="range" id="audio-seek" min="0" max="100" value="0" oninput="seekAudio(this.value)" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+                <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                  <span id="audio-current-time">0:00</span>
+                  <span id="audio-status-label" class="text-indigo-300">Click Play to Listen to Khadija</span>
+                  <span id="audio-total-duration">--:--</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player Status Badge -->
+          <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span>Official Developer Voice Walkthrough</span>
+            </span>
+            <span class="text-indigo-300 font-bold">Khadija Yaseen</span>
+          </div>
+
+        </div>
+
+        <!-- Interactive Screen Director -->
+        <div class="p-5 rounded-3xl bg-slate-900/90 border border-indigo-500/30 space-y-3 shadow-xl">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-cyan-300 font-bold flex items-center gap-1.5">
+              <i data-lucide="play-circle" class="w-4 h-4"></i> Interactive Screen Director
+            </span>
+            <span class="text-slate-400">Click to steer phone &rarr;</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs font-semibold">
+            <button onclick="switchAppScreen('auth')" class="p-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 hover:text-white border border-white/10 transition flex items-center justify-center gap-1">
+              <span>🔐 Login</span>
+            </button>
+            <button onclick="switchAppScreen('home')" class="p-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 hover:text-white border border-white/10 transition flex items-center justify-center gap-1">
+              <span>🏠 Home</span>
+            </button>
+            <button onclick="switchAppScreen('chat')" class="p-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 hover:text-white border border-white/10 transition flex items-center justify-center gap-1">
+              <span>💬 AI Chat</span>
+            </button>
+            <button onclick="switchAppScreen('quiz')" class="p-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 hover:text-white border border-white/10 transition flex items-center justify-center gap-1">
+              <span>📝 Quiz</span>
+            </button>
+            <button onclick="switchAppScreen('security')" class="p-2.5 rounded-xl bg-white/5 hover:bg-indigo-600 hover:text-white border border-white/10 transition flex items-center justify-center gap-1">
+              <span>🛡️ Security</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Action & Social Links -->
+        <div class="pt-4 border-t border-white/10 flex flex-wrap items-center gap-4">
+          <a href="https://github.com/khadijayaseen" target="_blank" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg shadow-indigo-500/25 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span>Explore Source Code on GitHub</span>
+          </a>
+          <a href="https://lnkd.in/p/dVChg5BR" target="_blank" class="px-6 py-3.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 font-bold text-xs border border-blue-500/30 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+            <i data-lucide="video" class="w-4 h-4"></i>
+            <span>Watch Full Demo on LinkedIn</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      const h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const formattedH = h % 12 || 12;
+      const clockEl = document.getElementById('phone-clock');
+      if (clockEl) clockEl.textContent = `${formattedH}:${m} ${ampm}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Screen Switcher
+    function switchAppScreen(screenName) {
+      document.querySelectorAll('.pscreen').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('pscreen-' + screenName);
+      if (target) target.classList.remove('hidden');
+      closeNewSessionModal();
+      closeFilePicker();
+    }
+
+    // Modal Handlers
+    function openNewSessionModal() {
+      document.getElementById('modal-new-session').classList.remove('hidden');
+    }
+    function closeNewSessionModal() {
+      document.getElementById('modal-new-session').classList.add('hidden');
+    }
+    function startSessionChat() {
+      closeNewSessionModal();
+      switchAppScreen('chat');
+    }
+
+    function openFileAttachmentModal() {
+      document.getElementById('modal-file-picker').classList.remove('hidden');
+    }
+    function closeFilePicker() {
+      document.getElementById('modal-file-picker').classList.add('hidden');
+    }
+    function attachDocFile(fileName) {
+      closeFilePicker();
+      const input = document.getElementById('pscreen-chat-input');
+      input.value = `Attached: ${fileName} - `;
+      input.focus();
+    }
+
+    function selectQuizOpt(btn, isCorrect) {
+      document.querySelectorAll('.quiz-btn').forEach(b => {
+        b.classList.remove('bg-emerald-900/60', 'border-emerald-500', 'bg-rose-900/60', 'border-rose-500');
+      });
+      if (isCorrect) {
+        btn.classList.add('bg-emerald-900/60', 'border-emerald-500');
+      } else {
+        btn.classList.add('bg-rose-900/60', 'border-rose-500');
+      }
+    }
+
+    function handleScreenChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('pscreen-chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('pscreen-chat-stream');
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex gap-2 justify-end";
+      userBubble.innerHTML = `
+        <div class="bg-indigo-600 text-white p-3 rounded-2xl max-w-[85%] text-[11px] space-y-1 shadow-md">
+          <p>${text}</p>
+          <div class="text-[9px] text-indigo-200 text-right">Just now</div>
+        </div>
+      `;
+      container.appendChild(userBubble);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        const aiBubble = document.createElement('div');
+        aiBubble.className = "flex gap-2";
+        aiBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 text-[10px]">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          </div>
+          <div class="bg-app-surface p-3 rounded-2xl border border-slate-800 max-w-[85%] text-slate-200 space-y-1 text-[11px] leading-relaxed shadow-sm">
+            <p class="font-bold text-cyan-300">💡 Study Insight</p>
+            <p class="text-slate-300">Analyzed concept based on course materials and syllabus parameters.</p>
+          </div>
+        `;
+        container.appendChild(aiBubble);
+        lucide.createIcons();
+        container.scrollTop = container.scrollHeight;
+      }, 700);
+    }
+
+    // Audio Player & Auto-Sync
+    const audioEl = document.getElementById('walkthrough-audio');
+    const playBtn = document.getElementById('audio-play-btn');
+    const seekSlider = document.getElementById('audio-seek');
+    const currTimeLabel = document.getElementById('audio-current-time');
+    const durLabel = document.getElementById('audio-total-duration');
+    const statusLabel = document.getElementById('audio-status-label');
+    const visualizer = document.getElementById('audio-visualizer');
+
+    let isPlaying = false;
+
+    function toggleAudioPlay() {
+      if (!audioEl) return;
+      if (isPlaying) {
+        audioEl.pause();
+        isPlaying = false;
+        playBtn.innerHTML = '<i data-lucide="play" class="w-4 h-4 ml-0.5"></i>';
+        statusLabel.textContent = 'Paused';
+        visualizer.classList.remove('animate-pulse');
+      } else {
+        audioEl.play();
+        isPlaying = true;
+        playBtn.innerHTML = '<i data-lucide="pause" class="w-4 h-4"></i>';
+        statusLabel.textContent = '🔊 Playing Khadija\'s Voice Walkthrough...';
+        visualizer.classList.add('animate-pulse');
+      }
+      lucide.createIcons();
+    }
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    if (audioEl) {
+      audioEl.addEventListener('loadedmetadata', () => {
+        if (!isNaN(audioEl.duration)) {
+          durLabel.textContent = formatTime(audioEl.duration);
+        }
+      });
+
+      audioEl.addEventListener('timeupdate', () => {
+        if (!isNaN(audioEl.duration)) {
+          const progress = (audioEl.currentTime / audioEl.duration) * 100;
+          seekSlider.value = progress;
+          currTimeLabel.textContent = formatTime(audioEl.currentTime);
+
+          // Synchronize phone screen with voiceover
+          const cur = audioEl.currentTime;
+          if (cur < 25) {
+            switchAppScreen('home');
+          } else if (cur >= 25 && cur < 70) {
+            switchAppScreen('chat');
+          } else if (cur >= 70 && cur < 105) {
+            switchAppScreen('quiz');
+          } else if (cur >= 105) {
+            switchAppScreen('security');
+          }
+        }
+      });
+
+      audioEl.addEventListener('ended', () => {
+        isPlaying = false;
+        playBtn.innerHTML = '<i data-lucide="play" class="w-4 h-4 ml-0.5"></i>';
+        statusLabel.textContent = 'Walkthrough Finished';
+        visualizer.classList.remove('animate-pulse');
+        lucide.createIcons();
+      });
+    }
+
+    function seekAudio(val) {
+      if (audioEl && !isNaN(audioEl.duration)) {
+        audioEl.currentTime = (val / 100) * audioEl.duration;
+      }
+    }
+  </script>
+</body>
+</html>

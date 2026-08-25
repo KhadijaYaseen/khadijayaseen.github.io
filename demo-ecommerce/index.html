@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KY TrendZone — Curated Fashion, Jewelry & Lifestyle Boutique</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            alabaster: {
+              50: '#fdfcfb',
+              100: '#fbf9f6',
+              200: '#f5f0ea',
+              300: '#ede4d8',
+              400: '#dfd0bf',
+            },
+            terracotta: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#ea580c',
+              600: '#c2410c',
+              700: '#9a3412',
+            },
+            roseGold: {
+              500: '#e11d48',
+              600: '#be123c',
+            },
+            slateDark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-alabaster-100 text-slate-800 font-sans antialiased selection:bg-terracotta-100 selection:text-terracotta-700">
+
+  <!-- ======================================================== -->
+  <!-- TOP ANNOUNCEMENT TICKER                                  -->
+  <!-- ======================================================== -->
+  <aside class="bg-slateDark-900 text-white text-[11px] font-medium py-2 px-4 text-center tracking-wide flex items-center justify-between border-b border-white/10" aria-label="Store Announcements">
+    <div class="hidden md:flex items-center gap-4 text-slate-400">
+      <span>📞 Helpline: +92 (300) 123-4567</span>
+      <span>•</span>
+      <span>📍 Lahore, Pakistan</span>
+    </div>
+    <div class="mx-auto flex items-center gap-2">
+      <span class="px-2 py-0.5 rounded-full bg-roseGold-500 text-white font-bold text-[10px] uppercase">Special Offer</span>
+      <span>Spring 2026 Collection Live • Use Code <strong class="text-amber-300 font-mono">KY2026</strong> for 15% OFF!</span>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <!-- Currency Switcher -->
+      <select id="currency-select" onchange="changeCurrency(this.value)" class="bg-slateDark-800 text-white text-[11px] rounded-lg px-2 py-1 border border-white/20 focus:outline-none cursor-pointer">
+        <option value="USD">USD ($)</option>
+        <option value="PKR">PKR (₨)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+      </select>
+    </div>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- LUXURY LIGHT NAVBAR                                      -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-alabaster-300 transition-all duration-300 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Brand Logo -->
+        <a href="#hero" class="flex items-center gap-3 group shrink-0">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-terracotta-600 via-roseGold-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-terracotta-500/20 group-hover:scale-105 transition-transform duration-300">
+            <span class="font-serif font-black text-lg tracking-wider">KY</span>
+          </div>
+          <div>
+            <div class="font-serif font-black text-xl text-slateDark-900 tracking-tight leading-none group-hover:text-terracotta-600 transition">TrendZone</div>
+            <div class="text-[10px] text-terracotta-600 font-bold uppercase tracking-widest mt-0.5">Boutique &bull; Curated</div>
+          </div>
+        </a>
+
+        <!-- Live Search Bar -->
+        <div class="hidden lg:flex items-center flex-1 max-w-md mx-4">
+          <div class="relative w-full">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+            <input type="text" id="live-search-input" oninput="handleSearch(this.value)" placeholder="Search clothing, jewelry, accessories..." class="w-full pl-10 pr-4 py-2.5 rounded-full bg-alabaster-50 border border-alabaster-300 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-terracotta-500 focus:bg-white focus:ring-2 focus:ring-terracotta-500/10 transition shadow-inner">
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+          <a href="#hero" class="hover:text-terracotta-600 transition">Home</a>
+          <a href="#categories-section" class="hover:text-terracotta-600 transition">Categories</a>
+          <a href="#products-section" class="hover:text-terracotta-600 transition">Catalog</a>
+          <a href="#faqs-section" class="hover:text-terracotta-600 transition">FAQs</a>
+          <a href="#reviews-section" class="hover:text-terracotta-600 transition">Reviews</a>
+          <a href="#dev-section" class="hover:text-terracotta-600 transition">Developer</a>
+        </nav>
+
+        <!-- Right Action Controls -->
+        <div class="flex items-center gap-3">
+          
+          <!-- Admin Portal Trigger Button -->
+          <button onclick="toggleAdminModal()" id="admin-nav-btn" class="px-3 py-2 rounded-xl text-xs font-semibold bg-alabaster-200 hover:bg-alabaster-300 text-slate-700 border border-alabaster-400/60 flex items-center gap-1.5 transition" title="Store Manager Portal">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-terracotta-600"></i>
+            <span id="admin-nav-text">Admin</span>
+          </button>
+
+          <!-- Wishlist Heart Button -->
+          <button onclick="toggleWishlistModal()" class="relative p-2.5 rounded-xl bg-alabaster-50 hover:bg-alabaster-200 text-slate-700 border border-alabaster-300 transition" title="My Wishlist">
+            <i data-lucide="heart" class="w-4 h-4 text-rose-500"></i>
+            <span id="wishlist-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-roseGold-500 text-white text-[9px] font-bold flex items-center justify-center shadow">0</span>
+          </button>
+
+          <!-- Cart Drawer Button -->
+          <button onclick="toggleCartDrawer()" class="relative px-4 py-2.5 rounded-xl bg-gradient-to-r from-slateDark-900 to-slateDark-800 hover:from-terracotta-600 hover:to-roseGold-500 text-white text-xs font-bold shadow-md shadow-slateDark-900/10 flex items-center gap-2 transition-all transform hover:-translate-y-0.5">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-amber-300"></i>
+            <span id="nav-cart-total">$0.00</span>
+            <span id="nav-cart-count" class="px-1.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-mono">0</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- HERO LOOKBOOK BANNER SECTION                             -->
+  <!-- ======================================================== -->
+  <section id="hero" class="relative overflow-hidden pt-8 pb-16 lg:py-20">
+    <!-- Subtle Background Accents -->
+    <div class="absolute -top-24 right-0 w-96 h-96 bg-terracotta-100 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Text -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-terracotta-50 border border-terracotta-200 text-terracotta-700 text-xs font-bold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-terracotta-500 animate-pulse"></span>
+            <span>NEW 2026 LUXURY READY-TO-WEAR</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-6xl font-extrabold text-slateDark-900 tracking-tight leading-[1.15]">
+            Curated Elegance for <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-terracotta-600 via-roseGold-500 to-amber-600 italic">Every Trendsetter.</span>
+          </h1>
+
+          <p class="text-slate-600 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            Discover a sophisticated collection of runway fashion, handcrafted jewelry, and modern lifestyle essentials engineered with uncompromising craftsmanship.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <a href="#products-section" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-terracotta-600 via-roseGold-500 to-amber-600 hover:opacity-95 text-white font-bold text-sm shadow-xl shadow-terracotta-500/25 flex items-center gap-3 transition-all transform hover:-translate-y-0.5">
+              <span>Explore Collection</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#featured-section" class="px-6 py-4 rounded-2xl bg-white hover:bg-alabaster-50 text-slateDark-900 font-bold text-sm border border-alabaster-300 shadow-sm flex items-center gap-2 transition">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+              <span>Featured Lookbook</span>
+            </a>
+          </div>
+
+          <!-- Social Proof Pills -->
+          <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 font-medium">
+            <div class="flex items-center gap-2">
+              <div class="flex text-amber-400">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <span><strong class="text-slate-800">4.9/5</strong> Rating (2.4k+ Reviews)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+              <span>100% Certified Authentic</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="truck" class="w-4 h-4 text-terracotta-600"></i>
+              <span>Express 2-Day Delivery</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Hero Image Grid Showcase -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md">
+            
+            <!-- Main Hero Card -->
+            <div class="bg-white p-4 rounded-3xl shadow-2xl border border-alabaster-300 rotate-1 hover:rotate-0 transition-transform duration-500">
+              <div class="relative overflow-hidden rounded-2xl bg-alabaster-200 aspect-[4/5] group">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" alt="High Fashion" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-xs font-bold text-slateDark-900 shadow">
+                  🔥 Trend Highlight
+                </div>
+                <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-lg border border-white flex items-center justify-between">
+                  <div>
+                    <h2 class="text-xs text-slate-500 font-mono">KY Exclusive Lookbook</h2>
+                    <div class="text-sm font-bold text-slateDark-900">Autumn Cashmere Trench</div>
+                    <div class="text-xs font-extrabold text-terracotta-600 mt-0.5">$189.00 <span class="text-slate-400 line-through text-[11px] font-normal">$240.00</span></div>
+                  </div>
+                  <button onclick="quickAddHeroItem()" class="p-3 rounded-xl bg-slateDark-900 hover:bg-terracotta-600 text-white transition shadow">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Badge 1 -->
+            <div class="absolute -top-4 -left-6 bg-white p-3.5 rounded-2xl shadow-xl border border-alabaster-300 flex items-center gap-3 animate-bounce" style="animation-duration: 4s;">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                <i data-lucide="percent" class="w-5 h-5"></i>
+              </div>
+              <div class="text-left">
+                <div class="text-[10px] text-slate-400 font-bold uppercase">Member Discount</div>
+                <div class="text-xs font-extrabold text-slateDark-900">15% Instant Cashback</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- CATEGORY FILTER PILLS                                    -->
+  <!-- ======================================================== -->
+  <section id="categories-section" class="py-6 bg-white border-y border-alabaster-300 sticky top-20 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4 overflow-x-auto no-scrollbar py-1">
+        
+        <div class="flex items-center gap-2 text-xs font-semibold shrink-0">
+          <button onclick="filterCategory('all', this)" class="cat-pill active-cat px-4 py-2.5 rounded-full bg-slateDark-900 text-white transition flex items-center gap-2 shadow-sm">
+            <span>✨ All Items</span>
+            <span class="px-1.5 py-0.2 rounded-full bg-white/20 text-[10px]" id="cat-count-all">20</span>
+          </button>
+          <button onclick="filterCategory('women\'s clothing', this)" class="cat-pill px-4 py-2.5 rounded-full bg-alabaster-100 hover:bg-alabaster-200 text-slate-700 border border-alabaster-300 transition flex items-center gap-2">
+            <span>👗 Women's</span>
+          </button>
+          <button onclick="filterCategory('men\'s clothing', this)" class="cat-pill px-4 py-2.5 rounded-full bg-alabaster-100 hover:bg-alabaster-200 text-slate-700 border border-alabaster-300 transition flex items-center gap-2">
+            <span>👔 Men's</span>
+          </button>
+          <button onclick="filterCategory('jewelery', this)" class="cat-pill px-4 py-2.5 rounded-full bg-alabaster-100 hover:bg-alabaster-200 text-slate-700 border border-alabaster-300 transition flex items-center gap-2">
+            <span>💍 Jewelry</span>
+          </button>
+          <button onclick="filterCategory('electronics', this)" class="cat-pill px-4 py-2.5 rounded-full bg-alabaster-100 hover:bg-alabaster-200 text-slate-700 border border-alabaster-300 transition flex items-center gap-2">
+            <span>⚡ Tech &amp; Gadgets</span>
+          </button>
+        </div>
+
+        <!-- Sort Filter -->
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-xs text-slate-400 font-medium hidden sm:inline">Sort by:</span>
+          <select id="sort-select" onchange="sortProducts(this.value)" class="bg-alabaster-50 border border-alabaster-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none focus:border-terracotta-500 cursor-pointer">
+            <option value="featured">🔥 Popular / Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">★ Highest Customer Rating</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- FEATURED LOOKBOOK CAROUSEL / HIGHLIGHTS                  -->
+  <!-- ======================================================== -->
+  <section id="featured-section" class="py-16 bg-alabaster-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-terracotta-600 font-mono">Editor's Choice</div>
+          <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-slateDark-900 mt-1">Featured Arrivals</h2>
+        </div>
+        <p class="text-xs text-slate-500 max-w-sm">Hand-selected bestsellers chosen for their premium textile quality, comfort, and timeless silhouette.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Featured Item 1 -->
+        <div class="product-highlight-card bg-white rounded-3xl p-5 border border-alabaster-300 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <div class="relative overflow-hidden rounded-2xl bg-alabaster-50 p-6 aspect-square flex items-center justify-center">
+            <img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png" alt="Mens Casual Jacket" class="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slateDark-900 text-white text-[10px] font-bold">Bestseller</span>
+            <button onclick="toggleWishlistItem('Mens Cotton Jacket', 55.99, 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png')" class="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white text-slate-400 hover:text-rose-500 shadow transition">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="pt-4 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400 font-mono">Men's Outerwear</span>
+              <span class="text-amber-500 font-bold flex items-center gap-1">★ 4.7 <span class="text-slate-400 text-[10px]">(500+)</span></span>
+            </div>
+            <h3 class="font-bold text-slateDark-900 text-sm line-clamp-1">Mens Cotton Slim-Fit Jacket</h3>
+            <div class="flex items-center justify-between pt-2 border-t border-alabaster-200">
+              <div class="text-base font-extrabold text-slateDark-900 product-price-val" data-usd="55.99">$55.99</div>
+              <button onclick="addToCart('Mens Cotton Slim-Fit Jacket', 55.99, 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png')" class="px-4 py-2 rounded-xl bg-terracotta-50 hover:bg-terracotta-600 text-terracotta-700 hover:text-white text-xs font-bold transition flex items-center gap-1.5">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                <span>Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Item 2 -->
+        <div class="product-highlight-card bg-white rounded-3xl p-5 border border-alabaster-300 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <div class="relative overflow-hidden rounded-2xl bg-alabaster-50 p-6 aspect-square flex items-center justify-center">
+            <img src="https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png" alt="Womens Rain Jacket" class="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-roseGold-500 text-white text-[10px] font-bold">-25% OFF</span>
+            <button onclick="toggleWishlistItem('Rain Jacket Women Windbreaker', 39.99, 'https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png')" class="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white text-slate-400 hover:text-rose-500 shadow transition">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="pt-4 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400 font-mono">Women's Fashion</span>
+              <span class="text-amber-500 font-bold flex items-center gap-1">★ 4.9 <span class="text-slate-400 text-[10px]">(320)</span></span>
+            </div>
+            <h3 class="font-bold text-slateDark-900 text-sm line-clamp-1">Rain Jacket Women Windbreaker</h3>
+            <div class="flex items-center justify-between pt-2 border-t border-alabaster-200">
+              <div>
+                <span class="text-base font-extrabold text-slateDark-900 product-price-val" data-usd="39.99">$39.99</span>
+                <span class="text-slate-400 line-through text-xs ml-1.5">$54.00</span>
+              </div>
+              <button onclick="addToCart('Rain Jacket Women Windbreaker', 39.99, 'https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png')" class="px-4 py-2 rounded-xl bg-terracotta-50 hover:bg-terracotta-600 text-terracotta-700 hover:text-white text-xs font-bold transition flex items-center gap-1.5">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                <span>Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Item 3 -->
+        <div class="product-highlight-card bg-white rounded-3xl p-5 border border-alabaster-300 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <div class="relative overflow-hidden rounded-2xl bg-alabaster-50 p-6 aspect-square flex items-center justify-center">
+            <img src="https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png" alt="White Gold Princess Ring" class="max-h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-amber-500 text-white text-[10px] font-bold">Fine Gems</span>
+            <button onclick="toggleWishlistItem('White Gold Plated Princess Ring', 9.99, 'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png')" class="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white text-slate-400 hover:text-rose-500 shadow transition">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="pt-4 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400 font-mono">Fine Jewelry</span>
+              <span class="text-amber-500 font-bold flex items-center gap-1">★ 4.8 <span class="text-slate-400 text-[10px]">(890)</span></span>
+            </div>
+            <h3 class="font-bold text-slateDark-900 text-sm line-clamp-1">White Gold Plated Princess Ring</h3>
+            <div class="flex items-center justify-between pt-2 border-t border-alabaster-200">
+              <div class="text-base font-extrabold text-slateDark-900 product-price-val" data-usd="9.99">$9.99</div>
+              <button onclick="addToCart('White Gold Plated Princess Ring', 9.99, 'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png')" class="px-4 py-2 rounded-xl bg-terracotta-50 hover:bg-terracotta-600 text-terracotta-700 hover:text-white text-xs font-bold transition flex items-center gap-1.5">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                <span>Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SHOP BY DEPARTMENT (DIRECT CATEGORY JUMP CARDS)          -->
+  <!-- ======================================================== -->
+  <section class="py-12 bg-white border-b border-alabaster-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-terracotta-600 font-mono">Curated Departments</div>
+          <h2 class="font-serif text-2xl sm:text-3xl font-extrabold text-slateDark-900 mt-0.5">Shop by Category</h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono hidden sm:inline">Click to jump directly to category &darr;</span>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        
+        <!-- Women's Fashion -->
+        <button onclick="filterCategory('women\'s clothing')" class="group text-left p-4 rounded-3xl bg-alabaster-100 hover:bg-rose-50 border border-alabaster-300 hover:border-rose-300 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="overflow-hidden rounded-2xl bg-white p-3 aspect-square flex items-center justify-center mb-3">
+            <img src="https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_t.png" alt="Women's Fashion" class="max-h-28 object-contain group-hover:scale-110 transition-transform duration-500">
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-slateDark-900 text-xs sm:text-sm group-hover:text-rose-600 transition">Women's Fashion</h3>
+              <p class="text-[11px] text-slate-500 mt-0.5">Dresses, tops &amp; outerwear</p>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-white shadow-xs flex items-center justify-center text-slate-400 group-hover:text-rose-600 group-hover:bg-rose-100 transition">
+              <i data-lucide="arrow-down-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </button>
+
+        <!-- Men's Collection -->
+        <button onclick="filterCategory('men\'s clothing')" class="group text-left p-4 rounded-3xl bg-alabaster-100 hover:bg-blue-50 border border-alabaster-300 hover:border-blue-300 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="overflow-hidden rounded-2xl bg-white p-3 aspect-square flex items-center justify-center mb-3">
+            <img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png" alt="Men's Fashion" class="max-h-28 object-contain group-hover:scale-110 transition-transform duration-500">
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-slateDark-900 text-xs sm:text-sm group-hover:text-blue-600 transition">Men's Style</h3>
+              <p class="text-[11px] text-slate-500 mt-0.5">Jackets, shirts &amp; casuals</p>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-white shadow-xs flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-100 transition">
+              <i data-lucide="arrow-down-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </button>
+
+        <!-- Fine Jewelry -->
+        <button onclick="filterCategory('jewelery')" class="group text-left p-4 rounded-3xl bg-alabaster-100 hover:bg-amber-50 border border-alabaster-300 hover:border-amber-300 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="overflow-hidden rounded-2xl bg-white p-3 aspect-square flex items-center justify-center mb-3">
+            <img src="https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_t.png" alt="Fine Jewelry" class="max-h-28 object-contain group-hover:scale-110 transition-transform duration-500">
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-slateDark-900 text-xs sm:text-sm group-hover:text-amber-600 transition">Fine Jewelry</h3>
+              <p class="text-[11px] text-slate-500 mt-0.5">Gold rings, bracelets &amp; gems</p>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-white shadow-xs flex items-center justify-center text-slate-400 group-hover:text-amber-600 group-hover:bg-amber-100 transition">
+              <i data-lucide="arrow-down-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </button>
+
+        <!-- Modern Electronics / Tablets / Gadgets -->
+        <button onclick="filterCategory('electronics')" class="group text-left p-4 rounded-3xl bg-alabaster-100 hover:bg-emerald-50 border border-alabaster-300 hover:border-emerald-300 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="overflow-hidden rounded-2xl bg-white p-3 aspect-square flex items-center justify-center mb-3">
+            <img src="https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_t.png" alt="Tech & Gadgets" class="max-h-28 object-contain group-hover:scale-110 transition-transform duration-500">
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-slateDark-900 text-xs sm:text-sm group-hover:text-emerald-600 transition">Tech &amp; Gadgets</h3>
+              <p class="text-[11px] text-slate-500 mt-0.5">Tablets, SSDs, hard drives</p>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-white shadow-xs flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:bg-emerald-100 transition">
+              <i data-lucide="arrow-down-right" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- MAIN ALL PRODUCTS CATALOG (FETCHED VIA API + CRUD)       -->
+  <!-- ======================================================== -->
+  <section id="products-section" class="py-16 bg-white scroll-mt-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-terracotta-600 font-mono">Catalog Overview</div>
+          <h2 id="catalog-section-title" class="font-serif text-3xl sm:text-4xl font-extrabold text-slateDark-900 mt-1">Explore All Products</h2>
+        </div>
+        <div class="text-xs text-slate-500 font-mono">
+          Showing <span id="product-count-label" class="font-bold text-slateDark-900">20</span> boutique items
+        </div>
+      </div>
+
+      <!-- Live Loading State Spinner -->
+      <div id="product-loader" class="py-20 text-center space-y-3">
+        <div class="w-10 h-10 border-4 border-terracotta-200 border-t-terracotta-600 rounded-full animate-spin mx-auto"></div>
+        <p class="text-xs text-slate-500 font-mono">Loading curated catalog from FakeStore API...</p>
+      </div>
+
+      <!-- Main Product Grid -->
+      <div id="product-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Injected Dynamically by script.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-search-state" class="hidden py-16 text-center space-y-4">
+        <div class="w-16 h-16 rounded-full bg-alabaster-200 text-slate-400 flex items-center justify-center mx-auto text-2xl">
+          🔍
+        </div>
+        <h3 class="font-bold text-lg text-slateDark-900">No matching products found</h3>
+        <p class="text-xs text-slate-500 max-w-sm mx-auto">Try adjusting your search terms or category filter to discover other luxury items.</p>
+        <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl bg-slateDark-900 text-white text-xs font-bold">Reset Filters</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- DEVELOPER SHOWCASE / ABOUT CREATOR                      -->
+  <!-- ======================================================== -->
+  <section id="dev-section" class="py-16 bg-alabaster-200/70 border-t border-alabaster-300">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-white rounded-3xl p-8 sm:p-10 border border-alabaster-300 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-64 h-64 bg-terracotta-100 rounded-full blur-3xl opacity-50"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+          
+          <div class="md:col-span-4 text-center md:text-left">
+            <div class="w-28 h-28 mx-auto md:mx-0 rounded-3xl bg-gradient-to-tr from-terracotta-600 to-amber-500 p-1 shadow-xl">
+              <div class="w-full h-full rounded-[22px] bg-slateDark-900 flex items-center justify-center text-white">
+                <span class="font-serif font-black text-3xl">KY</span>
+              </div>
+            </div>
+            <h3 class="font-serif font-black text-2xl text-slateDark-900 mt-4">Khadija Yaseen</h3>
+            <p class="text-xs font-bold text-terracotta-600 font-mono mt-0.5">Software Engineer &amp; Full-Stack Architect</p>
+          </div>
+
+          <div class="md:col-span-8 space-y-4 text-xs text-slate-600">
+            <div class="border-b border-alabaster-200 pb-3">
+              <h2 class="font-bold text-sm text-slateDark-900">About KY TrendZone Architecture</h2>
+              <p class="mt-1 text-slate-500 leading-relaxed">
+                KY TrendZone is an e-commerce platform built with modern HTML5, CSS3, ES6+ JavaScript, and Tailwind CSS. It features full RESTful CRUD operations with FakeStoreAPI, live cart state machine, currency conversion engine, and an integrated Store Manager terminal.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-[11px]">
+              <div class="bg-alabaster-50 p-3 rounded-xl border border-alabaster-300">
+                <div class="text-slate-400">Institution</div>
+                <div class="font-bold text-slateDark-900 mt-0.5">UMT Lahore</div>
+              </div>
+              <div class="bg-alabaster-50 p-3 rounded-xl border border-alabaster-300">
+                <div class="text-slate-400">Degree</div>
+                <div class="font-bold text-slateDark-900 mt-0.5">BS Software Eng.</div>
+              </div>
+              <div class="bg-alabaster-50 p-3 rounded-xl border border-alabaster-300">
+                <div class="text-slate-400">Specialization</div>
+                <div class="font-bold text-slateDark-900 mt-0.5">Adv Web Tech &bull; .NET</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- CUSTOMER REVIEWS & TESTIMONIALS                          -->
+  <!-- ======================================================== -->
+  <section id="reviews-section" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="text-xs font-bold uppercase tracking-widest text-terracotta-600 font-mono">Real Experiences</div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-slateDark-900 mt-1">Loved by Trendsetters</h2>
+        <p class="text-xs text-slate-500 mt-2">See what verified shoppers from Pakistan and around the world have to say about our fabric quality and customer care.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Review 1 -->
+        <div class="bg-alabaster-50 rounded-3xl p-7 border border-alabaster-300 shadow-sm hover:shadow-md transition space-y-4">
+          <div class="flex text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            "The fit and stitching on the slim-fit cotton jacket exceeded my expectations! Arrived in Karachi within 2 days in pristine luxury packaging."
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-alabaster-300/60">
+            <div class="w-9 h-9 rounded-full bg-slateDark-900 text-white font-bold text-xs flex items-center justify-center">AH</div>
+            <div>
+              <div class="font-bold text-slateDark-900 text-xs">Ali Hassan</div>
+              <div class="text-[10px] text-emerald-600 font-mono">Verified Buyer &bull; Karachi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-alabaster-50 rounded-3xl p-7 border border-alabaster-300 shadow-sm hover:shadow-md transition space-y-4">
+          <div class="flex text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            "The White Gold Princess Ring is so delicate and sparkly. Excellent customer support when I asked about ring sizing. 10/10 recommendation!"
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-alabaster-300/60">
+            <div class="w-9 h-9 rounded-full bg-roseGold-500 text-white font-bold text-xs flex items-center justify-center">SK</div>
+            <div>
+              <div class="font-bold text-slateDark-900 text-xs">Sara Khan</div>
+              <div class="text-[10px] text-emerald-600 font-mono">Verified Buyer &bull; Lahore</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-alabaster-50 rounded-3xl p-7 border border-alabaster-300 shadow-sm hover:shadow-md transition space-y-4">
+          <div class="flex text-amber-400 text-sm">★★★★★</div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            "Smooth online shopping experience, live cart updates, and hassle-free returns. By far one of the cleanest boutique experiences online."
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-alabaster-300/60">
+            <div class="w-9 h-9 rounded-full bg-terracotta-600 text-white font-bold text-xs flex items-center justify-center">UA</div>
+            <div>
+              <div class="font-bold text-slateDark-900 text-xs">Usman Ahmed</div>
+              <div class="text-[10px] text-emerald-600 font-mono">Verified Buyer &bull; Islamabad</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- FREQUENTLY ASKED QUESTIONS (FAQS)                        -->
+  <!-- ======================================================== -->
+  <section id="faqs-section" class="py-16 bg-alabaster-100 border-t border-alabaster-300">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <div class="text-xs font-bold uppercase tracking-widest text-terracotta-600 font-mono">Got Questions?</div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-slateDark-900 mt-1">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <div class="bg-white rounded-2xl p-5 border border-alabaster-300 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between font-bold text-slateDark-900 text-xs sm:text-sm">
+            <span>How do I place an order and track shipment?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-terracotta-600 transition-transform duration-300"></i>
+          </div>
+          <div class="faq-content hidden mt-3 pt-3 border-t border-alabaster-200 text-xs text-slate-600 leading-relaxed">
+            Simply browse our catalog, click "Add to Cart", and click Checkout in your cart drawer. Once completed, you will receive an instant order tracking number with live parcel telemetry.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-alabaster-300 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between font-bold text-slateDark-900 text-xs sm:text-sm">
+            <span>What payment methods are supported?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-terracotta-600 transition-transform duration-300"></i>
+          </div>
+          <div class="faq-content hidden mt-3 pt-3 border-t border-alabaster-200 text-xs text-slate-600 leading-relaxed">
+            We accept Visa, MasterCard, UnionPay, JazzCash, EasyPaisa, and Cash on Delivery (COD) across all major cities in Pakistan.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-alabaster-300 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between font-bold text-slateDark-900 text-xs sm:text-sm">
+            <span>What is your return &amp; exchange policy?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-terracotta-600 transition-transform duration-300"></i>
+          </div>
+          <div class="faq-content hidden mt-3 pt-3 border-t border-alabaster-200 text-xs text-slate-600 leading-relaxed">
+            We offer a 30-day hassle-free exchange and return policy. If an item does not fit or arrives defective, we will send a courier to collect it at no extra charge.
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-alabaster-300 shadow-sm cursor-pointer" onclick="toggleFaq(this)">
+          <div class="flex items-center justify-between font-bold text-slateDark-900 text-xs sm:text-sm">
+            <span>Are all fashion products certified authentic?</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-terracotta-600 transition-transform duration-300"></i>
+          </div>
+          <div class="faq-content hidden mt-3 pt-3 border-t border-alabaster-200 text-xs text-slate-600 leading-relaxed">
+            Yes! Every item sold on KY TrendZone goes through a rigorous multi-stage quality assurance check to guarantee authentic fabrics and precious metals.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- ADMIN PRODUCT MANAGER CONTROLS (EMBEDDED MODAL)          -->
+  <!-- ======================================================== -->
+  <div id="admin-modal" class="fixed inset-0 bg-slateDark-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl w-full max-w-xl p-8 border border-alabaster-300 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-alabaster-200 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-terracotta-50 text-terracotta-600 flex items-center justify-center font-bold">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-slateDark-900">Store Manager Terminal</h3>
+            <p class="text-xs text-slate-500 font-mono">KY TrendZone &bull; Product CRUD Portal</p>
+          </div>
+        </div>
+        <button onclick="toggleAdminModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-800 bg-alabaster-100 hover:bg-alabaster-200 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- State 1: Login Form (If not logged in) -->
+      <div id="admin-login-box" class="space-y-4 text-xs">
+        <p class="text-slate-600">Enter your store manager password to activate instant product editing, additions, and deletions.</p>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Admin Security Password</label>
+          <input type="password" id="admin-pass-input" placeholder="Enter admin password (e.g. admin123)" class="w-full px-4 py-3 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+        </div>
+        <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-[11px] text-amber-800 font-mono">
+          🔑 Demo Password: <strong>admin123</strong>
+        </div>
+        <button onclick="loginAdmin()" class="w-full py-3 rounded-xl bg-slateDark-900 hover:bg-terracotta-600 text-white font-bold text-xs transition">
+          Unlock Admin Dashboard
+        </button>
+      </div>
+
+      <!-- State 2: Active Admin Panel (If logged in) -->
+      <div id="admin-dashboard-box" class="hidden space-y-6 text-xs">
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+          <div class="flex items-center gap-2 text-emerald-800 font-bold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Welcome, Admin Khadija!</span>
+          </div>
+          <button onclick="logoutAdmin()" class="px-3 py-1.5 rounded-lg bg-white border border-emerald-300 text-emerald-700 hover:bg-emerald-100 font-semibold text-[11px] transition">
+            Sign Out
+          </button>
+        </div>
+
+        <!-- Add New Product Form -->
+        <div class="space-y-4 border-t border-alabaster-200 pt-4">
+          <h4 class="font-bold text-sm text-slateDark-900 flex items-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4 text-terracotta-600"></i>
+            <span>Add New Product to Store</span>
+          </h4>
+
+          <form id="add-product-form" onsubmit="handleAddNewProduct(event)" class="space-y-3">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Product Title</label>
+              <input type="text" id="new-prod-title" required placeholder="e.g. Silk Evening Dress" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Price ($ USD)</label>
+                <input type="number" step="0.01" id="new-prod-price" required placeholder="49.99" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Category</label>
+                <select id="new-prod-category" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+                  <option value="women's clothing">Women's Clothing</option>
+                  <option value="men's clothing">Men's Clothing</option>
+                  <option value="jewelery">Jewelry</option>
+                  <option value="electronics">Electronics</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Image URL</label>
+              <input type="url" id="new-prod-image" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs transition shadow-md shadow-terracotta-600/20">
+              ➕ Publish Product to Storefront
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- PRODUCT QUICK-VIEW MODAL                                -->
+  <!-- ======================================================== -->
+  <div id="quick-view-modal" class="fixed inset-0 bg-slateDark-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl w-full max-w-2xl p-6 sm:p-8 border border-alabaster-300 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeQuickViewModal()" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-slate-800 bg-alabaster-100 hover:bg-alabaster-200 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-2">
+        <div class="md:col-span-5 bg-alabaster-100 rounded-2xl p-6 flex items-center justify-center aspect-square">
+          <img id="qv-image" src="" alt="Product Image" class="max-h-60 object-contain">
+        </div>
+        <div class="md:col-span-7 space-y-4 text-xs">
+          <span id="qv-category" class="px-2.5 py-1 rounded-full bg-terracotta-50 text-terracotta-700 font-mono text-[10px] font-bold uppercase">Fashion</span>
+          <h3 id="qv-title" class="font-serif font-bold text-xl text-slateDark-900 leading-snug">Product Title</h3>
+          <div class="flex items-center gap-3">
+            <div id="qv-price" class="text-2xl font-black text-slateDark-900">$0.00</div>
+            <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold">In Stock</span>
+          </div>
+          <p id="qv-desc" class="text-slate-600 leading-relaxed line-clamp-3">Description...</p>
+
+          <!-- Size Selector -->
+          <div class="space-y-1.5 pt-2">
+            <span class="font-bold text-slate-700">Select Size:</span>
+            <div class="flex gap-2 text-xs font-bold">
+              <button class="size-btn px-3 py-1.5 rounded-lg border border-alabaster-300 hover:border-slateDark-900 bg-white" onclick="selectSize(this)">S</button>
+              <button class="size-btn px-3 py-1.5 rounded-lg border border-slateDark-900 bg-slateDark-900 text-white" onclick="selectSize(this)">M</button>
+              <button class="size-btn px-3 py-1.5 rounded-lg border border-alabaster-300 hover:border-slateDark-900 bg-white" onclick="selectSize(this)">L</button>
+              <button class="size-btn px-3 py-1.5 rounded-lg border border-alabaster-300 hover:border-slateDark-900 bg-white" onclick="selectSize(this)">XL</button>
+            </div>
+          </div>
+
+          <div class="pt-3 flex gap-3">
+            <button id="qv-add-btn" class="w-full py-3.5 rounded-xl bg-slateDark-900 hover:bg-terracotta-600 text-white font-bold text-xs transition shadow-lg flex items-center justify-center gap-2">
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              <span>Add to Shopping Bag</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SLIDE-OVER SHOPPING CART DRAWER                         -->
+  <!-- ======================================================== -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-slateDark-900/50 backdrop-blur-xs z-50 transition-opacity duration-300 opacity-0 pointer-events-none" onclick="toggleCartDrawer()"></div>
+  
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between border-l border-alabaster-300">
+    
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-alabaster-200 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-terracotta-600"></i>
+        <h3 class="font-serif font-bold text-lg text-slateDark-900">Your Shopping Bag</h3>
+        <span id="drawer-item-count-badge" class="px-2 py-0.5 rounded-full bg-alabaster-200 text-slate-700 text-xs font-bold font-mono">0</span>
+      </div>
+      <button onclick="toggleCartDrawer()" class="p-2 rounded-xl text-slate-400 hover:text-slate-800 bg-alabaster-100 hover:bg-alabaster-200 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Cart Items Scroll List -->
+    <div id="drawer-items-list" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-alabaster-200">
+      <!-- Injected Dynamically -->
+      <div id="empty-cart-msg" class="py-20 text-center space-y-3">
+        <div class="w-16 h-16 rounded-full bg-alabaster-100 text-slate-400 flex items-center justify-center mx-auto text-2xl">
+          🛍️
+        </div>
+        <p class="text-xs text-slate-500">Your shopping bag is currently empty.</p>
+        <button onclick="toggleCartDrawer()" class="px-5 py-2 rounded-xl bg-slateDark-900 text-white text-xs font-bold">Start Shopping</button>
+      </div>
+    </div>
+
+    <!-- Drawer Footer Checkout Panel -->
+    <div class="p-6 border-t border-alabaster-200 bg-alabaster-50/70 space-y-4">
+      
+      <!-- Promo Code Input -->
+      <div class="flex gap-2">
+        <input type="text" id="promo-input" placeholder="Promo code (e.g. KY2026)" class="flex-1 px-3 py-2 rounded-xl bg-white border border-alabaster-300 text-xs text-slate-800 placeholder-slate-400 uppercase font-mono focus:outline-none focus:border-terracotta-500">
+        <button onclick="applyPromoCode()" class="px-4 py-2 rounded-xl bg-slateDark-900 hover:bg-terracotta-600 text-white text-xs font-bold transition">Apply</button>
+      </div>
+
+      <!-- Financial Calculation Summary -->
+      <div class="space-y-1.5 text-xs text-slate-600 font-medium">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="drawer-subtotal" class="font-bold text-slateDark-900">$0.00</span>
+        </div>
+        <div class="flex justify-between text-emerald-600" id="drawer-discount-row" style="display: none;">
+          <span>Discount (KY2026 - 15%)</span>
+          <span id="drawer-discount">-$0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Estimated Shipping</span>
+          <span class="text-emerald-600 font-bold">FREE</span>
+        </div>
+        <div class="flex justify-between text-sm font-extrabold text-slateDark-900 pt-2 border-t border-alabaster-300">
+          <span>Total</span>
+          <span id="drawer-total" class="text-terracotta-600 text-base">$0.00</span>
+        </div>
+      </div>
+
+      <button onclick="openCheckoutModal()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-terracotta-600 via-roseGold-500 to-amber-600 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-terracotta-500/25 flex items-center justify-center gap-2 transition transform hover:-translate-y-0.5">
+        <i data-lucide="lock" class="w-4 h-4"></i>
+        <span>Proceed to Secure Checkout</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- CHECKOUT MODAL                                           -->
+  <!-- ======================================================== -->
+  <div id="checkout-modal" class="fixed inset-0 bg-slateDark-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl w-full max-w-lg p-8 border border-alabaster-300 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-alabaster-200 mb-6">
+        <div>
+          <h3 class="font-serif font-bold text-xl text-slateDark-900">Complete Your Order</h3>
+          <p class="text-xs text-slate-500 font-mono">KY TrendZone &bull; 256-Bit Encrypted</p>
+        </div>
+        <button onclick="closeCheckoutModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-800 bg-alabaster-100 hover:bg-alabaster-200 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="checkout-form" onsubmit="handlePlaceOrder(event)" class="space-y-4 text-xs">
+        
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Full Shipping Name</label>
+          <input type="text" required placeholder="e.g. Khadija Yaseen" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Email Address</label>
+            <input type="email" required placeholder="khadija@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Phone / WhatsApp</label>
+            <input type="tel" required placeholder="0300-1234567" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Delivery Address</label>
+          <input type="text" required placeholder="Street address, Apartment / House #" class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Payment Method</label>
+          <select class="w-full px-3.5 py-2.5 rounded-xl bg-alabaster-50 border border-alabaster-300 text-slateDark-900 focus:outline-none focus:border-terracotta-500">
+            <option value="cod">💵 Cash on Delivery (Pakistan)</option>
+            <option value="card">💳 Credit / Debit Card (Visa/MasterCard)</option>
+            <option value="jazzcash">📱 JazzCash / EasyPaisa</option>
+          </select>
+        </div>
+
+        <div class="pt-4 border-t border-alabaster-200">
+          <button type="submit" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-terracotta-600 via-roseGold-500 to-amber-600 text-white font-bold text-xs shadow-lg shadow-terracotta-500/25 flex items-center justify-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Confirm Order &bull; <span id="checkout-btn-total">$0.00</span></span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING TOAST NOTIFICATION BANNER                       -->
+  <!-- ======================================================== -->
+  <div id="toast-banner" class="fixed bottom-6 right-6 z-50 bg-slateDark-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-3 transition-all duration-300 opacity-0 translate-y-8 pointer-events-none">
+    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-text">Action completed successfully.</span>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODERN LIGHT FOOTER                                      -->
+  <!-- ======================================================== -->
+  <footer class="bg-white border-t border-alabaster-300 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-alabaster-200">
+        
+        <!-- Brand Summary -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-terracotta-600 to-amber-500 flex items-center justify-center text-white font-serif font-bold text-lg shadow">
+              KY
+            </div>
+            <div>
+              <div class="font-serif font-black text-xl text-slateDark-900">TrendZone</div>
+              <div class="text-[10px] text-terracotta-600 font-bold uppercase tracking-widest">Boutique &bull; Curated</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 max-w-sm leading-relaxed">
+            High-fashion apparel, bespoke jewelry, and modern lifestyle essentials designed with elegance and delivered with care worldwide.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="md:col-span-2 space-y-3 text-xs">
+          <h4 class="font-bold text-slateDark-900 uppercase tracking-wider text-[11px]">Navigation</h4>
+          <ul class="space-y-2 text-slate-500">
+            <li><a href="#hero" class="hover:text-terracotta-600 transition">Home</a></li>
+            <li><a href="#featured-section" class="hover:text-terracotta-600 transition">Featured</a></li>
+            <li><a href="#products-section" class="hover:text-terracotta-600 transition">Catalog</a></li>
+            <li><a href="#faqs-section" class="hover:text-terracotta-600 transition">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2 space-y-3 text-xs">
+          <h4 class="font-bold text-slateDark-900 uppercase tracking-wider text-[11px]">Customer Care</h4>
+          <ul class="space-y-2 text-slate-500">
+            <li><a href="#faqs-section" class="hover:text-terracotta-600 transition">Shipping Rates</a></li>
+            <li><a href="#faqs-section" class="hover:text-terracotta-600 transition">30-Day Returns</a></li>
+            <li><a href="#reviews-section" class="hover:text-terracotta-600 transition">Shopper Reviews</a></li>
+            <li><a href="#dev-section" class="hover:text-terracotta-600 transition">Developer Info</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="md:col-span-3 space-y-3 text-xs">
+          <h4 class="font-bold text-slateDark-900 uppercase tracking-wider text-[11px]">Boutique Support</h4>
+          <div class="space-y-2 text-slate-500">
+            <p>📧 Email: <a href="mailto:ky@trendzone.com" class="text-slateDark-900 font-semibold hover:underline">ky@trendzone.com</a></p>
+            <p>📞 Phone: +92 (300) 123-4567</p>
+            <p>📍 UMT Campus &bull; Lahore, Pakistan</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+        <div>&copy; 2026 KY TrendZone. Architected by <strong>Khadija Yaseen</strong>.</div>
+        <div class="flex items-center gap-4">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>•</span>
+          <span>⚡ FakeStoreAPI Connected</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

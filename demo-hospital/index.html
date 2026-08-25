@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse MediCore ERP — Enterprise Hospital Management System</title>
+  <meta name="description" content="Enterprise Hospital ERP & EMR platform with real-time patient triage, staff management (Doctors, Nurses, Janitors, Receptionists) with full Edit & Delete, payroll salary tracking, and ICU telemetry.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            hospital: {
+              950: '#030712',
+              900: '#08101e',
+              850: '#0c172c',
+              800: '#11203d',
+              700: '#192e54',
+              600: '#233f72',
+            },
+            cyan: {
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+            },
+            emerald: {
+              400: '#34d399',
+              500: '#10b981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-sidebar {
+      background: rgba(8, 16, 30, 0.94);
+      backdrop-filter: blur(24px);
+      border-right: 1px solid rgba(6, 182, 212, 0.15);
+    }
+    .glass-card {
+      background: rgba(12, 23, 44, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(6, 182, 212, 0.12);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .active-nav-tab {
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.05) 100%);
+      color: #22d3ee;
+      border-left: 3px solid #22d3ee;
+    }
+    /* ECG Monitor animation styling */
+    #ecg-canvas {
+      width: 100%;
+      height: 36px;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030712;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #192e54;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #06b6d4;
+    }
+  </style>
+</head>
+<body class="bg-hospital-950 text-slate-200 font-sans antialiased overflow-x-hidden flex h-screen">
+
+  <!-- ======================================================== -->
+  <!-- LEFT DASHBOARD SIDEBAR NAVIGATION                        -->
+  <!-- ======================================================== -->
+  <aside class="w-64 glass-sidebar flex flex-col justify-between shrink-0 hidden md:flex z-30">
+    <div>
+      <!-- Brand Logo Header -->
+      <div class="h-20 flex items-center gap-3 px-6 border-b border-cyan-500/15">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-hospital-950 font-black shadow-lg shadow-cyan-500/30 shrink-0">
+          <i data-lucide="cross" class="w-5 h-5 text-hospital-950"></i>
+        </div>
+        <div>
+          <div class="text-base font-extrabold text-white tracking-tight leading-none">CarePulse</div>
+          <div class="text-[10px] text-cyan-300 font-mono mt-0.5">MediCore ERP v4.2</div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="p-3 space-y-1 text-xs font-semibold">
+        <button onclick="switchTab('tab-dashboard')" id="nav-tab-dashboard" class="nav-item w-full flex items-center gap-3 px-3.5 py-3 rounded-xl active-nav-tab hover:bg-white/5 transition text-left">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-cyan-400"></i>
+          <span>Live Operations &amp; Telemetry</span>
+        </button>
+        <button onclick="switchTab('tab-patients')" id="nav-tab-patients" class="nav-item w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition text-left">
+          <i data-lucide="user-plus" class="w-4 h-4 text-emerald-400"></i>
+          <span>Patient Admissions (EMR)</span>
+        </button>
+        <button onclick="switchTab('tab-staff')" id="nav-tab-staff" class="nav-item w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition text-left">
+          <i data-lucide="users" class="w-4 h-4 text-blue-400"></i>
+          <span>Staff Directory &bull; Edit/Delete</span>
+        </button>
+        <button onclick="switchTab('tab-payroll')" id="nav-tab-payroll" class="nav-item w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition text-left">
+          <i data-lucide="banknote" class="w-4 h-4 text-amber-400"></i>
+          <span>Payroll &amp; Salary Ledger</span>
+        </button>
+        <button onclick="switchTab('tab-wards')" id="nav-tab-wards" class="nav-item w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition text-left">
+          <i data-lucide="bed" class="w-4 h-4 text-purple-400"></i>
+          <span>ICU &amp; Ward Bed Grid</span>
+        </button>
+        <button onclick="switchTab('tab-code')" id="nav-tab-code" class="nav-item w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition text-left">
+          <i data-lucide="file-code" class="w-4 h-4 text-rose-400"></i>
+          <span>.NET &amp; MySQL Codebase</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Sidebar Bottom Footer -->
+    <div class="p-4 border-t border-cyan-500/15">
+      <div class="bg-hospital-900/90 rounded-xl p-3 border border-cyan-500/15 mb-3 text-[11px] font-mono">
+        <div class="text-slate-400">Database Engine</div>
+        <div class="text-cyan-300 font-bold flex items-center gap-1.5 mt-0.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          MySQL 8.0 &bull; EF Core
+        </div>
+      </div>
+      <a href="../index.html" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-semibold border border-cyan-500/30 transition">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+        <span>Back to Khadija's Portfolio</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- MAIN APPLICATION CONTENT AREA                            -->
+  <!-- ======================================================== -->
+  <main class="flex-1 flex flex-col overflow-y-auto bg-hospital-950">
+
+    <!-- TOP TELEMETRY & ECG PULSE BAR -->
+    <header class="h-20 glass-card border-b border-cyan-500/15 px-6 flex items-center justify-between shrink-0 sticky top-0 z-20">
+      
+      <!-- Left Hospital Wing & ECG Monitor -->
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="text-xs font-bold text-white uppercase tracking-wider">Hospital Wing Alpha</span>
+          <span class="text-xs font-mono text-cyan-400 hidden sm:inline">&bull; Real-time Telemetry</span>
+        </div>
+
+        <!-- Live Beating ECG Canvas -->
+        <div class="w-48 sm:w-72 hidden md:block bg-hospital-900/90 rounded-lg px-2 border border-cyan-500/20">
+          <canvas id="ecg-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Right Quick Actions -->
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-2 text-xs font-mono text-slate-400">
+          <span>Heart Rate:</span>
+          <span class="text-emerald-400 font-bold" id="hr-display">74 BPM</span>
+        </div>
+
+        <button onclick="openAddStaffModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-hospital-950 font-black text-xs shadow-lg shadow-cyan-500/25 transition transform hover:-translate-y-0.5 flex items-center gap-1.5">
+          <i data-lucide="user-plus" class="w-4 h-4"></i>
+          <span>Add Staff / Doctor</span>
+        </button>
+
+        <a href="../index.html" class="md:hidden p-2 rounded-lg bg-white/5 text-slate-300 text-xs">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- TAB CONTAINER -->
+    <div class="p-6 sm:p-8 max-w-7xl mx-auto w-full space-y-8">
+
+      <!-- ==================================================== -->
+      <!-- TAB 1: OPERATIONS DASHBOARD (DEFAULT)                -->
+      <!-- ==================================================== -->
+      <div id="tab-dashboard" class="tab-pane space-y-8">
+        
+        <!-- Welcome Banner with Hospital Visual Backdrop -->
+        <div class="relative rounded-3xl overflow-hidden glass-card p-8 border border-cyan-500/30">
+          <div class="absolute inset-0 bg-gradient-to-r from-hospital-950 via-hospital-900/95 to-transparent z-10"></div>
+          <div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-25 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-400 via-blue-600 to-transparent pointer-events-none"></div>
+
+          <div class="relative z-20 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-xs font-mono mb-3 border border-cyan-500/20">
+              <span>● SYSTEM STATUS: OPTIMAL</span>
+              <span>&bull; ASP.NET Core 8.0 REST API Active</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Clinical Operations Command Center</h1>
+            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+              Real-time synchronization across Patient Triage, Doctor &amp; Staff Directory, Salary Payroll, and ICU Ward Occupancy. Full CRUD enabled across all entities.
+            </p>
+            <div class="mt-5 flex flex-wrap gap-3">
+              <button onclick="switchTab('tab-patients')" class="px-4 py-2 rounded-xl bg-cyan-500 text-hospital-950 font-bold text-xs flex items-center gap-1.5 hover:bg-cyan-400 transition">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>Admit New Patient</span>
+              </button>
+              <button onclick="switchTab('tab-staff')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs transition flex items-center gap-1.5">
+                <i data-lucide="users" class="w-3.5 h-3.5 text-blue-400"></i>
+                <span>Manage Staff &bull; Edit/Delete</span>
+              </button>
+              <button onclick="switchTab('tab-payroll')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs transition flex items-center gap-1.5">
+                <i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span>Manage Staff Salaries</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Key Telemetry Metrics -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="glass-card p-5 rounded-2xl border border-cyan-500/20">
+            <div class="flex justify-between items-center text-xs font-mono text-cyan-400 mb-1">
+              <span>In-Patient Census</span>
+              <i data-lucide="users" class="w-4 h-4"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-white" id="stat-patients">128</div>
+            <div class="text-[11px] text-emerald-400 mt-1 font-medium">● 92% Bed Utilization</div>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl border border-cyan-500/20">
+            <div class="flex justify-between items-center text-xs font-mono text-cyan-400 mb-1">
+              <span>Total Active Staff</span>
+              <i data-lucide="user-check" class="w-4 h-4"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-white" id="stat-staff-count">9</div>
+            <div class="text-[11px] text-slate-400 mt-1">Doctors, Nurses, Janitors, Admins</div>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl border border-cyan-500/20">
+            <div class="flex justify-between items-center text-xs font-mono text-cyan-400 mb-1">
+              <span>Monthly Payroll</span>
+              <i data-lucide="banknote" class="w-4 h-4 text-amber-400"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-white" id="stat-payroll-total">$51,700</div>
+            <div class="text-[11px] text-emerald-400 mt-1 font-medium" id="stat-payroll-sub">● $31,500 Disbursed</div>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl border border-cyan-500/20">
+            <div class="flex justify-between items-center text-xs font-mono text-cyan-400 mb-1">
+              <span>ICU Emergency Beds</span>
+              <i data-lucide="heart-pulse" class="w-4 h-4 text-rose-400"></i>
+            </div>
+            <div class="text-3xl font-extrabold text-white" id="stat-icu-display">17 <span class="text-sm font-normal text-slate-400">/ 20</span></div>
+            <div class="text-[11px] text-cyan-300 mt-1" id="stat-icu-vacant">● 3 Units Ready for Triage</div>
+          </div>
+        </div>
+
+        <!-- Real-Time Activity Feeds -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Recent Patient Admissions -->
+          <div class="glass-card p-6 rounded-2xl border border-cyan-500/20">
+            <div class="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+              <h3 class="font-bold text-white text-base">Recent Patient Triage Queue</h3>
+              <button onclick="switchTab('tab-patients')" class="text-xs text-cyan-400 hover:underline">View All &rarr;</button>
+            </div>
+            <div class="space-y-3 font-mono text-xs" id="dashboard-patient-summary">
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-white">Eleanor Vance (42, F)</div>
+                  <div class="text-slate-400 text-[11px]">Cardiology &bull; Assigned: Dr. Robert Chen</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold">🔴 Urgent</span>
+              </div>
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-white">Tariq Mahmood (29, M)</div>
+                  <div class="text-slate-400 text-[11px]">Neurology &bull; Assigned: Dr. Sarah Mansoor</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">🟡 Priority</span>
+              </div>
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-white">Grace Mitchell (8, F)</div>
+                  <div class="text-slate-400 text-[11px]">Pediatrics &bull; Assigned: Dr. Emily Watson</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">🟢 Routine</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Staff On-Duty Summary -->
+          <div class="glass-card p-6 rounded-2xl border border-cyan-500/20">
+            <div class="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+              <h3 class="font-bold text-white text-base">Staff On-Duty Distribution</h3>
+              <button onclick="switchTab('tab-staff')" class="text-xs text-cyan-400 hover:underline">Manage Staff &rarr;</button>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5">
+                <div class="text-slate-400">Specialist Doctors</div>
+                <div class="text-xl font-bold text-white mt-1" id="count-doctors">3 Active</div>
+                <div class="text-[10px] text-emerald-400">Cardio, Neuro, Peds</div>
+              </div>
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5">
+                <div class="text-slate-400">Nursing Staff</div>
+                <div class="text-xl font-bold text-white mt-1" id="count-nurses">2 Active</div>
+                <div class="text-[10px] text-cyan-300">ICU &bull; Emergency</div>
+              </div>
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5">
+                <div class="text-slate-400">Sanitation / Sweepers</div>
+                <div class="text-xl font-bold text-white mt-1" id="count-sweepers">2 Active</div>
+                <div class="text-[10px] text-emerald-400">Hygiene &bull; Sterilization</div>
+              </div>
+              <div class="p-3 rounded-xl bg-hospital-900/80 border border-white/5">
+                <div class="text-slate-400">Front Desk &amp; Pharmacy</div>
+                <div class="text-xl font-bold text-white mt-1" id="count-others">2 Active</div>
+                <div class="text-[10px] text-amber-300">Admissions &bull; Meds</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==================================================== -->
+      <!-- TAB 2: PATIENT ADMISSIONS (EMR)                      -->
+      <!-- ==================================================== -->
+      <div id="tab-patients" class="tab-pane hidden space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">Electronic Medical Records (EMR) &amp; Admissions</h2>
+            <p class="text-slate-400 text-xs mt-1">Admit incoming patients, edit triage details, or discharge with instant records synchronization.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Admission Form -->
+          <div class="lg:col-span-5 glass-card p-6 rounded-2xl border border-cyan-500/20">
+            <h3 class="font-bold text-white text-base mb-1">New Patient Intake</h3>
+            <p class="text-xs text-slate-400 mb-5">Submissions write directly to the active MySQL queue.</p>
+
+            <form id="emr-admission-form" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1">Patient Full Name</label>
+                <input type="text" id="emr-name" required placeholder="e.g. Samuel Green" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-semibold text-slate-300 mb-1">Age &amp; Gender</label>
+                  <input type="text" id="emr-age" required placeholder="52, Male" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-300 mb-1">Department</label>
+                  <select id="emr-dept" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Emergency Care">Emergency Care</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-semibold text-slate-300 mb-1">Urgency Triage</label>
+                  <select id="emr-urgency" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+                    <option value="Routine">🟢 Routine Check</option>
+                    <option value="Priority">🟡 Priority / Followup</option>
+                    <option value="Urgent">🔴 Urgent Care</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-300 mb-1">Assigned Nurse</label>
+                  <select id="emr-nurse" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+                    <option value="Sister Maria Santos">Sister Maria Santos (ICU)</option>
+                    <option value="Nurse Kevin Zhao">Nurse Kevin Zhao (ER)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1">Symptoms / Medical Assessment</label>
+                <textarea id="emr-symptoms" rows="2" placeholder="Describe symptoms, vital signs, allergies..." class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold transition shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+                <i data-lucide="check" class="w-4 h-4"></i>
+                <span>Admit Patient &amp; Dispatch Alert</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Live Patient Queue Table -->
+          <div class="lg:col-span-7 glass-card p-6 rounded-2xl border border-cyan-500/20">
+            <div class="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
+              <h3 class="font-bold text-white text-base">Active Patient Queue (Live Sync)</h3>
+              <span class="text-xs font-mono text-cyan-300">EF Core Transaction Ready</span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs font-mono text-slate-300">
+                <thead class="text-[11px] uppercase text-cyan-400 border-b border-white/5">
+                  <tr>
+                    <th class="py-2.5 px-2">Patient</th>
+                    <th class="py-2.5 px-2">Dept</th>
+                    <th class="py-2.5 px-2">Doctor</th>
+                    <th class="py-2.5 px-2">Urgency</th>
+                    <th class="py-2.5 px-2 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="patient-table-body" class="divide-y divide-white/5">
+                  <tr class="patient-row hover:bg-white/5 transition" data-id="p1">
+                    <td class="py-3 px-2 font-bold text-white patient-name-cell">Eleanor Vance (42, F)</td>
+                    <td class="py-3 px-2 text-slate-400 patient-dept-cell">Cardiology</td>
+                    <td class="py-3 px-2 text-cyan-300 patient-doctor-cell">Dr. Robert Chen</td>
+                    <td class="py-3 px-2 font-bold patient-urgency-cell text-rose-400">🔴 Urgent</td>
+                    <td class="py-3 px-2 text-right space-x-1.5">
+                      <button onclick="openEditPatientModal('p1')" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-[10px] transition" title="Edit Patient">
+                        <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <button onclick="dischargePatient(this)" class="px-2 py-0.5 rounded bg-white/10 hover:bg-rose-500/20 hover:text-rose-300 text-[10px] transition font-sans">Discharge</button>
+                    </td>
+                  </tr>
+                  <tr class="patient-row hover:bg-white/5 transition" data-id="p2">
+                    <td class="py-3 px-2 font-bold text-white patient-name-cell">Tariq Mahmood (29, M)</td>
+                    <td class="py-3 px-2 text-slate-400 patient-dept-cell">Neurology</td>
+                    <td class="py-3 px-2 text-cyan-300 patient-doctor-cell">Dr. Sarah Mansoor</td>
+                    <td class="py-3 px-2 font-bold patient-urgency-cell text-amber-400">🟡 Priority</td>
+                    <td class="py-3 px-2 text-right space-x-1.5">
+                      <button onclick="openEditPatientModal('p2')" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-[10px] transition" title="Edit Patient">
+                        <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <button onclick="dischargePatient(this)" class="px-2 py-0.5 rounded bg-white/10 hover:bg-rose-500/20 hover:text-rose-300 text-[10px] transition font-sans">Discharge</button>
+                    </td>
+                  </tr>
+                  <tr class="patient-row hover:bg-white/5 transition" data-id="p3">
+                    <td class="py-3 px-2 font-bold text-white patient-name-cell">Grace Mitchell (8, F)</td>
+                    <td class="py-3 px-2 text-slate-400 patient-dept-cell">Pediatrics</td>
+                    <td class="py-3 px-2 text-cyan-300 patient-doctor-cell">Dr. Emily Watson</td>
+                    <td class="py-3 px-2 font-bold patient-urgency-cell text-emerald-400">🟢 Routine</td>
+                    <td class="py-3 px-2 text-right space-x-1.5">
+                      <button onclick="openEditPatientModal('p3')" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-[10px] transition" title="Edit Patient">
+                        <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <button onclick="dischargePatient(this)" class="px-2 py-0.5 rounded bg-white/10 hover:bg-rose-500/20 hover:text-rose-300 text-[10px] transition font-sans">Discharge</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==================================================== -->
+      <!-- TAB 3: STAFF DIRECTORY (ALL ROLES) & EDIT/DELETE     -->
+      <!-- ==================================================== -->
+      <div id="tab-staff" class="tab-pane hidden space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">Hospital Staff &amp; Human Resources</h2>
+            <p class="text-slate-400 text-xs mt-1">Full management of Doctors, Head Nurses, Sweepers, Receptionists, and Pharmacists with <strong>Edit &amp; Delete</strong> controls.</p>
+          </div>
+          <button onclick="openAddStaffModal()" class="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-xs shadow-lg shadow-cyan-500/25 flex items-center gap-2 transition">
+            <i data-lucide="user-plus" class="w-4 h-4"></i>
+            <span>Add New Staff Member</span>
+          </button>
+        </div>
+
+        <!-- Role Filter Buttons -->
+        <div class="flex flex-wrap gap-2 text-xs font-mono">
+          <button onclick="filterStaff('all')" class="staff-filter-btn px-3 py-1.5 rounded-lg bg-cyan-500 text-hospital-950 font-bold transition">All Staff</button>
+          <button onclick="filterStaff('Doctor')" class="staff-filter-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">Doctors</button>
+          <button onclick="filterStaff('Nurse')" class="staff-filter-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">Nurses</button>
+          <button onclick="filterStaff('SweeperJanitor')" class="staff-filter-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">Sweepers &amp; Janitors</button>
+          <button onclick="filterStaff('Receptionist')" class="staff-filter-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">Receptionists</button>
+          <button onclick="filterStaff('Pharmacist')" class="staff-filter-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">Pharmacists</button>
+        </div>
+
+        <!-- Staff Table -->
+        <div class="glass-card rounded-2xl overflow-hidden border border-cyan-500/20">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono text-slate-300">
+              <thead class="text-[11px] uppercase text-cyan-400 bg-hospital-900/90 border-b border-white/5">
+                <tr>
+                  <th class="py-3 px-4">Staff Member</th>
+                  <th class="py-3 px-4">Role</th>
+                  <th class="py-3 px-4">Department</th>
+                  <th class="py-3 px-4">Shift</th>
+                  <th class="py-3 px-4">Monthly Salary</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="staff-table-body" class="divide-y divide-white/5">
+                <!-- Seed Staff -->
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-1" data-id="1" data-role="Doctor" data-salary="9500">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Dr. Robert Chen</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Doctor</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Cardiology</td>
+                  <td class="py-3 px-4 staff-shift">Morning</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$9,500.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(1)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(1, 'Dr. Robert Chen', 9500)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-2" data-id="2" data-role="Doctor" data-salary="11000">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Dr. Sarah Al-Mansoor</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Doctor</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Neurology</td>
+                  <td class="py-3 px-4 staff-shift">Morning</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$11,000.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(2)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(2, 'Dr. Sarah Al-Mansoor', 11000)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-3" data-id="3" data-role="Doctor" data-salary="8800">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Dr. Emily Watson</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Doctor</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Pediatrics</td>
+                  <td class="py-3 px-4 staff-shift">Evening</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$8,800.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(3)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(3, 'Dr. Emily Watson', 8800)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-4" data-id="4" data-role="Nurse" data-salary="5400">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Sister Maria Santos</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Head Nurse</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">ICU Ward</td>
+                  <td class="py-3 px-4 staff-shift">Morning</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$5,400.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(4)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(4, 'Sister Maria Santos', 5400)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-5" data-id="5" data-role="Nurse" data-salary="4200">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Nurse Kevin Zhao</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Duty Nurse</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Emergency Care</td>
+                  <td class="py-3 px-4 staff-shift">Night</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$4,200.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(5)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(5, 'Nurse Kevin Zhao', 4200)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-6" data-id="6" data-role="Receptionist" data-salary="3200">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Jessica Miller</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Receptionist</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Front Desk &amp; Admissions</td>
+                  <td class="py-3 px-4 staff-shift">Morning</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$3,200.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(6)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(6, 'Jessica Miller', 3200)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-7" data-id="7" data-role="Pharmacist" data-salary="4800">
+                  <td class="py-3 px-4 font-bold text-white staff-name">David Sterling</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Pharmacist</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Central Pharmacy</td>
+                  <td class="py-3 px-4 staff-shift">Morning</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$4,800.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(7)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(7, 'David Sterling', 4800)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-8" data-id="8" data-role="SweeperJanitor" data-salary="2400">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Rashid Ali</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">Sweeper / Janitor</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Sanitation &amp; Hygiene</td>
+                  <td class="py-3 px-4 staff-shift">Morning</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$2,400.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(8)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(8, 'Rashid Ali', 2400)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr class="staff-row hover:bg-white/5 transition" id="staff-row-9" data-id="9" data-role="SweeperJanitor" data-salary="2400">
+                  <td class="py-3 px-4 font-bold text-white staff-name">Elena Rostova</td>
+                  <td class="py-3 px-4 staff-role-cell"><span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">Sweeper / Janitor</span></td>
+                  <td class="py-3 px-4 text-slate-400 staff-dept">Sterilization &amp; Ward Cleaning</td>
+                  <td class="py-3 px-4 staff-shift">Evening</td>
+                  <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$2,400.00</td>
+                  <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+                  <td class="py-3 px-4 text-right space-x-1.5">
+                    <button onclick="openEditStaffModal(9)" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button onclick="deleteStaffMember(9, 'Elena Rostova', 2400)" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================================================== -->
+      <!-- TAB 4: PAYROLL & SALARY STATUS LEDGER                -->
+      <!-- ==================================================== -->
+      <div id="tab-payroll" class="tab-pane hidden space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">Staff Payroll &amp; Monthly Salary Disbursement</h2>
+            <p class="text-slate-400 text-xs mt-1">Track pending vs paid salaries and trigger instant automated disbursements.</p>
+          </div>
+          <div class="px-3.5 py-1.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-xs font-mono text-cyan-300">
+            Billing Period: <span class="font-bold text-white">August 2026</span>
+          </div>
+        </div>
+
+        <!-- Payroll Summary Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="glass-card p-5 rounded-2xl border border-cyan-500/20">
+            <div class="text-xs font-mono text-slate-400">Total Monthly Obligation</div>
+            <div class="text-3xl font-extrabold text-white mt-1" id="payroll-total-display">$51,700.00</div>
+            <div class="text-[11px] text-slate-400 mt-1" id="payroll-staff-count-display">9 Staff Members</div>
+          </div>
+          <div class="glass-card p-5 rounded-2xl border border-emerald-500/30">
+            <div class="text-xs font-mono text-emerald-400">Disbursed (Paid)</div>
+            <div class="text-3xl font-extrabold text-emerald-400 mt-1" id="payroll-paid-display">$31,500.00</div>
+            <div class="text-[11px] text-emerald-300 mt-1" id="payroll-paid-count">5 Payments Completed</div>
+          </div>
+          <div class="glass-card p-5 rounded-2xl border border-amber-500/30">
+            <div class="text-xs font-mono text-amber-400">Pending Disbursement</div>
+            <div class="text-3xl font-extrabold text-amber-400 mt-1" id="payroll-pending-display">$20,200.00</div>
+            <div class="text-[11px] text-amber-300 mt-1" id="payroll-pending-count">4 Pending Approval</div>
+          </div>
+        </div>
+
+        <!-- Salary Disbursement Table -->
+        <div class="glass-card rounded-2xl overflow-hidden border border-cyan-500/20">
+          <div class="p-4 border-b border-white/5 flex items-center justify-between">
+            <span class="font-bold text-white text-sm">Monthly Staff Salary Ledger</span>
+            <span class="text-xs font-mono text-cyan-400">Click 'Disburse' to simulate payment release</span>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono text-slate-300">
+              <thead class="text-[11px] uppercase text-cyan-400 bg-hospital-900/90 border-b border-white/5">
+                <tr>
+                  <th class="py-3 px-4">Employee</th>
+                  <th class="py-3 px-4">Role</th>
+                  <th class="py-3 px-4">Base Salary</th>
+                  <th class="py-3 px-4">Net Payable</th>
+                  <th class="py-3 px-4">Status (Click to Toggle)</th>
+                  <th class="py-3 px-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="payroll-table-body" class="divide-y divide-white/5">
+                
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-1" data-id="1" data-amount="9500" data-base="9500" data-overtime="0" data-deductions="0" data-status="paid">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Dr. Robert Chen</td>
+                  <td class="py-3 px-4 text-blue-300 payroll-role">Doctor (Cardio)</td>
+                  <td class="py-3 px-4 payroll-base">$9,500.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$9,500.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(1)" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟢 Paid</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(1)" class="px-2 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[10px] transition">🔄 Revert</button>
+                      <button onclick="openEditSalaryModal(1)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <span class="text-[10px] text-slate-500 font-mono">TX-PAY-8801</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-2" data-id="2" data-amount="11000" data-base="11000" data-overtime="0" data-deductions="0" data-status="paid">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Dr. Sarah Al-Mansoor</td>
+                  <td class="py-3 px-4 text-blue-300 payroll-role">Doctor (Neuro)</td>
+                  <td class="py-3 px-4 payroll-base">$11,000.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$11,000.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(2)" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟢 Paid</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(2)" class="px-2 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[10px] transition">🔄 Revert</button>
+                      <button onclick="openEditSalaryModal(2)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <span class="text-[10px] text-slate-500 font-mono">TX-PAY-8802</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-3" data-id="3" data-amount="8800" data-base="8800" data-overtime="0" data-deductions="0" data-status="pending">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Dr. Emily Watson</td>
+                  <td class="py-3 px-4 text-blue-300 payroll-role">Doctor (Peds)</td>
+                  <td class="py-3 px-4 payroll-base">$8,800.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$8,800.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(3)" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟡 Pending</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(3)" class="px-2.5 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-[11px] transition">Disburse</button>
+                      <button onclick="openEditSalaryModal(3)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-4" data-id="4" data-amount="5400" data-base="5400" data-overtime="0" data-deductions="0" data-status="paid">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Sister Maria Santos</td>
+                  <td class="py-3 px-4 text-cyan-300 payroll-role">Head Nurse</td>
+                  <td class="py-3 px-4 payroll-base">$5,400.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$5,400.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(4)" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟢 Paid</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(4)" class="px-2 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[10px] transition">🔄 Revert</button>
+                      <button onclick="openEditSalaryModal(4)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <span class="text-[10px] text-slate-500 font-mono">TX-PAY-8803</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-5" data-id="5" data-amount="4200" data-base="4200" data-overtime="0" data-deductions="0" data-status="pending">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Nurse Kevin Zhao</td>
+                  <td class="py-3 px-4 text-cyan-300 payroll-role">Duty Nurse</td>
+                  <td class="py-3 px-4 payroll-base">$4,200.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$4,200.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(5)" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟡 Pending</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(5)" class="px-2.5 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-[11px] transition">Disburse</button>
+                      <button onclick="openEditSalaryModal(5)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-6" data-id="6" data-amount="3200" data-base="3200" data-overtime="0" data-deductions="0" data-status="paid">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Jessica Miller</td>
+                  <td class="py-3 px-4 text-amber-300 payroll-role">Receptionist</td>
+                  <td class="py-3 px-4 payroll-base">$3,200.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$3,200.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(6)" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟢 Paid</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(6)" class="px-2 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[10px] transition">🔄 Revert</button>
+                      <button onclick="openEditSalaryModal(6)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <span class="text-[10px] text-slate-500 font-mono">TX-PAY-8804</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-7" data-id="7" data-amount="4800" data-base="4800" data-overtime="0" data-deductions="0" data-status="pending">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">David Sterling</td>
+                  <td class="py-3 px-4 text-purple-300 payroll-role">Pharmacist</td>
+                  <td class="py-3 px-4 payroll-base">$4,800.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$4,800.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(7)" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟡 Pending</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(7)" class="px-2.5 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-[11px] transition">Disburse</button>
+                      <button onclick="openEditSalaryModal(7)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-8" data-id="8" data-amount="2400" data-base="2400" data-overtime="0" data-deductions="0" data-status="paid">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Rashid Ali</td>
+                  <td class="py-3 px-4 text-rose-300 payroll-role">Sweeper / Janitor</td>
+                  <td class="py-3 px-4 payroll-base">$2,400.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$2,400.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(8)" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟢 Paid</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(8)" class="px-2 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[10px] transition">🔄 Revert</button>
+                      <button onclick="openEditSalaryModal(8)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                      <span class="text-[10px] text-slate-500 font-mono">TX-PAY-8805</span>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="payroll-row hover:bg-white/5 transition" id="payroll-row-9" data-id="9" data-amount="2400" data-base="2400" data-overtime="0" data-deductions="0" data-status="pending">
+                  <td class="py-3 px-4 font-bold text-white payroll-name">Elena Rostova</td>
+                  <td class="py-3 px-4 text-rose-300 payroll-role">Sweeper / Janitor</td>
+                  <td class="py-3 px-4 payroll-base">$2,400.00</td>
+                  <td class="py-3 px-4 font-bold text-white payroll-net">$2,400.00</td>
+                  <td class="py-3 px-4 status-cell">
+                    <button onclick="toggleSalaryStatus(9)" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟡 Pending</button>
+                  </td>
+                  <td class="py-3 px-4 action-cell">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleSalaryStatus(9)" class="px-2.5 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-[11px] transition">Disburse</button>
+                      <button onclick="openEditSalaryModal(9)" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================================================== -->
+      <!-- TAB 5: WARD & ICU BED ALLOCATION                     -->
+      <!-- ==================================================== -->
+      <div id="tab-wards" class="tab-pane hidden space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">Ward &amp; ICU Bed Telemetry Map</h2>
+            <p class="text-slate-400 text-xs mt-1">Click any bed to toggle state: <strong>🔴 Occupied &bull; 🟢 Vacant &bull; 🟡 Maintenance</strong>.</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs font-mono">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> Occupied</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span> Vacant</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-amber-500"></span> Maintenance</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- ICU-A Ward -->
+          <div class="glass-card p-6 rounded-2xl border border-cyan-500/20">
+            <div class="flex justify-between items-center pb-3 border-b border-white/5 mb-4">
+              <span class="font-bold text-white text-sm">Intensive Care Unit (ICU-A)</span>
+              <span class="text-xs font-mono text-cyan-300" id="icu-ratio-label">17/20 Occupied</span>
+            </div>
+            <div class="grid grid-cols-5 gap-2.5 font-mono text-xs text-center">
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-01</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-02</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-03</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">B-04</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-05</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-06</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">B-07</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-08</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">B-09</button>
+              <button onclick="toggleBed(this, 'icu')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">B-10</button>
+            </div>
+          </div>
+
+          <!-- General Ward 3 -->
+          <div class="glass-card p-6 rounded-2xl border border-cyan-500/20">
+            <div class="flex justify-between items-center pb-3 border-b border-white/5 mb-4">
+              <span class="font-bold text-white text-sm">General Recovery Ward (Wing 3)</span>
+              <span class="text-xs font-mono text-cyan-300" id="ward-ratio-label">12/20 Occupied</span>
+            </div>
+            <div class="grid grid-cols-5 gap-2.5 font-mono text-xs text-center">
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">W-01</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">W-02</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">W-03</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">W-04</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">W-05</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">W-06</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">W-07</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105" data-state="occupied">W-08</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">W-09</button>
+              <button onclick="toggleBed(this, 'ward')" class="bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105" data-state="vacant">W-10</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ==================================================== -->
+      <!-- TAB 6: .NET & MYSQL ARCHITECTURE CODE INSPECTOR      -->
+      <!-- ==================================================== -->
+      <div id="tab-code" class="tab-pane hidden space-y-8">
+        
+        <div>
+          <h2 class="text-2xl font-extrabold text-white">Full-Stack .NET &amp; MySQL Codebase Architecture</h2>
+          <p class="text-slate-400 text-xs mt-1">Inspect the actual ASP.NET Core controllers with full CRUD (Create, Read, Update, Delete) &amp; MySQL schemas built in <code class="text-cyan-300 font-mono">C:\CarePulseERP</code>.</p>
+        </div>
+
+        <!-- Code Switcher Tabs -->
+        <div class="flex flex-wrap gap-2 text-xs font-mono">
+          <button onclick="switchCodeSnippet('csharp-staff')" id="code-btn-staff" class="code-btn px-3 py-1.5 rounded-lg bg-cyan-500 text-hospital-950 font-bold transition">StaffController.cs</button>
+          <button onclick="switchCodeSnippet('csharp-payroll')" id="code-btn-payroll" class="code-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">PayrollController.cs</button>
+          <button onclick="switchCodeSnippet('csharp-db')" id="code-btn-db" class="code-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">HospitalDbContext.cs</button>
+          <button onclick="switchCodeSnippet('mysql-schema')" id="code-btn-schema" class="code-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 transition">schema.mysql.sql</button>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden border border-cyan-500/20">
+          
+          <div id="snippet-csharp-staff" class="code-snippet-box">
+            <div class="px-4 py-2.5 bg-hospital-900 border-b border-white/5 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Location: C:\CarePulseERP\Controllers\StaffController.cs</span>
+              <span class="text-emerald-400">ASP.NET Core 8.0 &bull; Full CRUD (GET, POST, PUT, DELETE)</span>
+            </div>
+            <pre class="p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+<span class="text-purple-400">[ApiController]</span>
+<span class="text-purple-400">[Route]</span>(<span class="text-emerald-300">"api/[controller]"</span>)
+<span class="text-purple-400">public class</span> <span class="text-amber-300">StaffController</span> : <span class="text-cyan-300">ControllerBase</span>
+{
+    <span class="text-purple-400">private readonly</span> HospitalDbContext _db;
+    <span class="text-purple-400">public</span> <span class="text-blue-400">StaffController</span>(HospitalDbContext db) =&gt; _db = db;
+
+    <span class="text-purple-400">[HttpGet]</span>
+    <span class="text-purple-400">public async Task</span>&lt;IActionResult&gt; <span class="text-blue-400">GetAllStaff</span>([FromQuery] StaffRole? role = null)
+    {
+        <span class="text-purple-400">var</span> query = _db.StaffMembers.AsNoTracking().AsQueryable();
+        <span class="text-purple-400">if</span> (role.HasValue) query = query.Where(s =&gt; s.Role == role.Value);
+        <span class="text-purple-400">return</span> Ok(<span class="text-purple-400">await</span> query.ToListAsync());
+    }
+
+    <span class="text-purple-400">[HttpPut(</span><span class="text-emerald-300">"{id}"</span><span class="text-purple-400">)]</span>
+    <span class="text-purple-400">public async Task</span>&lt;IActionResult&gt; <span class="text-blue-400">UpdateStaff</span>(<span class="text-cyan-300">int</span> id, [FromBody] CreateStaffDto dto)
+    {
+        <span class="text-purple-400">var</span> staff = <span class="text-purple-400">await</span> _db.StaffMembers.FindAsync(id);
+        <span class="text-purple-400">if</span> (staff == null) <span class="text-purple-400">return</span> NotFound();
+
+        staff.FullName = dto.FullName;
+        staff.Role = dto.Role;
+        staff.Department = dto.Department;
+        staff.MonthlySalary = dto.MonthlySalary;
+        staff.Shift = dto.Shift;
+
+        <span class="text-purple-400">await</span> _db.SaveChangesAsync();
+        <span class="text-purple-400">return</span> Ok(<span class="text-purple-400">new</span> { message = <span class="text-emerald-400">"Staff member updated successfully."</span> });
+    }
+
+    <span class="text-purple-400">[HttpDelete(</span><span class="text-emerald-300">"{id}"</span><span class="text-purple-400">)]</span>
+    <span class="text-purple-400">public async Task</span>&lt;IActionResult&gt; <span class="text-blue-400">DeleteStaff</span>(<span class="text-cyan-300">int</span> id)
+    {
+        <span class="text-purple-400">var</span> staff = <span class="text-purple-400">await</span> _db.StaffMembers.FindAsync(id);
+        <span class="text-purple-400">if</span> (staff == null) <span class="text-purple-400">return</span> NotFound();
+
+        _db.StaffMembers.Remove(staff);
+        <span class="text-purple-400">await</span> _db.SaveChangesAsync();
+        <span class="text-purple-400">return</span> Ok(<span class="text-purple-400">new</span> { message = $<span class="text-emerald-300">"Staff '{staff.FullName}' removed."</span> });
+    }
+}</pre>
+          </div>
+
+          <div id="snippet-csharp-payroll" class="code-snippet-box hidden">
+            <div class="px-4 py-2.5 bg-hospital-900 border-b border-white/5 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Location: C:\CarePulseERP\Controllers\PayrollController.cs</span>
+              <span class="text-emerald-400">Automated Salary Disbursement</span>
+            </div>
+            <pre class="p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+<span class="text-purple-400">[HttpPost(</span><span class="text-emerald-300">"disburse"</span><span class="text-purple-400">)]</span>
+<span class="text-purple-400">public async Task</span>&lt;IActionResult&gt; <span class="text-blue-400">DisburseSalary</span>([FromBody] DisburseSalaryDto dto)
+{
+    <span class="text-purple-400">var</span> record = <span class="text-purple-400">await</span> _db.SalaryRecords
+        .Include(r =&gt; r.StaffMember)
+        .FirstOrDefaultAsync(r =&gt; r.StaffMemberId == dto.StaffMemberId &amp;&amp; r.MonthYear == dto.MonthYear);
+
+    record.Status = PayrollStatus.Paid;
+    record.PaidDate = DateTime.UtcNow;
+    record.TransactionReference = $<span class="text-emerald-300">"TX-PAY-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid().ToString()[..6]}"</span>;
+
+    <span class="text-purple-400">await</span> _db.SaveChangesAsync();
+    <span class="text-purple-400">return</span> Ok(<span class="text-purple-400">new</span> { Status = <span class="text-emerald-400">"Paid"</span>, TxRef = record.TransactionReference });
+}</pre>
+          </div>
+
+          <div id="snippet-csharp-db" class="code-snippet-box hidden">
+            <div class="px-4 py-2.5 bg-hospital-900 border-b border-white/5 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Location: C:\CarePulseERP\Data\HospitalDbContext.cs</span>
+              <span class="text-emerald-400">EF Core MySQL Model</span>
+            </div>
+            <pre class="p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+<span class="text-purple-400">public class</span> <span class="text-amber-300">HospitalDbContext</span> : <span class="text-cyan-300">DbContext</span>
+{
+    <span class="text-purple-400">public</span> <span class="text-blue-400">HospitalDbContext</span>(DbContextOptions&lt;HospitalDbContext&gt; opt) : <span class="text-purple-400">base</span>(opt) { }
+
+    <span class="text-purple-400">public DbSet</span>&lt;StaffMember&gt; StaffMembers =&gt; Set&lt;StaffMember&gt;();
+    <span class="text-purple-400">public DbSet</span>&lt;SalaryRecord&gt; SalaryRecords =&gt; Set&lt;SalaryRecord&gt;();
+    <span class="text-purple-400">public DbSet</span>&lt;Patient&gt; Patients =&gt; Set&lt;Patient&gt;();
+    <span class="text-purple-400">public DbSet</span>&lt;Bed&gt; Beds =&gt; Set&lt;Bed&gt;();
+}</pre>
+          </div>
+
+          <div id="snippet-mysql-schema" class="code-snippet-box hidden">
+            <div class="px-4 py-2.5 bg-hospital-900 border-b border-white/5 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>Location: C:\CarePulseERP\Database\schema.sql</span>
+              <span class="text-amber-400">Relational Database</span>
+            </div>
+            <pre class="p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
+<span class="text-purple-400">CREATE TABLE</span> StaffMembers (
+    Id <span class="text-cyan-300">INT AUTO_INCREMENT PRIMARY KEY</span>,
+    FullName <span class="text-cyan-300">VARCHAR(120) NOT NULL</span>,
+    Role <span class="text-cyan-300">INT NOT NULL</span> COMMENT 'Doctor, Nurse, Sweeper, Receptionist, Pharmacist',
+    Department <span class="text-cyan-300">VARCHAR(80) NOT NULL</span>,
+    MonthlySalary <span class="text-cyan-300">DECIMAL(18,2) NOT NULL</span>,
+    IsActive <span class="text-cyan-300">BOOLEAN DEFAULT TRUE</span>
+);
+
+<span class="text-purple-400">CREATE TABLE</span> SalaryRecords (
+    Id <span class="text-cyan-300">INT AUTO_INCREMENT PRIMARY KEY</span>,
+    StaffMemberId <span class="text-cyan-300">INT NOT NULL</span>,
+    MonthYear <span class="text-cyan-300">VARCHAR(20) NOT NULL</span>,
+    BaseSalary <span class="text-cyan-300">DECIMAL(18,2) NOT NULL</span>,
+    Status <span class="text-cyan-300">INT DEFAULT 1</span>,
+    <span class="text-purple-400">FOREIGN KEY</span> (StaffMemberId) <span class="text-purple-400">REFERENCES</span> StaffMembers(Id)
+);</pre>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ADD NEW STAFF MEMBER                              -->
+  <!-- ======================================================== -->
+  <div id="add-staff-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card w-full max-w-lg rounded-3xl p-7 border border-cyan-500/30 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+        <div>
+          <h3 class="text-xl font-bold text-white">Add Hospital Staff Member</h3>
+          <p class="text-xs text-slate-400">Doctor, Nurse, Receptionist, Janitor/Sweeper, Pharmacist</p>
+        </div>
+        <button onclick="closeAddStaffModal()" class="p-2 rounded-lg text-slate-400 hover:text-white bg-white/5">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="new-staff-form" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Full Name</label>
+          <input type="text" id="staff-name" required placeholder="e.g. Dr. Arthur Pendelton / Fatima Noor" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Staff Role</label>
+            <select id="staff-role" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+              <option value="Doctor">Doctor (Physician)</option>
+              <option value="Nurse">Staff Nurse / Head Nurse</option>
+              <option value="SweeperJanitor">Sweeper / Janitorial Staff</option>
+              <option value="Receptionist">Front Desk Receptionist</option>
+              <option value="Pharmacist">Pharmacist</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Department</label>
+            <input type="text" id="staff-dept" required placeholder="e.g. Cardiology / Ward 2" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Monthly Salary ($)</label>
+            <input type="number" id="staff-salary" required placeholder="4500" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Shift</label>
+            <select id="staff-shift" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+              <option value="Morning">Morning (8am - 4pm)</option>
+              <option value="Evening">Evening (4pm - 12am)</option>
+              <option value="Night">Night (12am - 8am)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="button" onclick="closeAddStaffModal()" class="w-1/2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold transition shadow-lg shadow-cyan-500/25">
+            Add to Staff Roster
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: EDIT STAFF MEMBER (NEW)                           -->
+  <!-- ======================================================== -->
+  <div id="edit-staff-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card w-full max-w-lg rounded-3xl p-7 border border-cyan-500/40 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+        <div>
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="edit-3" class="w-5 h-5 text-cyan-400"></i>
+            <span>Edit Staff Member</span>
+          </h3>
+          <p class="text-xs text-slate-400">Modify staff role, department, shift, or salary</p>
+        </div>
+        <button onclick="closeEditStaffModal()" class="p-2 rounded-lg text-slate-400 hover:text-white bg-white/5">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="edit-staff-form" class="space-y-4 text-xs">
+        <input type="hidden" id="edit-staff-id">
+        <input type="hidden" id="edit-staff-old-salary">
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Full Name</label>
+          <input type="text" id="edit-staff-name" required class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white focus:outline-none focus:border-cyan-400">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Staff Role</label>
+            <select id="edit-staff-role" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+              <option value="Doctor">Doctor (Physician)</option>
+              <option value="Nurse">Staff Nurse / Head Nurse</option>
+              <option value="SweeperJanitor">Sweeper / Janitorial Staff</option>
+              <option value="Receptionist">Front Desk Receptionist</option>
+              <option value="Pharmacist">Pharmacist</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Department</label>
+            <input type="text" id="edit-staff-dept" required class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white focus:outline-none focus:border-cyan-400">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Monthly Salary ($)</label>
+            <input type="number" id="edit-staff-salary" required class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white focus:outline-none focus:border-cyan-400">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Shift</label>
+            <select id="edit-staff-shift" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+              <option value="Morning">Morning (8am - 4pm)</option>
+              <option value="Evening">Evening (4pm - 12am)</option>
+              <option value="Night">Night (12am - 8am)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="button" onclick="closeEditStaffModal()" class="w-1/2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold transition shadow-lg shadow-cyan-500/25">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: EDIT PATIENT (NEW)                                -->
+  <!-- ======================================================== -->
+  <div id="edit-patient-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card w-full max-w-md rounded-3xl p-7 border border-cyan-500/40 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+        <div>
+          <h3 class="text-xl font-bold text-white">Edit Patient Record</h3>
+          <p class="text-xs text-slate-400">Update department, doctor, or urgency level</p>
+        </div>
+        <button onclick="closeEditPatientModal()" class="p-2 rounded-lg text-slate-400 hover:text-white bg-white/5">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="edit-patient-form" class="space-y-4 text-xs">
+        <input type="hidden" id="edit-patient-id">
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Patient Name</label>
+          <input type="text" id="edit-patient-name" required class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white focus:outline-none focus:border-cyan-400">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Department</label>
+          <select id="edit-patient-dept" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+            <option value="Cardiology">Cardiology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Emergency Care">Emergency Care</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Urgency Level</label>
+          <select id="edit-patient-urgency" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+            <option value="Routine">🟢 Routine Check</option>
+            <option value="Priority">🟡 Priority / Followup</option>
+            <option value="Urgent">🔴 Urgent Care</option>
+          </select>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="button" onclick="closeEditPatientModal()" class="w-1/2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold transition">
+            Update Record
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: EDIT SALARY & ALLOWANCES (NEW)                    -->
+  <!-- ======================================================== -->
+  <div id="edit-salary-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card w-full max-w-md rounded-3xl p-7 border border-amber-500/40 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+        <div>
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="banknote" class="w-5 h-5 text-amber-400"></i>
+            <span>Adjust Salary &amp; Allowances</span>
+          </h3>
+          <p class="text-xs text-slate-400">Update Base Salary, Overtime Bonus, and Deductions</p>
+        </div>
+        <button onclick="closeEditSalaryModal()" class="p-2 rounded-lg text-slate-400 hover:text-white bg-white/5">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="edit-salary-form" class="space-y-4 text-xs">
+        <input type="hidden" id="edit-salary-id">
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Employee Name</label>
+          <input type="text" id="edit-salary-name" readonly class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900/50 border border-white/10 text-slate-400 cursor-not-allowed">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Base Salary ($)</label>
+            <input type="number" id="edit-salary-base" required oninput="calculateNetSalary()" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-amber-500/20 text-white focus:outline-none focus:border-amber-400">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Overtime Bonus ($)</label>
+            <input type="number" id="edit-salary-overtime" value="0" oninput="calculateNetSalary()" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-amber-500/20 text-white focus:outline-none focus:border-amber-400">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Deductions ($)</label>
+            <input type="number" id="edit-salary-deductions" value="0" oninput="calculateNetSalary()" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-amber-500/20 text-white focus:outline-none focus:border-amber-400">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Net Payable ($)</label>
+            <input type="text" id="edit-salary-net" readonly class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900/80 border border-emerald-500/30 text-emerald-400 font-bold">
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="button" onclick="closeEditSalaryModal()" class="w-1/2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-hospital-950 font-bold transition shadow-lg shadow-amber-500/25">
+            Save Adjustment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING TOAST NOTIFICATION BANNER                       -->
+  <!-- ======================================================== -->
+  <div id="toast-banner" class="fixed bottom-6 right-6 z-50 bg-hospital-900 border border-cyan-500/40 text-cyan-300 px-5 py-3.5 rounded-2xl shadow-2xl font-mono text-xs flex items-center gap-3 transition-all duration-300 opacity-0 translate-y-8 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-text">Action completed successfully.</span>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT LOGIC & ECG CANVAS PULSE                      -->
+  <!-- ======================================================== -->
+  <script>
+    lucide.createIcons();
+
+    // Toast Trigger
+    function showToast(message) {
+      const toast = document.getElementById('toast-banner');
+      const text = document.getElementById('toast-text');
+      text.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3500);
+    }
+
+    // Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.classList.remove('active-nav-tab');
+        btn.classList.add('text-slate-400');
+      });
+
+      const navBtn = document.getElementById('nav-' + tabId);
+      if (navBtn) {
+        navBtn.classList.add('active-nav-tab');
+        navBtn.classList.remove('text-slate-400');
+      }
+    }
+
+    // Code Snippet Switcher
+    function switchCodeSnippet(snippetId) {
+      document.querySelectorAll('.code-snippet-box').forEach(box => box.classList.add('hidden'));
+      document.getElementById('snippet-' + snippetId).classList.remove('hidden');
+
+      document.querySelectorAll('.code-btn').forEach(btn => {
+        btn.classList.remove('bg-cyan-500', 'text-hospital-950', 'font-bold');
+        btn.classList.add('bg-white/5', 'text-slate-300');
+      });
+
+      const activeBtn = document.getElementById('code-btn-' + snippetId.replace('csharp-', '').replace('mysql-', ''));
+      if (activeBtn) {
+        activeBtn.classList.add('bg-cyan-500', 'text-hospital-950', 'font-bold');
+        activeBtn.classList.remove('bg-white/5', 'text-slate-300');
+      }
+    }
+
+    // Modal Controls
+    function openAddStaffModal() {
+      document.getElementById('add-staff-modal').classList.remove('hidden');
+    }
+    function closeAddStaffModal() {
+      document.getElementById('add-staff-modal').classList.add('hidden');
+    }
+
+    function openEditStaffModal(id) {
+      const row = document.getElementById('staff-row-' + id);
+      if (!row) return;
+
+      const name = row.querySelector('.staff-name').textContent.trim();
+      const role = row.getAttribute('data-role');
+      const dept = row.querySelector('.staff-dept').textContent.trim();
+      const shift = row.querySelector('.staff-shift').textContent.trim();
+      const salary = parseFloat(row.getAttribute('data-salary') || 0);
+
+      document.getElementById('edit-staff-id').value = id;
+      document.getElementById('edit-staff-old-salary').value = salary;
+      document.getElementById('edit-staff-name').value = name;
+      document.getElementById('edit-staff-role').value = role;
+      document.getElementById('edit-staff-dept').value = dept;
+      document.getElementById('edit-staff-shift').value = shift;
+      document.getElementById('edit-staff-salary').value = salary;
+
+      document.getElementById('edit-staff-modal').classList.remove('hidden');
+    }
+    function closeEditStaffModal() {
+      document.getElementById('edit-staff-modal').classList.add('hidden');
+    }
+
+    function openEditPatientModal(id) {
+      const row = document.querySelector(`.patient-row[data-id="${id}"]`);
+      if (!row) return;
+
+      const name = row.querySelector('.patient-name-cell').textContent.trim();
+      const dept = row.querySelector('.patient-dept-cell').textContent.trim();
+
+      document.getElementById('edit-patient-id').value = id;
+      document.getElementById('edit-patient-name').value = name;
+      document.getElementById('edit-patient-dept').value = dept;
+
+      document.getElementById('edit-patient-modal').classList.remove('hidden');
+    }
+    function closeEditPatientModal() {
+      document.getElementById('edit-patient-modal').classList.add('hidden');
+    }
+
+    // Edit Salary Modal Controls
+    function openEditSalaryModal(id) {
+      const row = document.getElementById('payroll-row-' + id);
+      if (!row) return;
+
+      const name = row.querySelector('.payroll-name').textContent.trim();
+      const base = parseFloat(row.getAttribute('data-base') || row.getAttribute('data-amount') || 0);
+      const overtime = parseFloat(row.getAttribute('data-overtime') || 0);
+      const deductions = parseFloat(row.getAttribute('data-deductions') || 0);
+
+      document.getElementById('edit-salary-id').value = id;
+      document.getElementById('edit-salary-name').value = name;
+      document.getElementById('edit-salary-base').value = base;
+      document.getElementById('edit-salary-overtime').value = overtime;
+      document.getElementById('edit-salary-deductions').value = deductions;
+
+      calculateNetSalary();
+      document.getElementById('edit-salary-modal').classList.remove('hidden');
+    }
+    function closeEditSalaryModal() {
+      document.getElementById('edit-salary-modal').classList.add('hidden');
+    }
+
+    function calculateNetSalary() {
+      const base = parseFloat(document.getElementById('edit-salary-base').value) || 0;
+      const overtime = parseFloat(document.getElementById('edit-salary-overtime').value) || 0;
+      const deductions = parseFloat(document.getElementById('edit-salary-deductions').value) || 0;
+      const net = Math.max(0, base + overtime - deductions);
+      document.getElementById('edit-salary-net').value = '$' + net.toLocaleString() + '.00';
+    }
+
+    // Global Payroll & Staff State
+    let totalPayroll = 51700;
+    let paidPayroll = 31500;
+    let pendingPayroll = 20200;
+    let paidCount = 5;
+    let pendingCount = 4;
+    let totalStaff = 9;
+
+    // Filter Staff by Role
+    function filterStaff(role) {
+      document.querySelectorAll('.staff-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-cyan-500', 'text-hospital-950', 'font-bold');
+        btn.classList.add('bg-white/5', 'text-slate-300');
+      });
+      event.target.classList.add('bg-cyan-500', 'text-hospital-950', 'font-bold');
+      event.target.classList.remove('bg-white/5', 'text-slate-300');
+
+      document.querySelectorAll('.staff-row').forEach(row => {
+        if (role === 'all' || row.getAttribute('data-role') === role) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+    }
+
+    // Bidirectional Toggle Salary Status (Paid <-> Pending)
+    function toggleSalaryStatus(id) {
+      const row = document.getElementById('payroll-row-' + id);
+      if (!row) return;
+
+      const name = row.querySelector('.payroll-name').textContent.trim();
+      const amount = parseFloat(row.getAttribute('data-amount') || 0);
+      const currentStatus = row.getAttribute('data-status') || (row.querySelector('.status-cell').textContent.includes('Paid') ? 'paid' : 'pending');
+      const statusCell = row.querySelector('.status-cell');
+      const actionCell = row.querySelector('.action-cell');
+
+      if (currentStatus === 'paid') {
+        // Toggle to Pending (Revert)
+        row.setAttribute('data-status', 'pending');
+        statusCell.innerHTML = `
+          <button onclick="toggleSalaryStatus(${id})" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟡 Pending</button>
+        `;
+        actionCell.innerHTML = `
+          <div class="flex items-center gap-1.5">
+            <button onclick="toggleSalaryStatus(${id})" class="px-2.5 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-[11px] transition">Disburse</button>
+            <button onclick="openEditSalaryModal(${id})" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+
+        paidPayroll -= amount;
+        pendingPayroll += amount;
+        paidCount--;
+        pendingCount++;
+
+        showToast(`Payment for ${name} reverted to 🟡 Pending.`);
+      } else {
+        // Toggle to Paid (Disburse)
+        row.setAttribute('data-status', 'paid');
+        const txCode = 'TX-PAY-' + Math.floor(1000 + Math.random() * 9000);
+        statusCell.innerHTML = `
+          <button onclick="toggleSalaryStatus(${id})" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 transition font-bold cursor-pointer" title="Click to toggle Paid/Pending">🟢 Paid</button>
+        `;
+        actionCell.innerHTML = `
+          <div class="flex items-center gap-1.5">
+            <button onclick="toggleSalaryStatus(${id})" class="px-2 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[10px] transition">🔄 Revert</button>
+            <button onclick="openEditSalaryModal(${id})" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Adjust Salary / Allowances">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[10px] text-slate-500 font-mono">${txCode}</span>
+          </div>
+        `;
+
+        paidPayroll += amount;
+        pendingPayroll -= amount;
+        paidCount++;
+        pendingCount--;
+
+        showToast(`Salary of $${amount.toLocaleString()} disbursed for ${name} (${txCode}).`);
+      }
+
+      document.getElementById('payroll-paid-display').textContent = '$' + paidPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-pending-display').textContent = '$' + pendingPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-paid-count').textContent = `${paidCount} Payments Completed`;
+      document.getElementById('payroll-pending-count').textContent = `${pendingCount} Pending Approval`;
+      document.getElementById('stat-payroll-sub').textContent = `● $${paidPayroll.toLocaleString()} Disbursed`;
+      lucide.createIcons();
+    }
+
+    // Save Salary Adjustment Handler
+    document.getElementById('edit-salary-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-salary-id').value;
+      const base = parseFloat(document.getElementById('edit-salary-base').value) || 0;
+      const overtime = parseFloat(document.getElementById('edit-salary-overtime').value) || 0;
+      const deductions = parseFloat(document.getElementById('edit-salary-deductions').value) || 0;
+      const newNet = Math.max(0, base + overtime - deductions);
+
+      const payrollRow = document.getElementById('payroll-row-' + id);
+      if (payrollRow) {
+        const oldAmount = parseFloat(payrollRow.getAttribute('data-amount') || 0);
+        const isPaid = payrollRow.getAttribute('data-status') === 'paid';
+
+        payrollRow.setAttribute('data-base', base);
+        payrollRow.setAttribute('data-overtime', overtime);
+        payrollRow.setAttribute('data-deductions', deductions);
+        payrollRow.setAttribute('data-amount', newNet);
+
+        payrollRow.querySelector('.payroll-base').textContent = '$' + base.toLocaleString() + '.00';
+        payrollRow.querySelector('.payroll-net').textContent = '$' + newNet.toLocaleString() + '.00';
+
+        const diff = newNet - oldAmount;
+        totalPayroll += diff;
+        if (isPaid) {
+          paidPayroll += diff;
+        } else {
+          pendingPayroll += diff;
+        }
+      }
+
+      // Also update Staff Directory table row
+      const staffRow = document.getElementById('staff-row-' + id);
+      if (staffRow) {
+        staffRow.setAttribute('data-salary', base);
+        staffRow.querySelector('.staff-salary').textContent = '$' + base.toLocaleString() + '.00';
+      }
+
+      document.getElementById('stat-payroll-total').textContent = '$' + totalPayroll.toLocaleString();
+      document.getElementById('payroll-total-display').textContent = '$' + totalPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-paid-display').textContent = '$' + paidPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-pending-display').textContent = '$' + pendingPayroll.toLocaleString() + '.00';
+
+      const name = document.getElementById('edit-salary-name').value;
+      closeEditSalaryModal();
+      showToast(`Salary package updated for ${name} (Net: $${newNet.toLocaleString()})`);
+      lucide.createIcons();
+    });
+
+    // Delete Staff Member
+    function deleteStaffMember(id, name, salary) {
+      if (!confirm(`Are you sure you want to remove '${name}' from the hospital staff directory?`)) {
+        return;
+      }
+
+      const staffRow = document.getElementById('staff-row-' + id);
+      const payrollRow = document.getElementById('payroll-row-' + id);
+
+      if (staffRow) {
+        staffRow.classList.add('opacity-0', 'transition-all', 'duration-300');
+        setTimeout(() => staffRow.remove(), 300);
+      }
+      if (payrollRow) {
+        const isPaid = payrollRow.querySelector('.status-cell').textContent.includes('Paid');
+        if (isPaid) {
+          paidPayroll -= salary;
+          paidCount--;
+        } else {
+          pendingPayroll -= salary;
+          pendingCount--;
+        }
+        payrollRow.remove();
+      }
+
+      totalStaff--;
+      totalPayroll -= salary;
+
+      document.getElementById('stat-staff-count').textContent = totalStaff;
+      document.getElementById('stat-payroll-total').textContent = '$' + totalPayroll.toLocaleString();
+      document.getElementById('payroll-total-display').textContent = '$' + totalPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-paid-display').textContent = '$' + paidPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-pending-display').textContent = '$' + pendingPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-paid-count').textContent = `${paidCount} Payments Completed`;
+      document.getElementById('payroll-pending-count').textContent = `${pendingCount} Pending Approval`;
+      document.getElementById('payroll-staff-count-display').textContent = `${totalStaff} Staff Members`;
+
+      showToast(`Staff member '${name}' deleted successfully.`);
+    }
+
+    // Edit Staff Form Submit Handler
+    document.getElementById('edit-staff-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-staff-id').value;
+      const oldSalary = parseFloat(document.getElementById('edit-staff-old-salary').value);
+      const name = document.getElementById('edit-staff-name').value;
+      const role = document.getElementById('edit-staff-role').value;
+      const dept = document.getElementById('edit-staff-dept').value;
+      const shift = document.getElementById('edit-staff-shift').value;
+      const newSalary = parseFloat(document.getElementById('edit-staff-salary').value);
+
+      // Role Pill Formatting
+      let rolePill = '<span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Doctor</span>';
+      if (role === 'Nurse') rolePill = '<span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Staff Nurse</span>';
+      if (role === 'SweeperJanitor') rolePill = '<span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">Sweeper / Janitor</span>';
+      if (role === 'Receptionist') rolePill = '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Receptionist</span>';
+      if (role === 'Pharmacist') rolePill = '<span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Pharmacist</span>';
+
+      // Update Staff Row
+      const staffRow = document.getElementById('staff-row-' + id);
+      if (staffRow) {
+        staffRow.setAttribute('data-role', role);
+        staffRow.setAttribute('data-salary', newSalary);
+        staffRow.querySelector('.staff-name').textContent = name;
+        staffRow.querySelector('.staff-role-cell').innerHTML = rolePill;
+        staffRow.querySelector('.staff-dept').textContent = dept;
+        staffRow.querySelector('.staff-shift').textContent = shift;
+        staffRow.querySelector('.staff-salary').textContent = '$' + newSalary.toLocaleString() + '.00';
+        staffRow.classList.add('bg-cyan-500/15');
+        setTimeout(() => staffRow.classList.remove('bg-cyan-500/15'), 1500);
+      }
+
+      // Update Payroll Row
+      const payrollRow = document.getElementById('payroll-row-' + id);
+      if (payrollRow) {
+        payrollRow.setAttribute('data-amount', newSalary);
+        payrollRow.querySelector('.payroll-name').textContent = name;
+        payrollRow.querySelector('.payroll-role').textContent = `${role} (${dept})`;
+        payrollRow.querySelector('.payroll-base').textContent = '$' + newSalary.toLocaleString() + '.00';
+        payrollRow.querySelector('.payroll-net').textContent = '$' + newSalary.toLocaleString() + '.00';
+      }
+
+      // Recalculate Payroll
+      const salaryDiff = newSalary - oldSalary;
+      totalPayroll += salaryDiff;
+      pendingPayroll += salaryDiff;
+
+      document.getElementById('stat-payroll-total').textContent = '$' + totalPayroll.toLocaleString();
+      document.getElementById('payroll-total-display').textContent = '$' + totalPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-pending-display').textContent = '$' + pendingPayroll.toLocaleString() + '.00';
+
+      closeEditStaffModal();
+      showToast(`Staff member '${name}' updated successfully.`);
+      lucide.createIcons();
+    });
+
+    // Add Staff Form Submission Handler
+    let newStaffAutoId = 100;
+    document.getElementById('new-staff-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      newStaffAutoId++;
+      const id = newStaffAutoId;
+      const name = document.getElementById('staff-name').value;
+      const role = document.getElementById('staff-role').value;
+      const dept = document.getElementById('staff-dept').value;
+      const salary = parseFloat(document.getElementById('staff-salary').value);
+      const shift = document.getElementById('staff-shift').value;
+
+      let rolePill = '<span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Doctor</span>';
+      if (role === 'Nurse') rolePill = '<span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Staff Nurse</span>';
+      if (role === 'SweeperJanitor') rolePill = '<span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300">Sweeper / Janitor</span>';
+      if (role === 'Receptionist') rolePill = '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Receptionist</span>';
+      if (role === 'Pharmacist') rolePill = '<span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Pharmacist</span>';
+
+      // Append to Staff Table with Edit & Delete actions
+      const staffTable = document.getElementById('staff-table-body');
+      const newStaffRow = document.createElement('tr');
+      newStaffRow.className = 'staff-row hover:bg-white/5 transition bg-cyan-500/10 animate-pulse';
+      newStaffRow.id = 'staff-row-' + id;
+      newStaffRow.setAttribute('data-id', id);
+      newStaffRow.setAttribute('data-role', role);
+      newStaffRow.setAttribute('data-salary', salary);
+      newStaffRow.innerHTML = `
+        <td class="py-3 px-4 font-bold text-white staff-name">${name}</td>
+        <td class="py-3 px-4 staff-role-cell">${rolePill}</td>
+        <td class="py-3 px-4 text-slate-400 staff-dept">${dept}</td>
+        <td class="py-3 px-4 staff-shift">${shift}</td>
+        <td class="py-3 px-4 font-bold text-emerald-400 staff-salary">$${salary.toLocaleString()}.00</td>
+        <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Active</span></td>
+        <td class="py-3 px-4 text-right space-x-1.5">
+          <button onclick="openEditStaffModal(${id})" class="p-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-400 transition" title="Edit Staff Member">
+            <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+          </button>
+          <button onclick="deleteStaffMember(${id}, '${name}', ${salary})" class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 transition" title="Delete Staff Member">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+        </td>
+      `;
+      staffTable.insertBefore(newStaffRow, staffTable.firstChild);
+
+      // Append to Payroll Table
+      const payrollTable = document.getElementById('payroll-table-body');
+      const newPayrollRow = document.createElement('tr');
+      newPayrollRow.className = 'payroll-row hover:bg-white/5 transition bg-amber-500/10 animate-pulse';
+      newPayrollRow.id = 'payroll-row-' + id;
+      newPayrollRow.setAttribute('data-id', id);
+      newPayrollRow.setAttribute('data-amount', salary);
+      newPayrollRow.innerHTML = `
+        <td class="py-3 px-4 font-bold text-white payroll-name">${name}</td>
+        <td class="py-3 px-4 text-slate-300 payroll-role">${role} (${dept})</td>
+        <td class="py-3 px-4 payroll-base">$${salary.toLocaleString()}.00</td>
+        <td class="py-3 px-4 font-bold text-white payroll-net">$${salary.toLocaleString()}.00</td>
+        <td class="py-3 px-4 status-cell"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">🟡 Pending</span></td>
+        <td class="py-3 px-4 action-cell"><button onclick="disburseSalary(this, ${salary})" class="px-3 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-hospital-950 font-bold text-[11px] transition">Disburse</button></td>
+      `;
+      payrollTable.insertBefore(newPayrollRow, payrollTable.firstChild);
+
+      // Recalculate totals
+      totalStaff++;
+      totalPayroll += salary;
+      pendingPayroll += salary;
+      pendingCount++;
+
+      document.getElementById('stat-staff-count').textContent = totalStaff;
+      document.getElementById('stat-payroll-total').textContent = '$' + totalPayroll.toLocaleString();
+      document.getElementById('payroll-total-display').textContent = '$' + totalPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-pending-display').textContent = '$' + pendingPayroll.toLocaleString() + '.00';
+      document.getElementById('payroll-pending-count').textContent = `${pendingCount} Pending Approval`;
+      document.getElementById('payroll-staff-count-display').textContent = `${totalStaff} Staff Members`;
+
+      closeAddStaffModal();
+      document.getElementById('new-staff-form').reset();
+      showToast(`Staff member '${name}' added to roster & payroll.`);
+      switchTab('tab-staff');
+      filterStaff('all');
+      lucide.createIcons();
+    });
+
+    // Patient Intake Form Handler
+    let newPatientAutoId = 50;
+    document.getElementById('emr-admission-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      newPatientAutoId++;
+      const id = 'p' + newPatientAutoId;
+      const name = document.getElementById('emr-name').value;
+      const age = document.getElementById('emr-age').value;
+      const dept = document.getElementById('emr-dept').value;
+      const urgency = document.getElementById('emr-urgency').value;
+
+      let urgencyPill = '<span class="text-emerald-400 font-bold">🟢 Routine</span>';
+      if (urgency === 'Priority') urgencyPill = '<span class="text-amber-400 font-bold">🟡 Priority</span>';
+      if (urgency === 'Urgent') urgencyPill = '<span class="text-rose-400 font-bold">🔴 Urgent</span>';
+
+      const patientTable = document.getElementById('patient-table-body');
+      const row = document.createElement('tr');
+      row.className = 'patient-row hover:bg-white/5 transition bg-cyan-500/10 animate-pulse';
+      row.setAttribute('data-id', id);
+      row.innerHTML = `
+        <td class="py-3 px-2 font-bold text-white patient-name-cell">${name} (${age})</td>
+        <td class="py-3 px-2 text-slate-400 patient-dept-cell">${dept}</td>
+        <td class="py-3 px-2 text-cyan-300 font-bold patient-doctor-cell">Dr. On-Duty Specialist</td>
+        <td class="py-3 px-2 font-bold patient-urgency-cell">${urgencyPill}</td>
+        <td class="py-3 px-2 text-right space-x-1.5">
+          <button onclick="openEditPatientModal('${id}')" class="p-1 rounded bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-300 text-[10px] transition" title="Edit Patient">
+            <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+          </button>
+          <button onclick="dischargePatient(this)" class="px-2 py-0.5 rounded bg-white/10 hover:bg-rose-500/20 hover:text-rose-300 text-[10px] transition font-sans">Discharge</button>
+        </td>
+      `;
+      patientTable.insertBefore(row, patientTable.firstChild);
+
+      document.getElementById('emr-admission-form').reset();
+      showToast(`Patient '${name}' admitted and assigned to triage.`);
+      lucide.createIcons();
+    });
+
+    // Edit Patient Form Submit
+    document.getElementById('edit-patient-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-patient-id').value;
+      const name = document.getElementById('edit-patient-name').value;
+      const dept = document.getElementById('edit-patient-dept').value;
+      const urgency = document.getElementById('edit-patient-urgency').value;
+
+      let urgencyPill = '<span class="text-emerald-400 font-bold">🟢 Routine</span>';
+      if (urgency === 'Priority') urgencyPill = '<span class="text-amber-400 font-bold">🟡 Priority</span>';
+      if (urgency === 'Urgent') urgencyPill = '<span class="text-rose-400 font-bold">🔴 Urgent</span>';
+
+      const row = document.querySelector(`.patient-row[data-id="${id}"]`);
+      if (row) {
+        row.querySelector('.patient-name-cell').textContent = name;
+        row.querySelector('.patient-dept-cell').textContent = dept;
+        row.querySelector('.patient-urgency-cell').innerHTML = urgencyPill;
+      }
+
+      closeEditPatientModal();
+      showToast(`Patient record '${name}' updated.`);
+    });
+
+    function dischargePatient(btn) {
+      const row = btn.closest('tr');
+      row.style.opacity = '0.3';
+      btn.textContent = 'Discharged';
+      btn.disabled = true;
+      showToast('Patient discharged successfully.');
+    }
+
+    // Toggle Bed Status (Interactive Bed Grid)
+    let icuOccupied = 17;
+    function toggleBed(btn, wardType) {
+      const currentState = btn.getAttribute('data-state');
+      if (currentState === 'occupied') {
+        btn.setAttribute('data-state', 'vacant');
+        btn.className = 'bed-node p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold transition hover:scale-105';
+        if (wardType === 'icu') icuOccupied--;
+      } else if (currentState === 'vacant') {
+        btn.setAttribute('data-state', 'maintenance');
+        btn.className = 'bed-node p-3 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold transition hover:scale-105';
+      } else {
+        btn.setAttribute('data-state', 'occupied');
+        btn.className = 'bed-node p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold transition hover:scale-105';
+        if (wardType === 'icu') icuOccupied++;
+      }
+
+      if (wardType === 'icu') {
+        document.getElementById('icu-ratio-label').textContent = `${icuOccupied}/20 Occupied`;
+        document.getElementById('stat-icu-display').innerHTML = `${icuOccupied} <span class="text-sm font-normal text-slate-400">/ 20</span>`;
+        document.getElementById('stat-icu-vacant').textContent = `● ${20 - icuOccupied} Units Ready for Triage`;
+      }
+      showToast(`Bed ${btn.textContent} marked as ${btn.getAttribute('data-state').toUpperCase()}`);
+    }
+
+    // ========================================================
+    // REAL-TIME ANIMATED ECG HEARTBEAT CANVAS MONITOR
+    // ========================================================
+    const canvas = document.getElementById('ecg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.parentElement.clientWidth;
+    let height = canvas.height = canvas.parentElement.clientHeight || 36;
+    let x = 0;
+    let points = [];
+    const maxPoints = Math.floor(width / 2);
+
+    window.addEventListener('resize', () => {
+      if (canvas.parentElement) {
+        width = canvas.width = canvas.parentElement.clientWidth;
+        height = canvas.height = canvas.parentElement.clientHeight || 36;
+      }
+    });
+
+    let step = 0;
+    function animateECG() {
+      ctx.fillStyle = 'rgba(8, 16, 30, 0.2)';
+      ctx.fillRect(0, 0, width, height);
+
+      let y = height / 2;
+      step++;
+
+      // Heartbeat wave pulse formula
+      const mod = step % 60;
+      if (mod === 10) y -= 4;
+      else if (mod === 12) y += 3;
+      else if (mod === 18) y -= 14; // QRS complex peak
+      else if (mod === 20) y += 12;
+      else if (mod === 24) y -= 3;
+
+      points.push({ x: (step * 2) % width, y: y });
+      if (points.length > maxPoints) points.shift();
+
+      ctx.beginPath();
+      ctx.strokeStyle = '#22d3ee';
+      ctx.lineWidth = 1.5;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = '#06b6d4';
+
+      for (let i = 0; i < points.length; i++) {
+        if (i === 0) ctx.moveTo(points[i].x, points[i].y);
+        else ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.stroke();
+
+      requestAnimationFrame(animateECG);
+    }
+    animateECG();
+  </script>
+</body>
+</html>

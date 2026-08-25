@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS Central Hub — Real-Time Collaborative Team Workspace</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nexus: {
+              950: '#030712',
+              900: '#090d16',
+              850: '#0f172a',
+              800: '#1e293b',
+              accent: '#38bdf8',
+              glow: '#0284c7'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .kanban-col {
+      min-height: 480px;
+    }
+    .task-card {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .task-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-nexus-950 text-slate-200 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- ======================================================== -->
+  <!-- TOP NAVIGATION BAR                                       -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-nexus-900/90 backdrop-blur-md border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-3">
+        
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-nexus-950 font-black shadow-lg shadow-cyan-500/30">
+            <i data-lucide="cpu" class="w-5 h-5 text-nexus-950"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-base text-white tracking-tight leading-none flex items-center gap-2">
+              <span>NEXUS Hub</span>
+              <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-mono border border-cyan-500/30">WebSocket v2</span>
+            </div>
+            <div class="text-[10px] text-cyan-400 font-mono mt-0.5">Real-Time Team Workspace &bull; Sprint 14</div>
+          </div>
+        </div>
+
+        <!-- Team Status Online Telemetry -->
+        <div class="hidden lg:flex items-center gap-4 text-xs font-mono">
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-nexus-850 border border-white/10">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-slate-300">5 Members Active</span>
+          </div>
+          <div class="flex -space-x-2">
+            <div class="w-7 h-7 rounded-full bg-indigo-600 border-2 border-nexus-900 flex items-center justify-center text-[10px] font-bold text-white" title="Khadija (Lead)">KY</div>
+            <div class="w-7 h-7 rounded-full bg-cyan-600 border-2 border-nexus-900 flex items-center justify-center text-[10px] font-bold text-white" title="Alex (Backend)">AM</div>
+            <div class="w-7 h-7 rounded-full bg-purple-600 border-2 border-nexus-900 flex items-center justify-center text-[10px] font-bold text-white" title="Sarah (UI/UX)">SK</div>
+            <div class="w-7 h-7 rounded-full bg-amber-600 border-2 border-nexus-900 flex items-center justify-center text-[10px] font-bold text-white" title="David (DevOps)">DS</div>
+          </div>
+        </div>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-3">
+          <button onclick="openAddTaskModal()" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-nexus-950 font-bold text-xs shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 transition transform hover:-translate-y-0.5">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>New Task</span>
+          </button>
+          <a href="../index.html" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold border border-white/10 flex items-center gap-1 transition">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Portfolio</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    
+    <!-- Sprint Overview Metrics -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass-panel p-5 rounded-2xl border border-cyan-500/20">
+        <div class="text-xs font-mono text-slate-400">Sprint Velocity</div>
+        <div class="text-2xl font-extrabold text-white mt-1">42 / 48 Points</div>
+        <div class="text-[11px] text-emerald-400 font-mono mt-1">87.5% Complete &bull; On Track</div>
+      </div>
+      <div class="glass-panel p-5 rounded-2xl border border-indigo-500/20">
+        <div class="text-xs font-mono text-slate-400">Total Active Tasks</div>
+        <div class="text-2xl font-extrabold text-indigo-300 mt-1" id="total-tasks-badge">8 Tasks</div>
+        <div class="text-[11px] text-indigo-400 font-mono mt-1">4 Team Columns</div>
+      </div>
+      <div class="glass-panel p-5 rounded-2xl border border-emerald-500/20">
+        <div class="text-xs font-mono text-slate-400">Deployed to Prod</div>
+        <div class="text-2xl font-extrabold text-emerald-400 mt-1" id="done-tasks-badge">2 Releases</div>
+        <div class="text-[11px] text-emerald-300 font-mono mt-1">0 Critical Bugs</div>
+      </div>
+      <div class="glass-panel p-5 rounded-2xl border border-amber-500/20">
+        <div class="text-xs font-mono text-slate-400">WebSocket Ping</div>
+        <div class="text-2xl font-extrabold text-amber-300 mt-1">18 ms</div>
+        <div class="text-[11px] text-amber-400 font-mono mt-1">SignalR Low Latency</div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- COLLABORATIVE KANBAN BOARD                               -->
+    <!-- ======================================================== -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-white">Sprint 14 Real-Time Kanban Board</h2>
+          <p class="text-xs text-slate-400">Click task action buttons to move cards across columns dynamically.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Column 1: Backlog -->
+        <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between border-t-4 border-t-slate-500 kanban-col">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-3 border-b border-white/5 text-xs font-mono">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>📋 Backlog</span>
+                <span class="px-2 py-0.5 rounded-full bg-slate-700 text-white text-[10px]" id="col-count-backlog">2</span>
+              </span>
+            </div>
+            <div id="col-backlog" class="space-y-3">
+              <!-- Task Card 1 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-white/10 space-y-2 text-xs" id="task-1">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-mono font-bold">FEAT-101</span>
+                  <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[10px] font-bold">Urgent</span>
+                </div>
+                <h4 class="font-bold text-white">Implement OAuth2 Multi-Tenant SSO</h4>
+                <p class="text-slate-400 text-[11px]">Integrate Google &amp; GitHub authentication tokens.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: KY</span>
+                  <button onclick="moveTask('task-1', 'col-progress')" class="px-2 py-1 rounded bg-white/10 hover:bg-cyan-500 hover:text-nexus-950 text-white font-bold transition">Move &rarr;</button>
+                </div>
+              </div>
+
+              <!-- Task Card 2 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-white/10 space-y-2 text-xs" id="task-2">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-mono font-bold">FEAT-102</span>
+                  <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold">Medium</span>
+                </div>
+                <h4 class="font-bold text-white">Optimize SQL Index on User Ledger</h4>
+                <p class="text-slate-400 text-[11px]">Add non-clustered composite indices on foreign keys.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: AM</span>
+                  <button onclick="moveTask('task-2', 'col-progress')" class="px-2 py-1 rounded bg-white/10 hover:bg-cyan-500 hover:text-nexus-950 text-white font-bold transition">Move &rarr;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: In Progress -->
+        <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between border-t-4 border-t-amber-500 kanban-col">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-3 border-b border-white/5 text-xs font-mono">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>⚡ In Progress</span>
+                <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px]" id="col-count-progress">2</span>
+              </span>
+            </div>
+            <div id="col-progress" class="space-y-3">
+              <!-- Task Card 3 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-amber-500/30 space-y-2 text-xs" id="task-3">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold">DEV-201</span>
+                  <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[10px] font-bold">High</span>
+                </div>
+                <h4 class="font-bold text-white">WebSocket Real-Time Broadcast Layer</h4>
+                <p class="text-slate-400 text-[11px]">Build SignalR hub for low-latency state synchronizer.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: KY</span>
+                  <div class="flex gap-1">
+                    <button onclick="moveTask('task-3', 'col-backlog')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 font-bold transition">&larr;</button>
+                    <button onclick="moveTask('task-3', 'col-review')" class="px-2 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-nexus-950 font-bold transition">&rarr;</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Task Card 4 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-amber-500/30 space-y-2 text-xs" id="task-4">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold">UI-305</span>
+                  <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-bold">Normal</span>
+                </div>
+                <h4 class="font-bold text-white">Glassmorphic Dashboard Redesign</h4>
+                <p class="text-slate-400 text-[11px]">Convert components to Tailwind 3.4 fluid layout.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: SK</span>
+                  <div class="flex gap-1">
+                    <button onclick="moveTask('task-4', 'col-backlog')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 font-bold transition">&larr;</button>
+                    <button onclick="moveTask('task-4', 'col-review')" class="px-2 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-nexus-950 font-bold transition">&rarr;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Code Review -->
+        <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between border-t-4 border-t-purple-500 kanban-col">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-3 border-b border-white/5 text-xs font-mono">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>🔍 Code Review</span>
+                <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px]" id="col-count-review">2</span>
+              </span>
+            </div>
+            <div id="col-review" class="space-y-3">
+              <!-- Task Card 5 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-purple-500/30 space-y-2 text-xs" id="task-5">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] font-mono font-bold">PR-440</span>
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">Passed Tests</span>
+                </div>
+                <h4 class="font-bold text-white">Unit Tests for Payroll Calculator</h4>
+                <p class="text-slate-400 text-[11px]">100% coverage on overtime &amp; tax deduction logic.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: KY</span>
+                  <div class="flex gap-1">
+                    <button onclick="moveTask('task-5', 'col-progress')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 font-bold transition">&larr;</button>
+                    <button onclick="moveTask('task-5', 'col-done')" class="px-2 py-1 rounded bg-emerald-500 hover:bg-emerald-400 text-nexus-950 font-bold transition">Deploy &rarr;</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Task Card 6 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-purple-500/30 space-y-2 text-xs" id="task-6">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] font-mono font-bold">SEC-812</span>
+                  <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[10px] font-bold">Audit</span>
+                </div>
+                <h4 class="font-bold text-white">Rate-Limiting Middleware for API</h4>
+                <p class="text-slate-400 text-[11px]">Throttling 100 requests per second per IP token.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: DS</span>
+                  <div class="flex gap-1">
+                    <button onclick="moveTask('task-6', 'col-progress')" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 font-bold transition">&larr;</button>
+                    <button onclick="moveTask('task-6', 'col-done')" class="px-2 py-1 rounded bg-emerald-500 hover:bg-emerald-400 text-nexus-950 font-bold transition">Deploy &rarr;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 4: Deployed & Done -->
+        <div class="glass-panel rounded-2xl p-4 flex flex-col justify-between border-t-4 border-t-emerald-500 kanban-col">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-3 border-b border-white/5 text-xs font-mono">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>🚀 Deployed (Done)</span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px]" id="col-count-done">2</span>
+              </span>
+            </div>
+            <div id="col-done" class="space-y-3">
+              <!-- Task Card 7 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-emerald-500/30 space-y-2 text-xs" id="task-7">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold">REL-1.4</span>
+                  <span class="text-emerald-400 font-bold">🟢 Live</span>
+                </div>
+                <h4 class="font-bold text-white line-through opacity-80">CarePulse MediCore v1.0 Release</h4>
+                <p class="text-slate-400 text-[11px]">Deployed with EF Core and SQL Server database.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: KY</span>
+                  <span class="text-emerald-400">Verified</span>
+                </div>
+              </div>
+
+              <!-- Task Card 8 -->
+              <div class="task-card bg-nexus-900 p-4 rounded-xl border border-emerald-500/30 space-y-2 text-xs" id="task-8">
+                <div class="flex items-center justify-between">
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold">REL-1.3</span>
+                  <span class="text-emerald-400 font-bold">🟢 Live</span>
+                </div>
+                <h4 class="font-bold text-white line-through opacity-80">KY TrendZone E-Commerce Launch</h4>
+                <p class="text-slate-400 text-[11px]">FakeStoreAPI &amp; cart drawer integration complete.</p>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+                  <span>Assignee: KY</span>
+                  <span class="text-emerald-400">Verified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ADD TASK                                          -->
+  <!-- ======================================================== -->
+  <div id="add-task-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-panel w-full max-w-md rounded-3xl p-7 border border-cyan-500/40 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+        <div>
+          <h3 class="text-lg font-bold text-white">Create Sprint Task</h3>
+          <p class="text-xs text-slate-400">Add a new item to the active Kanban sprint</p>
+        </div>
+        <button onclick="closeAddTaskModal()" class="p-2 rounded-lg text-slate-400 hover:text-white bg-white/5">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="add-task-form" onsubmit="handleCreateTask(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Task Title</label>
+          <input type="text" id="task-title-input" required placeholder="e.g. Build GraphQL Gateway" class="w-full px-3.5 py-2.5 rounded-xl bg-nexus-900 border border-cyan-500/20 text-white focus:outline-none focus:border-cyan-400">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Short Description</label>
+          <input type="text" id="task-desc-input" required placeholder="Details on implementation requirements..." class="w-full px-3.5 py-2.5 rounded-xl bg-nexus-900 border border-cyan-500/20 text-white focus:outline-none focus:border-cyan-400">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Priority</label>
+            <select id="task-priority-input" class="w-full px-3.5 py-2.5 rounded-xl bg-nexus-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+              <option value="Urgent">🔴 Urgent</option>
+              <option value="High">🟠 High</option>
+              <option value="Normal">🟢 Normal</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Assignee</label>
+            <select id="task-assignee-input" class="w-full px-3.5 py-2.5 rounded-xl bg-nexus-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+              <option value="KY">Khadija Yaseen (KY)</option>
+              <option value="AM">Alex Miller (AM)</option>
+              <option value="SK">Sarah Khan (SK)</option>
+              <option value="DS">David Sterling (DS)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="button" onclick="closeAddTaskModal()" class="w-1/2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-nexus-950 font-bold transition shadow-lg shadow-cyan-500/25">
+            Create Task
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-6 right-6 z-50 bg-nexus-900 border border-cyan-500/40 text-cyan-300 px-5 py-3.5 rounded-2xl shadow-2xl font-mono text-xs flex items-center gap-3 transition-all duration-300 opacity-0 translate-y-8 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-text">Task moved successfully.</span>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function showToast(message) {
+      const toast = document.getElementById('toast-banner');
+      const text = document.getElementById('toast-text');
+      text.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3000);
+    }
+
+    function moveTask(taskId, targetColId) {
+      const taskEl = document.getElementById(taskId);
+      const targetCol = document.getElementById(targetColId);
+      if (!taskEl || !targetCol) return;
+
+      targetCol.appendChild(taskEl);
+      updateColCounts();
+      showToast(`Task moved across sprint board!`);
+    }
+
+    function updateColCounts() {
+      document.getElementById('col-count-backlog').textContent = document.getElementById('col-backlog').children.length;
+      document.getElementById('col-count-progress').textContent = document.getElementById('col-progress').children.length;
+      document.getElementById('col-count-review').textContent = document.getElementById('col-review').children.length;
+      document.getElementById('col-count-done').textContent = document.getElementById('col-done').children.length;
+      document.getElementById('done-tasks-badge').textContent = `${document.getElementById('col-done').children.length} Releases`;
+    }
+
+    function openAddTaskModal() {
+      document.getElementById('add-task-modal').classList.remove('hidden');
+    }
+    function closeAddTaskModal() {
+      document.getElementById('add-task-modal').classList.add('hidden');
+    }
+
+    let taskAutoId = 100;
+    function handleCreateTask(e) {
+      e.preventDefault();
+      taskAutoId++;
+      const title = document.getElementById('task-title-input').value;
+      const desc = document.getElementById('task-desc-input').value;
+      const priority = document.getElementById('task-priority-input').value;
+      const assignee = document.getElementById('task-assignee-input').value;
+
+      let priorityPill = '<span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-bold">Normal</span>';
+      if (priority === 'Urgent') priorityPill = '<span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[10px] font-bold">Urgent</span>';
+      if (priority === 'High') priorityPill = '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold">High</span>';
+
+      const newCard = document.createElement('div');
+      newCard.className = "task-card bg-nexus-900 p-4 rounded-xl border border-cyan-500/30 space-y-2 text-xs";
+      newCard.id = `task-${taskAutoId}`;
+      newCard.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-mono font-bold">TASK-${taskAutoId}</span>
+          ${priorityPill}
+        </div>
+        <h4 class="font-bold text-white">${title}</h4>
+        <p class="text-slate-400 text-[11px]">${desc}</p>
+        <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-mono text-slate-400">
+          <span>Assignee: ${assignee}</span>
+          <button onclick="moveTask('task-${taskAutoId}', 'col-progress')" class="px-2 py-1 rounded bg-cyan-500 hover:bg-cyan-400 text-nexus-950 font-bold transition">Move &rarr;</button>
+        </div>
+      `;
+
+      document.getElementById('col-backlog').prepend(newCard);
+      closeAddTaskModal();
+      document.getElementById('add-task-form').reset();
+      updateColCounts();
+      showToast(`Task '${title}' added to Backlog!`);
+    }
+  </script>
+</body>
+</html>
