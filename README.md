@@ -14,27 +14,37 @@
 This repository houses my master developer portfolio along with 6 interactive live project sandboxes and architectural prototypes:
 
 ### 1. 📱 [StudyBuddy AI — Mobile GenAI Revision Companion](./demo-studybuddy/index.html)
-* **Tech Stack:** `Flutter 3.x`, `Dart`, `Google Gemini 1.5 Flash API`, `Claude Engine`, `Cloud Firestore`, `Firebase Auth`.
+* **Tech Stack:** `Flutter 3.x`, `Dart`, `Google Gemini 1.5 Flash (via OpenRouter API)`, `Claude Engine`, `Cloud Firestore`, `Firebase Auth`.
+* **Repository & Links:**
+  * 📦 **GitHub Repository:** [github.com/KhadijaYaseen/StudyBuddyAI](https://github.com/KhadijaYaseen/StudyBuddyAI)
+  * 🌐 **Interactive Web Sandbox:** [Launch StudyBuddy Simulator](./demo-studybuddy/index.html)
+  * 🎬 **Live Demo Video:** [Watch Video Walkthrough on LinkedIn](https://lnkd.in/p/dVChg5BR)
 * **Key Capabilities:**
   * Direct document parsing from lecture slides (`.ppt`, `.docx`) to generate tailored revision sessions.
   * Real-time **Active-Recall Timed Diagnostic Quizzes** with mastery score calculation.
   * 3D interactive flashcards with flip card physics.
   * Synchronized Developer Audio Walkthrough player narrating system features.
-* **Live Demo Video:** [Watch Video Walkthrough on LinkedIn](https://lnkd.in/p/dVChg5BR)
 
 ---
 
 ### 2. 🏥 [CarePulse MediCore — Hospital Management ERP](./demo-hospital/index.html)
-* **Tech Stack:** `C#`, `ASP.NET Core 8.0`, `Entity Framework Core`, `SQL Server`, `Tailwind CSS`.
+* **Tech Stack:** `C#`, `ASP.NET Core 8.0`, `Entity Framework Core 8`, `SQL Server & MySQL (Dual Engine)`, `Tailwind CSS`, `Swagger OpenAPI`.
+* **Repository & Links:**
+  * 📦 **GitHub Repository:** [github.com/KhadijaYaseen/CarePulseERP](https://github.com/KhadijaYaseen/CarePulseERP)
+  * 🌐 **Interactive Hospital Sandbox:** [Launch CarePulse Demo](./demo-hospital/index.html)
 * **Key Capabilities:**
   * Real-time SVG Canvas ECG telemetry monitor with variable heart-rate simulator.
   * Live Staff Directory CRUD with automated salary payroll calculation ledger.
+  * Dual database architecture: Active Microsoft SQL Server (LocalDB) provider + MySQL 8.0 schema.
   * Multi-role authorization and biometric audit logging.
 
 ---
 
 ### 3. 🛍️ [KY TrendZone — Luxury Nordic E-Commerce Boutique](./demo-ecommerce/index.html)
 * **Tech Stack:** `Vanilla JavaScript (ES6+)`, `Tailwind CSS 3.4`, `FakeStore REST API`, `Local Storage`.
+* **Repository & Links:**
+  * 📦 **GitHub Repository:** [github.com/KhadijaYaseen/Ky_TrendZone-](https://github.com/KhadijaYaseen/Ky_TrendZone-)
+  * 🌐 **Live Boutique Store:** [Launch KY TrendZone Store](./demo-ecommerce/index.html)
 * **Key Capabilities:**
   * Scandinavian Alabaster light theme with fluid category scroll jumping.
   * Instant multi-field product search, dynamic price filtering, and slider.
