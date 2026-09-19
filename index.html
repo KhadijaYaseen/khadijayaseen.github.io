@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Khadija Yaseen — Software Engineer & Full-Stack Web Architect</title>
+  <title>Khadija Yaseen &mdash; Software Engineer &amp; Full-Stack Web Architect</title>
   <meta name="description" content="Elite portfolio of Khadija Yaseen: Final-year Software Engineering student specializing in scalable C#/.NET backends, high-converting modern landing pages, and cutting-edge web experiences.">
   
   <!-- Tailwind CSS CDN -->
@@ -25,30 +25,51 @@
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            dark: {
-              950: '#040711',
-              900: '#080d1a',
-              850: '#0d1326',
-              800: '#121a33',
+            // Warm Sunset Titanium & Champagne Gold Palette
+            titanium: {
+              950: '#0F1015',
+              900: '#15161D',
+              850: '#1C1D26',
+              800: '#242632',
+              750: '#2D303F',
+              700: '#373A4D',
             },
-            brand: {
-              500: '#6366f1',
-              600: '#4f46e5',
-              400: '#818cf8',
-              cyan: '#06b6d4',
-              purple: '#a855f7',
+            amberTheme: {
+              500: '#F59E0B',
+              400: '#FBBF24',
+              300: '#FCD34D',
+              200: '#FEF3C7',
+              coral: '#FF6B4A',
+              orange: '#F97316',
+              rose: '#FB7185',
+            },
+            mintTheme: {
+              500: '#10B981',
+              400: '#34D399',
+              300: '#6EE7B7',
+            },
+            platinumTheme: {
+              500: '#8B5CF6',
+              400: '#A78BFA',
+              300: '#C084FC',
+            },
+            dark: {
+              950: '#0F1015',
+              900: '#15161D',
+              850: '#1C1D26',
+              800: '#242632',
             }
           },
           animation: {
-            'blob': 'blob 7s infinite',
+            'blob': 'blob 8s infinite',
             'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             'float': 'float 4s ease-in-out infinite',
           },
           keyframes: {
             blob: {
               '0%': { transform: 'translate(0px, 0px) scale(1)' },
-              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '33%': { transform: 'translate(25px, -35px) scale(1.08)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
               '100%': { transform: 'translate(0px, 0px) scale(1)' },
             },
             'pulse-glow': {
@@ -66,125 +87,219 @@
   </script>
 
   <style>
-    /* Custom Elite Cyber Glass Styles */
+    /* Theme Engine: Sovereign Between-Light-to-Dark Architecture */
+    :root, [data-theme="sunset"] {
+      --canvas-bg: #15161D;
+      --surface-bg: rgba(30, 32, 44, 0.85);
+      --card-bg: rgba(36, 38, 52, 0.78);
+      --card-border: rgba(245, 158, 11, 0.22);
+      --card-hover-border: rgba(251, 191, 36, 0.65);
+      --glow-1: rgba(245, 158, 11, 0.22);
+      --glow-2: rgba(255, 107, 74, 0.18);
+      --glow-3: rgba(251, 191, 36, 0.14);
+      --accent-gradient: linear-gradient(135deg, #F59E0B 0%, #FF6B4A 50%, #FB7185 100%);
+      --hero-text-gradient: linear-gradient(135deg, #FFFFFF 0%, #FEF3C7 25%, #FBBF24 65%, #FF6B4A 100%);
+      --accent-text-gradient: linear-gradient(135deg, #FBBF24 0%, #F97316 48%, #FB7185 100%);
+      --btn-gradient: linear-gradient(135deg, #F59E0B 0%, #F97316 50%, #FF6B4A 100%);
+      --btn-text: #0D0E12;
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(245, 158, 11, 0.35);
+      --badge-text: #FBBF24;
+      --accent-color: #F59E0B;
+      --accent-light: #FBBF24;
+    }
+
+    [data-theme="emerald"] {
+      --canvas-bg: #0D1614;
+      --surface-bg: rgba(18, 32, 28, 0.85);
+      --card-bg: rgba(24, 42, 37, 0.78);
+      --card-border: rgba(16, 185, 129, 0.25);
+      --card-hover-border: rgba(52, 211, 153, 0.65);
+      --glow-1: rgba(16, 185, 129, 0.22);
+      --glow-2: rgba(6, 182, 212, 0.18);
+      --glow-3: rgba(52, 211, 153, 0.14);
+      --accent-gradient: linear-gradient(135deg, #10B981 0%, #34D399 50%, #06B6D4 100%);
+      --hero-text-gradient: linear-gradient(135deg, #FFFFFF 0%, #D1FAE5 25%, #34D399 65%, #06B6D4 100%);
+      --accent-text-gradient: linear-gradient(135deg, #34D399 0%, #10B981 50%, #06B6D4 100%);
+      --btn-gradient: linear-gradient(135deg, #10B981 0%, #059669 50%, #06B6D4 100%);
+      --btn-text: #051A14;
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(16, 185, 129, 0.35);
+      --badge-text: #34D399;
+      --accent-color: #10B981;
+      --accent-light: #34D399;
+    }
+
+    [data-theme="platinum"] {
+      --canvas-bg: #161722;
+      --surface-bg: rgba(30, 32, 46, 0.85);
+      --card-bg: rgba(36, 38, 56, 0.78);
+      --card-border: rgba(167, 139, 250, 0.25);
+      --card-hover-border: rgba(192, 132, 252, 0.65);
+      --glow-1: rgba(139, 92, 246, 0.22);
+      --glow-2: rgba(244, 114, 182, 0.18);
+      --glow-3: rgba(192, 132, 252, 0.14);
+      --accent-gradient: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+      --hero-text-gradient: linear-gradient(135deg, #FFFFFF 0%, #F3E8FF 25%, #C084FC 65%, #F472B6 100%);
+      --accent-text-gradient: linear-gradient(135deg, #C084FC 0%, #A855F7 50%, #EC4899 100%);
+      --btn-gradient: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+      --btn-text: #FFFFFF;
+      --badge-bg: rgba(168, 85, 247, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.35);
+      --badge-text: #C084FC;
+      --accent-color: #8B5CF6;
+      --accent-light: #C084FC;
+    }
+
+    body {
+      background-color: var(--canvas-bg);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Frosted Smoked Titanium Glass */
     .glass-panel {
-      background: rgba(13, 19, 38, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      background: var(--surface-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 16px 36px -10px rgba(8, 9, 13, 0.65), 0 0 20px -6px var(--glow-1);
     }
     .glass-card-hover {
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card-hover:hover {
       transform: translateY(-5px);
-      border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.25);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 22px 42px -12px var(--glow-1), 0 0 32px -4px var(--glow-2);
     }
     .gradient-hero-text {
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 30%, #818cf8 70%, #c084fc 100%);
+      background: var(--hero-text-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .gradient-accent-text {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      background: var(--accent-text-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .cyber-grid {
-      background-size: 40px 40px;
+      background-size: 46px 46px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(to right, var(--card-border) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--card-border) 1px, transparent 1px);
+    }
+    .theme-btn-primary {
+      background: var(--btn-gradient);
+      color: var(--btn-text) !important;
+      box-shadow: 0 10px 25px -5px var(--glow-1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .theme-btn-primary:hover {
+      opacity: 0.94;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -5px var(--glow-2);
+    }
+    .theme-badge {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--badge-text);
+    }
+    .theme-accent-text {
+      color: var(--accent-light);
+    }
+    .theme-border {
+      border-color: var(--card-border);
     }
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(28px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
-    /* Custom Scrollbar */
+    /* Warm Titanium Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #040711;
+      background: #111218;
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #2D303F;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #4f46e5;
+      background: var(--accent-color);
     }
   </style>
 </head>
-<body class="bg-dark-950 text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-indigo-500 selection:text-white cyber-grid">
+<body class="bg-titanium-900 text-slate-100 font-sans antialiased overflow-x-hidden cyber-grid transition-colors duration-500">
 
-  <!-- Ambient Dynamic Glowing Mesh Background -->
+  <!-- Ambient Dynamic Glowing Mesh Background (Warm Sunset Nebula) -->
   <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[750px] h-[550px] bg-indigo-600/18 rounded-full blur-[140px] animate-blob"></div>
-    <div class="absolute top-[45%] -left-48 w-[550px] h-[550px] bg-cyan-600/12 rounded-full blur-[150px] animate-blob" style="animation-delay: 2s;"></div>
-    <div class="absolute bottom-10 -right-48 w-[600px] h-[600px] bg-purple-600/14 rounded-full blur-[150px] animate-blob" style="animation-delay: 4s;"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[550px] rounded-full blur-[150px] animate-blob" style="background: var(--glow-1);"></div>
+    <div class="absolute top-[35%] -left-48 w-[600px] h-[600px] rounded-full blur-[160px] animate-blob" style="background: var(--glow-2); animation-delay: 2s;"></div>
+    <div class="absolute top-[65%] -right-48 w-[650px] h-[650px] rounded-full blur-[150px] animate-blob" style="background: var(--glow-3); animation-delay: 4s;"></div>
+    <div class="absolute -bottom-20 left-1/3 w-[700px] h-[500px] rounded-full blur-[150px] animate-blob" style="background: var(--glow-1); animation-delay: 6s;"></div>
   </div>
 
   <!-- Top Announcement / Availability Bar -->
-  <div class="bg-gradient-to-r from-indigo-900/40 via-purple-900/40 to-dark-950 border-b border-indigo-500/20 py-2 px-4 text-center text-xs font-medium text-slate-300">
-    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span class="text-emerald-300 font-semibold">Ready for New Projects:</span>
-      <span>Delivering High-Performance Websites &amp; C# / .NET Applications in 24–48 Hours.</span>
-      <a href="#contact" class="underline text-indigo-400 hover:text-white ml-2 transition">Claim a Slot &rarr;</a>
+  <div class="bg-gradient-to-r from-amber-950/40 via-titanium-900/80 to-titanium-950/90 border-b border-amber-500/20 py-2.5 px-4 text-center text-xs font-medium text-slate-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-center flex-wrap gap-2">
+      <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+      <span class="text-amber-300 font-semibold">Executive Software &amp; Full-Stack Architect:</span>
+      <span class="text-slate-300">Scalable C#/.NET Core Web APIs, High-Converting Landing Pages &amp; Mobile Systems.</span>
+      <a href="#contact" class="underline text-amber-300 hover:text-white ml-2 transition font-semibold">Claim a Slot &rarr;</a>
     </div>
   </div>
 
-  <!-- Elite Navbar -->
-  <nav class="sticky top-0 z-50 glass-panel border-b border-white/5 transition-all duration-300">
+  <!-- Sovereign Warm Frosted Navbar -->
+  <nav class="sticky top-0 z-50 glass-panel border-b theme-border transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- Logo / Profile Avatar Badge -->
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="relative w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-[2px] shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
-            <img src="profile.jpg" alt="Khadija Yaseen" class="w-full h-full rounded-[10px] object-cover object-top">
+        <!-- Logo / Profile Avatar Badge with Warm Amber-Coral Border -->
+        <a href="#" class="flex items-center gap-3.5 group">
+          <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-400 p-[2px] shadow-lg shadow-amber-500/20 group-hover:scale-105 group-hover:shadow-amber-500/40 transition-all duration-300 flex-shrink-0">
+            <img src="profile.jpg" alt="Khadija Yaseen" class="w-full h-full rounded-[14px] object-cover object-top">
           </div>
           <div>
-            <div class="font-bold tracking-tight text-white leading-none text-base group-hover:text-indigo-300 transition">Khadija Yaseen</div>
-            <div class="text-[11px] text-indigo-400 font-mono mt-1 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Software Engineer &amp; Full-Stack Dev
+            <div class="font-bold tracking-tight text-white leading-none text-base group-hover:text-amber-300 transition">Khadija Yaseen</div>
+            <div class="text-[11px] theme-accent-text font-mono mt-1 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              Executive Full-Stack &amp; Systems Architect
             </div>
           </div>
         </a>
 
         <!-- Desktop Navigation Links -->
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <a href="#services" class="hover:text-indigo-400 transition-colors">Services</a>
-          <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
-          <a href="#skills" class="hover:text-indigo-400 transition-colors">Tech Stack</a>
-          <a href="#workflow" class="hover:text-indigo-400 transition-colors">Process</a>
-          <a href="#contact" class="hover:text-indigo-400 transition-colors">Hire Me</a>
+        <div class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+          <a href="#services" class="hover:text-amber-300 transition-colors">Services</a>
+          <a href="#projects" class="hover:text-amber-300 transition-colors">Projects</a>
+          <a href="#skills" class="hover:text-amber-300 transition-colors">Tech Stack</a>
+          <a href="#workflow" class="hover:text-amber-300 transition-colors">Process</a>
+          <a href="#contact" class="hover:text-amber-300 transition-colors">Hire Me</a>
         </div>
 
-        <!-- CTA & Demos -->
-        <div class="hidden lg:flex items-center gap-2">
-          <a href="./demo-studybuddy/index.html" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-mono font-semibold bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5 transition">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-            <span>StudyBuddy AI</span>
+        <!-- Ambience Switcher & Quick Demo Links -->
+        <div class="hidden lg:flex items-center gap-2.5">
+          <!-- 3-Theme Switcher (Sunset Gold / Aurora Mint / Smoked Platinum) -->
+          <button id="theme-selector-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold bg-white/5 hover:bg-white/10 text-white border theme-border transition shadow-sm cursor-pointer" title="Click to cycle theme (Sunset Gold &bull; Aurora Mint &bull; Smoked Platinum)">
+            <i data-lucide="palette" class="w-3.5 h-3.5 theme-accent-text"></i>
+            <span id="theme-mode-label" class="theme-accent-text font-bold">✨ Sunset Gold</span>
+          </button>
+          
+          <a href="./demo-studybuddy/index.html" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-mono font-bold bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5 transition shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+            <span>📱 StudyBuddy AI</span>
           </a>
-          <a href="./demo-hospital/index.html" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-mono font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5 transition">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+          <a href="./demo-hospital/index.html" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-mono font-semibold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 flex items-center gap-1.5 transition">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
             <span>Hospital ERP</span>
           </a>
-          <a href="./demo-ecommerce/index.html" target="_blank" class="px-2.5 py-1.5 rounded-xl text-xs font-mono font-semibold bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1.5 transition">
-            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-            <span>KY TrendZone</span>
-          </a>
-          <a href="#contact" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-indigo-500/25 transition transform hover:-translate-y-0.5 flex items-center gap-1.5">
+          <a href="#contact" class="theme-btn-primary px-4 py-2 rounded-xl text-xs font-bold shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-1.5">
             <span>Hire Me</span>
             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
@@ -200,16 +315,21 @@
     </div>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-drawer" class="hidden lg:hidden px-4 pt-2 pb-6 space-y-3 glass-panel border-t border-white/5">
+    <div id="mobile-drawer" class="hidden lg:hidden px-4 pt-2 pb-6 space-y-3 glass-panel border-t theme-border">
+      <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 border theme-border">
+        <span class="text-xs text-slate-300 font-mono">Theme Palette:</span>
+        <button id="mobile-theme-toggle" class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+          <i data-lucide="palette" class="w-3 h-3"></i>
+          <span id="mobile-theme-label">✨ Sunset Gold</span>
+        </button>
+      </div>
       <a href="#services" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm font-medium">Services</a>
       <a href="#projects" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm font-medium">Projects &amp; Demos</a>
       <a href="#skills" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm font-medium">Tech Stack</a>
-      <a href="./demo-studybuddy/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-indigo-500/10 text-indigo-300 text-xs font-mono">📱 StudyBuddy AI Demo</a>
-      <a href="./demo-hospital/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-cyan-500/10 text-cyan-300 text-xs font-mono">🏥 CarePulse Hospital ERP Demo</a>
+      <a href="./demo-studybuddy/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono font-semibold">📱 StudyBuddy AI (Flutter &bull; Gemini 1.5)</a>
+      <a href="./demo-hospital/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">🏥 CarePulse Hospital ERP Demo</a>
       <a href="./demo-ecommerce/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-rose-500/10 text-rose-300 text-xs font-mono">🛍️ KY TrendZone E-Commerce Demo</a>
-      <a href="./demo-nexus/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-cyan-500/10 text-cyan-300 text-xs font-mono">⚡ NEXUS Real-Time Kanban Demo</a>
-      <a href="./demo-inspira/index.html" target="_blank" class="block px-3 py-2 rounded-lg bg-pink-500/10 text-pink-300 text-xs font-mono">🎨 Inspira Motion Kit Demo</a>
-      <a href="#contact" class="block w-full text-center px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold shadow-md">
+      <a href="#contact" class="block w-full text-center px-4 py-2.5 rounded-xl theme-btn-primary text-sm font-bold shadow-md">
         Get in Touch
       </a>
     </div>
@@ -223,13 +343,13 @@
         <!-- Hero Content (Left) -->
         <div class="lg:col-span-7 text-center lg:text-left reveal">
           
-          <!-- Cyber Pill Badge -->
-          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel text-xs font-semibold text-indigo-300 mb-6 border border-indigo-500/30 shadow-inner">
+          <!-- Sovereign Pill Badge -->
+          <div class="theme-badge inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 shadow-inner">
             <span class="flex h-2 w-2 relative">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
             </span>
-            <span class="tracking-wide">ENGINEERED FOR SCALE &bull; FAST TURNAROUND</span>
+            <span class="tracking-wide font-mono text-[11px]">C# &bull; ASP.NET CORE &bull; FLUTTER AI SYSTEMS</span>
           </div>
 
           <!-- Main Dynamic Heading -->
@@ -239,25 +359,25 @@
             <span class="gradient-accent-text">That Drive Results.</span>
           </h1>
 
-          <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-            Final-year Software Engineering specialist fusing <strong class="text-slate-200">C# / .NET architecture</strong> with <strong class="text-slate-200">modern responsive frontend engineering (Tailwind, React, JS)</strong>. Delivering blazing fast, high-converting digital products for startups and businesses worldwide.
+          <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+            Software Engineering specialist combining robust <strong class="text-white">C# / ASP.NET Core Web APIs</strong> and <strong class="theme-accent-text">Flutter cross-platform apps</strong> with modern, pixel-perfect frontend engineering. Creator of <strong class="text-white">StudyBuddy AI</strong> and enterprise digital platforms.
           </p>
 
           <!-- Interactive Action Row -->
           <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <a href="#projects" class="px-7 py-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/30 transition-all transform hover:-translate-y-0.5 flex items-center gap-2.5">
+            <a href="#projects" class="theme-btn-primary px-7 py-4 rounded-xl font-bold text-sm shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2.5">
               <i data-lucide="code-2" class="w-4 h-4"></i>
               <span>Explore Live Work</span>
               <i data-lucide="arrow-down" class="w-4 h-4"></i>
             </a>
-            <a href="./demo-saas/index.html" target="_blank" class="px-6 py-4 rounded-xl glass-panel hover:bg-white/10 text-indigo-300 font-semibold text-sm transition border border-indigo-500/30 flex items-center gap-2">
-              <i data-lucide="play" class="w-4 h-4 text-cyan-400 fill-cyan-400"></i>
-              <span>Test NovaPulse Live Demo</span>
+            <a href="./demo-studybuddy/index.html" target="_blank" class="px-6 py-4 rounded-xl glass-panel hover:bg-white/10 theme-accent-text font-semibold text-sm transition border theme-border flex items-center gap-2 shadow-lg">
+              <i data-lucide="sparkles" class="w-4 h-4 theme-accent-text"></i>
+              <span>Launch StudyBuddy AI Demo</span>
             </a>
           </div>
 
           <!-- Live Engineering Proof Points -->
-          <div class="mt-12 pt-8 border-t border-white/5 grid grid-cols-3 gap-4 text-left">
+          <div class="mt-12 pt-8 border-t theme-border grid grid-cols-3 gap-4 text-left">
             <div>
               <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono counter" data-target="100">0</div>
               <div class="text-xs text-slate-400 font-medium mt-0.5">% Responsive Design</div>
@@ -275,13 +395,13 @@
 
         <!-- Hero Interactive Code Window (Right) -->
         <div class="lg:col-span-5 reveal">
-          <div class="rounded-2xl glass-panel p-1 border border-indigo-500/25 shadow-2xl relative group">
-            <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+          <div class="rounded-2xl glass-panel p-1 border theme-border shadow-2xl relative group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-amber-500/25 via-orange-500/20 to-rose-500/25 rounded-2xl blur opacity-30 group-hover:opacity-55 transition duration-500"></div>
             
-            <div class="relative bg-dark-900 rounded-[14px] overflow-hidden">
+            <div class="relative bg-titanium-950 rounded-[14px] overflow-hidden border theme-border">
               
               <!-- Code Tabs Header -->
-              <div class="flex items-center justify-between px-4 py-3 bg-dark-950 border-b border-white/5">
+              <div class="flex items-center justify-between px-4 py-3 bg-titanium-900/90 border-b theme-border">
                 <div class="flex items-center gap-2">
                   <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
                   <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
@@ -290,8 +410,8 @@
                 
                 <!-- Interactive Tab Switchers -->
                 <div class="flex items-center gap-1 font-mono text-xs">
-                  <button class="code-tab active px-3 py-1 rounded bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 transition" data-code="csharp">Developer.cs</button>
-                  <button class="code-tab px-3 py-1 rounded text-slate-400 hover:text-white transition" data-code="frontend">LandingPage.tsx</button>
+                  <button class="code-tab active px-3 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 transition font-semibold" data-code="csharp">Developer.cs</button>
+                  <button class="code-tab px-3 py-1 rounded-lg text-slate-400 hover:text-white transition" data-code="frontend">StudyBuddy.dart</button>
                 </div>
               </div>
 
@@ -302,9 +422,9 @@
 <span class="text-purple-400">public class</span> <span class="text-amber-300">SoftwareEngineer</span>
 {
     <span class="text-purple-400">public string</span> Name =&gt; <span class="text-emerald-300">"Khadija Yaseen"</span>;
-    <span class="text-purple-400">public string</span> Focus =&gt; <span class="text-emerald-300">"Full-Stack &amp; Web Architect"</span>;
+    <span class="text-purple-400">public string</span> Focus =&gt; <span class="text-emerald-300">"Full-Stack &amp; Flutter AI Architect"</span>;
     
-    <span class="text-purple-400">public async Task</span>&lt;ProjectResult&gt; <span class="text-blue-400">BuildAsync</span>(ClientBrief brief)
+    <span class="text-purple-400">public async Task</span>&lt;ProjectResult&gt; <span class="text-amber-400">BuildAsync</span>(ClientBrief brief)
     {
         <span class="text-slate-500">// 1. Architect scalable, secure backend</span>
         <span class="text-purple-400">var</span> backend = <span class="text-purple-400">new</span> AspNetCoreApi(brief.DataModel);
@@ -317,29 +437,29 @@
     }
 }</div>
 
-              <!-- Tab 2 Content: Frontend -->
+              <!-- Tab 2 Content: StudyBuddy.dart (Flutter & Gemini AI) -->
               <div id="code-frontend" class="hidden p-5 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto">
-<span class="text-purple-400">import</span> React <span class="text-purple-400">from</span> <span class="text-emerald-300">'react'</span>;
-<span class="text-purple-400">import</span> { Rocket, ShieldCheck } <span class="text-purple-400">from</span> <span class="text-emerald-300">'lucide-react'</span>;
+<span class="text-purple-400">import</span> <span class="text-emerald-300">'package:flutter/material.dart'</span>;
+<span class="text-purple-400">import</span> <span class="text-emerald-300">'services/openrouter_ai_service.dart'</span>;
 
-<span class="text-purple-400">export const</span> <span class="text-blue-400">HeroSection</span> = () =&gt; (
-  &lt;<span class="text-rose-400">section</span> <span class="text-amber-300">className</span>=<span class="text-emerald-300">"cyber-gradient py-24"</span>&gt;
-    &lt;<span class="text-rose-400">h1</span> <span class="text-amber-300">className</span>=<span class="text-emerald-300">"text-6xl font-extrabold"</span>&gt;
-      Next-Gen Web Experiences
-    &lt;/<span class="text-rose-400">h1</span>&gt;
-    &lt;<span class="text-rose-400">p</span> <span class="text-amber-300">className</span>=<span class="text-emerald-300">"text-slate-400 mt-4"</span>&gt;
-      Optimized for Conversion &amp; Speed
-    &lt;/<span class="text-rose-400">p</span>&gt;
-  &lt;/<span class="text-rose-400">section</span>&gt;
-);</div>
+<span class="text-purple-400">class</span> <span class="text-amber-300">StudyBuddyAI</span> <span class="text-purple-400">extends</span> <span class="text-amber-400">StatelessWidget</span> {
+  <span class="text-purple-400">final String</span> creator = <span class="text-emerald-300">"Khadija Yaseen"</span>;
+  
+  <span class="text-purple-400">Future</span>&lt;<span class="text-amber-400">QuizDeck</span>&gt; <span class="text-amber-400">generateQuiz</span>(<span class="text-purple-400">String</span> syllabus) <span class="text-purple-400">async</span> {
+    <span class="text-slate-500">// Calls Gemini 1.5 Flash via OpenRouter API</span>
+    <span class="text-purple-400">final</span> ai = <span class="text-amber-400">OpenRouterService</span>();
+    <span class="text-purple-400">final</span> deck = <span class="text-purple-400">await</span> ai.createFlashcards(syllabus);
+    <span class="text-purple-400">return</span> deck; <span class="text-slate-500">// Instant active recall</span>
+  }
+}</div>
 
               <!-- Terminal Footer Status Bar -->
-              <div class="px-4 py-2.5 bg-dark-950 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <div class="px-4 py-2.5 bg-titanium-900/90 border-t theme-border flex items-center justify-between text-[11px] font-mono text-slate-400">
                 <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                  <span class="text-slate-300 font-semibold">Output: Compiled Successfully</span>
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span class="text-slate-300 font-semibold">StudyBuddy AI Engine: Ready</span>
                 </div>
-                <span class="text-indigo-400">UTF-8 &bull; LF</span>
+                <span class="theme-accent-text font-bold">Dart 3.x &bull; .NET 8</span>
               </div>
             </div>
           </div>
@@ -350,59 +470,59 @@
   </section>
 
   <!-- Freelance Services Section -->
-  <section id="services" class="py-24 bg-dark-900/90 border-y border-white/5 relative">
+  <section id="services" class="py-24 bg-titanium-950/70 border-y theme-border relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Professional Services</h2>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-amber-400 font-mono mb-3">Professional Services</h2>
         <p class="text-3xl sm:text-5xl font-extrabold text-white">What I Deliver to Clients</p>
-        <p class="text-slate-400 text-sm mt-3">From high-impact landing pages to full-scale web applications.</p>
+        <p class="text-slate-300 text-sm mt-3">From high-impact landing pages to full-scale cross-platform web and mobile systems.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Service 1: Landing Pages -->
         <div class="glass-panel p-8 rounded-2xl glass-card-hover group reveal">
-          <div class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition duration-300 shadow-lg shadow-indigo-600/20">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-slate-950 transition duration-300 shadow-lg shadow-amber-500/20">
             <i data-lucide="layout" class="w-7 h-7"></i>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">High-Converting Landing Pages</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Modern, pixel-perfect one-page websites with dark-mode aesthetics, responsive layouts, Tailwind styling, and working lead capture forms.
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Modern, pixel-perfect one-page websites with warm titanium aesthetics, responsive layouts, Tailwind styling, and working lead capture forms.
           </p>
-          <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+          <div class="pt-4 border-t theme-border flex items-center justify-between text-xs font-mono">
             <span class="text-slate-400">Turnaround:</span>
-            <span class="text-indigo-300 font-bold">24 – 48 Hours</span>
+            <span class="text-amber-300 font-bold">24 – 48 Hours</span>
           </div>
         </div>
 
-        <!-- Service 2: C# / ASP.NET Full-Stack -->
+        <!-- Service 2: C# / ASP.NET Full-Stack & Flutter -->
         <div class="glass-panel p-8 rounded-2xl glass-card-hover group reveal" style="transition-delay: 0.15s;">
-          <div class="w-14 h-14 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center mb-6 group-hover:bg-purple-600 group-hover:text-white transition duration-300 shadow-lg shadow-purple-600/20">
+          <div class="w-14 h-14 rounded-2xl bg-orange-500/15 text-orange-400 flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-slate-950 transition duration-300 shadow-lg shadow-orange-500/20">
             <i data-lucide="server" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Full-Stack &amp; C# / .NET Backends</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Robust web applications powered by ASP.NET Core Web APIs, database schemas (PostgreSQL / SQL Server), authentication, and clean architecture.
+          <h3 class="text-xl font-bold text-white mb-3">Full-Stack, C# &amp; Flutter Mobile</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Robust web applications powered by ASP.NET Core Web APIs, SQL schemas, Firebase, and cross-platform Flutter 3.x mobile apps.
           </p>
-          <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+          <div class="pt-4 border-t theme-border flex items-center justify-between text-xs font-mono">
             <span class="text-slate-400">Architecture:</span>
-            <span class="text-purple-300 font-bold">Enterprise Clean Code</span>
+            <span class="text-amber-300 font-bold">Clean Code &amp; SOLID</span>
           </div>
         </div>
 
         <!-- Service 3: Redesign & Optimization -->
         <div class="glass-panel p-8 rounded-2xl glass-card-hover group reveal" style="transition-delay: 0.3s;">
-          <div class="w-14 h-14 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center mb-6 group-hover:bg-cyan-600 group-hover:text-white transition duration-300 shadow-lg shadow-cyan-600/20">
+          <div class="w-14 h-14 rounded-2xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-slate-950 transition duration-300 shadow-lg shadow-rose-500/20">
             <i data-lucide="zap" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Modern Redesign &amp; Mobile Fixes</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+          <h3 class="text-xl font-bold text-white mb-3">Modern Redesign &amp; Speed Fixes</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
             Revamping clunky, slow, outdated websites into ultra-fast, modern experiences with 100% mobile perfection and smooth interactive animations.
           </p>
-          <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+          <div class="pt-4 border-t theme-border flex items-center justify-between text-xs font-mono">
             <span class="text-slate-400">Optimization:</span>
-            <span class="text-cyan-300 font-bold">Core Web Vitals &amp; SEO</span>
+            <span class="text-amber-300 font-bold">Core Web Vitals &amp; SEO</span>
           </div>
         </div>
 
@@ -416,11 +536,12 @@
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4 reveal">
         <div>
-          <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Showcase &amp; Proof of Work</h2>
+          <h2 class="text-xs font-bold uppercase tracking-widest text-amber-400 font-mono mb-3">Showcase &amp; Proof of Work</h2>
           <p class="text-3xl sm:text-5xl font-extrabold text-white">Featured Projects &amp; Live Demos</p>
         </div>
-        <div class="text-sm text-slate-400 font-mono">
-          Click to test live interactive prototypes &rarr;
+        <div class="text-sm text-amber-300 font-mono flex items-center gap-1.5">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Click to test live interactive prototypes &rarr;</span>
         </div>
       </div>
 
@@ -428,16 +549,16 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         <!-- PROJECT 1: NovaPulse AI Analytics (FEATURED LIVE DEMO) -->
-        <div class="lg:col-span-2 glass-panel rounded-2xl overflow-hidden border-2 border-indigo-500/50 glass-card-hover group relative flex flex-col justify-between reveal">
+        <div class="lg:col-span-2 glass-panel rounded-2xl overflow-hidden border-2 theme-border glass-card-hover group relative flex flex-col justify-between reveal">
           <div class="absolute top-4 right-4 z-20">
-            <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/40 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-cyan-300 animate-ping"></span>
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-slate-950 shadow-lg shadow-amber-500/30 flex items-center gap-1.5 font-extrabold">
+              <span class="w-2 h-2 rounded-full bg-slate-950 animate-ping"></span>
               ⭐ Live Interactive Demo
             </span>
           </div>
 
           <div class="p-8">
-            <div class="flex items-center gap-2 text-xs font-mono text-indigo-400 mb-2">
+            <div class="flex items-center gap-2 text-xs font-mono text-amber-400 mb-2">
               <span>SaaS &bull; AI Platform &bull; Growth Engineering</span>
             </div>
             <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">NovaPulse — AI Analytics &amp; Revenue Growth Platform</h3>
@@ -447,15 +568,15 @@
 
             <!-- Tech Badges -->
             <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300 mb-6">
-              <span class="px-3 py-1 rounded-lg bg-dark-950 border border-white/10 text-indigo-300">HTML5 / Semantic</span>
-              <span class="px-3 py-1 rounded-lg bg-dark-950 border border-white/10 text-indigo-300">Tailwind CSS 3.4</span>
-              <span class="px-3 py-1 rounded-lg bg-dark-950 border border-white/10 text-indigo-300">Vanilla JS Interactions</span>
-              <span class="px-3 py-1 rounded-lg bg-dark-950 border border-white/10 text-indigo-300">Web3Forms Ready</span>
+              <span class="px-3 py-1 rounded-lg bg-titanium-950/80 border border-amber-500/20 text-amber-300">HTML5 / Semantic</span>
+              <span class="px-3 py-1 rounded-lg bg-titanium-950/80 border border-amber-500/20 text-amber-300">Tailwind CSS 3.4</span>
+              <span class="px-3 py-1 rounded-lg bg-titanium-950/80 border border-amber-500/20 text-orange-300">Vanilla JS Interactions</span>
+              <span class="px-3 py-1 rounded-lg bg-titanium-950/80 border border-amber-500/20 text-rose-300">Web3Forms Ready</span>
             </div>
           </div>
 
           <div class="p-8 pt-0 flex flex-wrap items-center gap-4">
-            <a href="./demo-saas/index.html" target="_blank" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg shadow-indigo-500/25 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+            <a href="./demo-saas/index.html" target="_blank" class="theme-btn-primary px-6 py-3.5 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition transform hover:-translate-y-0.5">
               <span>Open Live NovaPulse Experience</span>
               <i data-lucide="external-link" class="w-4 h-4"></i>
             </a>
@@ -463,34 +584,34 @@
           </div>
         </div>
 
-        <!-- PROJECT 2: StudyBuddy AI (FLUTTER & GEMINI AI) -->
-        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-indigo-500/40 relative reveal">
+        <!-- PROJECT 2: StudyBuddy AI (FLUTTER & GEMINI AI) — SIGNATURE SHOWCASE -->
+        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border-2 border-amber-500/40 shadow-xl shadow-amber-500/10 relative reveal">
           <div class="absolute -top-3 right-4">
-            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
-              📱 Flutter &bull; GenAI
+            <span class="theme-badge px-3 py-1 rounded-full text-[11px] font-bold shadow-md flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              📱 Flutter &bull; Gemini 1.5
             </span>
           </div>
 
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Mobile &bull; AI Learning</span>
-              <a href="./demo-studybuddy/index.html" target="_blank" class="text-xs text-indigo-400 hover:text-white flex items-center gap-1 font-mono">
+              <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">Mobile &bull; GenAI Assistant</span>
+              <a href="./demo-studybuddy/index.html" target="_blank" class="text-xs text-amber-300 hover:text-white flex items-center gap-1 font-mono">
                 Open <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">StudyBuddy AI Learning App</h3>
             <p class="text-slate-300 text-xs leading-relaxed mb-4">
-              Cross-platform study companion powered by Google Gemini 1.5 Flash via OpenRouter API and Firebase. Features interactive revision flashcard decks, instant syllabus quizzes, and markdown study chats.
+              Cross-platform mobile study companion powered by Google Gemini 1.5 Flash via OpenRouter API and Firebase. Features interactive revision flashcard decks, instant syllabus quizzes, and markdown study chats.
             </p>
             <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300 mb-5">
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-indigo-500/20 text-blue-300">Flutter 3.x</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-indigo-500/20 text-purple-300">Gemini 1.5 (OpenRouter)</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-indigo-500/20 text-amber-300">Firebase Firestore</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-amber-500/20 text-amber-300">Flutter 3.x</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-orange-500/20 text-orange-300">Gemini 1.5 (OpenRouter)</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-rose-500/20 text-rose-300">Firebase Firestore</span>
             </div>
           </div>
-          <div class="pt-3 border-t border-white/5 space-y-2">
-            <a href="./demo-studybuddy/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-md shadow-indigo-500/20">
+          <div class="pt-3 border-t theme-border space-y-2">
+            <a href="./demo-studybuddy/index.html" target="_blank" class="theme-btn-primary w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-lg">
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
               <span>Launch StudyBuddy AI Sandbox</span>
             </a>
@@ -506,23 +627,23 @@
             </div>
             <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Codebase: StudyBuddyAI</span>
-              <span class="text-indigo-400">Mobile &bull; Android/iOS</span>
+              <span class="text-amber-300 font-semibold">Mobile &bull; Android/iOS</span>
             </div>
           </div>
         </div>
 
         <!-- PROJECT 3: CarePulse MediCore Hospital Management ERP (ASP.NET CORE 8) -->
-        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-cyan-500/40 relative reveal">
+        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border theme-border relative reveal">
           <div class="absolute -top-3 right-4">
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500 text-slateDark-900 shadow-md flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-slateDark-900 animate-pulse"></span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-400 text-slate-950 shadow-md flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-pulse"></span>
               🏥 LIVE DEMO
             </span>
           </div>
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Healthcare ERP</span>
-              <a href="./demo-hospital/index.html" target="_blank" class="text-xs text-cyan-400 hover:text-white flex items-center gap-1 font-mono">
+              <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Healthcare ERP</span>
+              <a href="./demo-hospital/index.html" target="_blank" class="text-xs text-emerald-300 hover:text-white flex items-center gap-1 font-mono">
                 Open <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
             </div>
@@ -531,13 +652,13 @@
               Full-scale enterprise hospital management system featuring live patient EMR intake, staff &amp; doctor CRUD, salary payroll ledger, and ICU ward telemetry map.
             </p>
             <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300 mb-5">
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-cyan-500/20 text-cyan-300">ASP.NET Core 8.0</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-cyan-500/20 text-cyan-300">C# / EF Core 8</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-cyan-500/20 text-cyan-300">SQL Server &amp; MySQL</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-emerald-500/25 text-emerald-300">ASP.NET Core 8.0</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-emerald-500/25 text-emerald-300">C# / EF Core 8</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-emerald-500/25 text-emerald-300">SQL Server &amp; MySQL</span>
             </div>
           </div>
-          <div class="pt-3 border-t border-white/5 space-y-2">
-            <a href="./demo-hospital/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slateDark-900 text-xs font-bold flex items-center justify-center gap-2 transition shadow-md shadow-cyan-500/20">
+          <div class="pt-3 border-t theme-border space-y-2">
+            <a href="./demo-hospital/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-md">
               <i data-lucide="activity" class="w-3.5 h-3.5"></i>
               <span>Launch Hospital ERP Demo</span>
             </a>
@@ -547,13 +668,13 @@
             </a>
             <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Backend: CarePulseERP</span>
-              <span class="text-cyan-400">Production Ready</span>
+              <span class="text-emerald-300 font-semibold">Production Ready</span>
             </div>
           </div>
         </div>
 
         <!-- PROJECT 4: KY TrendZone Boutique E-Commerce (LIGHT THEME) -->
-        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-rose-500/40 relative reveal">
+        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-rose-500/35 relative reveal">
           <div class="absolute -top-3 right-4">
             <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-gradient-to-r from-rose-500 to-amber-500 text-white shadow-md flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
@@ -564,21 +685,21 @@
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-rose-500/20 text-rose-300 border border-rose-500/30">E-Commerce Boutique</span>
-              <a href="./demo-ecommerce/index.html" target="_blank" class="text-xs text-rose-400 hover:text-white flex items-center gap-1 font-mono">
+              <a href="./demo-ecommerce/index.html" target="_blank" class="text-xs text-rose-300 hover:text-white flex items-center gap-1 font-mono">
                 Open <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
             </div>
             <h3 class="text-xl font-bold text-white mb-2">KY TrendZone Storefront</h3>
             <p class="text-slate-300 text-xs leading-relaxed mb-4">
-              Nordic Alabaster light-themed store with FakeStoreAPI RESTful CRUD integration, slide-over cart drawer, instant multi-currency converter (USD, PKR, EUR, GBP), and Store Manager admin portal.
+              Nordic Alabaster store with FakeStoreAPI RESTful CRUD integration, slide-over cart drawer, instant multi-currency converter (USD, PKR, EUR, GBP), and Store Manager admin portal.
             </p>
             <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300 mb-5">
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-white/10 text-rose-300">FakeStore API</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-white/10 text-amber-300">Cart Drawer</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-white/10 text-emerald-300">Multi-Currency</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-rose-500/25 text-rose-300">FakeStore API</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-amber-500/25 text-amber-300">Cart Drawer</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-emerald-500/25 text-emerald-300">Multi-Currency</span>
             </div>
           </div>
-          <div class="pt-3 border-t border-white/5 space-y-2">
+          <div class="pt-3 border-t theme-border space-y-2">
             <a href="./demo-ecommerce/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition transform hover:-translate-y-0.5">
               <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
               <span>Launch Live Boutique Store</span>
@@ -589,24 +710,24 @@
             </a>
             <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Repo: Ky_TrendZone-</span>
-              <span class="text-rose-400">Public Repo</span>
+              <span class="text-rose-300 font-semibold">Public Repo</span>
             </div>
           </div>
         </div>
 
         <!-- PROJECT 5: NEXUS Central Hub (REAL-TIME WEBSOCKET WORKSPACE) -->
-        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-cyan-500/40 relative reveal">
+        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border theme-border relative reveal">
           <div class="absolute -top-3 right-4">
-            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-600 text-white shadow-md flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>
+            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-600 text-white shadow-md flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
               ⚡ WebSockets &bull; SignalR
             </span>
           </div>
 
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Team Workspace</span>
-              <a href="./demo-nexus/index.html" target="_blank" class="text-xs text-cyan-400 hover:text-white flex items-center gap-1 font-mono">
+              <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-white/5 text-slate-200 border theme-border">Team Workspace</span>
+              <a href="./demo-nexus/index.html" target="_blank" class="text-xs text-amber-300 hover:text-white flex items-center gap-1 font-mono">
                 Open <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
             </div>
@@ -615,25 +736,25 @@
               Cloud team collaboration platform with low-latency WebSocket presence, dynamic sprint Kanban column transitions, velocity tracking, and modular task management.
             </p>
             <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300 mb-5">
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-cyan-500/20 text-cyan-300">WebSockets / SignalR</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-cyan-500/20 text-blue-300">Kanban Engine</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-cyan-500/20 text-emerald-300">Live Telemetry</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border theme-border text-slate-200">WebSockets / SignalR</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border theme-border text-amber-300">Kanban Engine</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border theme-border text-emerald-300">Live Telemetry</span>
             </div>
           </div>
-          <div class="pt-3 border-t border-white/5 space-y-2">
-            <a href="./demo-nexus/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition transform hover:-translate-y-0.5">
+          <div class="pt-3 border-t theme-border space-y-2">
+            <a href="./demo-nexus/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition transform hover:-translate-y-0.5">
               <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
               <span>Launch NEXUS Workspace</span>
             </a>
             <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Stack: Real-Time / Sockets</span>
-              <span class="text-cyan-400">Interactive</span>
+              <span class="text-amber-300 font-semibold">Interactive</span>
             </div>
           </div>
         </div>
 
         <!-- PROJECT 6: Inspira Motion Kit (MICRO-INTERACTIONS & SPRING PHYSICS) -->
-        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-pink-500/40 relative reveal">
+        <div class="glass-panel rounded-2xl p-7 glass-card-hover group flex flex-col justify-between border border-pink-500/35 relative reveal">
           <div class="absolute -top-3 right-4">
             <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-pink-600 text-white shadow-md flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-pink-300 animate-pulse"></span>
@@ -644,7 +765,7 @@
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-pink-500/20 text-pink-300 border border-pink-500/30">Design System</span>
-              <a href="./demo-inspira/index.html" target="_blank" class="text-xs text-pink-400 hover:text-white flex items-center gap-1 font-mono">
+              <a href="./demo-inspira/index.html" target="_blank" class="text-xs text-pink-300 hover:text-white flex items-center gap-1 font-mono">
                 Open <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
             </div>
@@ -653,19 +774,19 @@
               Interactive micro-interaction and shader component sandbox with 3D mouse parallax cards, real-time glassmorphism shader controls, and 1-click Tailwind snippet export.
             </p>
             <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300 mb-5">
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-pink-500/20 text-pink-300">CSS Spring Physics</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-pink-500/20 text-purple-300">3D Parallax Tilt</span>
-              <span class="px-2.5 py-1 rounded bg-dark-950 border border-pink-500/20 text-cyan-300">Glass Shaders</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-pink-500/25 text-pink-300">CSS Spring Physics</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-purple-500/25 text-purple-300">3D Parallax Tilt</span>
+              <span class="px-2.5 py-1 rounded bg-titanium-950/80 border border-amber-500/25 text-amber-300">Glass Shaders</span>
             </div>
           </div>
-          <div class="pt-3 border-t border-white/5 space-y-2">
-            <a href="./demo-inspira/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition transform hover:-translate-y-0.5">
+          <div class="pt-3 border-t theme-border space-y-2">
+            <a href="./demo-inspira/index.html" target="_blank" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow transition transform hover:-translate-y-0.5">
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
               <span>Launch Motion Playground</span>
             </a>
             <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span>Type: Micro-UI Sandbox</span>
-              <span class="text-pink-400">Production Ready</span>
+              <span class="text-pink-300 font-semibold">Production Ready</span>
             </div>
           </div>
         </div>
@@ -675,62 +796,62 @@
   </section>
 
   <!-- Skills & Engineering Arsenal -->
-  <section id="skills" class="py-24 bg-dark-900/80 border-y border-white/5">
+  <section id="skills" class="py-24 bg-titanium-950/70 border-y theme-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Core Competencies</h2>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-amber-400 font-mono mb-3">Core Competencies</h2>
         <p class="text-3xl sm:text-5xl font-extrabold text-white">Technical Arsenal</p>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
         
         <div class="glass-panel p-6 rounded-2xl glass-card-hover reveal">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-400">
             <i data-lucide="cpu" class="w-5 h-5"></i>
           </div>
           <div class="text-white font-mono font-bold text-base mb-1">C# / .NET</div>
-          <div class="text-[11px] text-slate-400">ASP.NET Web APIs</div>
+          <div class="text-[11px] text-slate-300">ASP.NET Web APIs</div>
         </div>
 
         <div class="glass-panel p-6 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.05s;">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
-            <i data-lucide="palette" class="w-5 h-5"></i>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-orange-500/15 flex items-center justify-center text-orange-400">
+            <i data-lucide="smartphone" class="w-5 h-5"></i>
           </div>
-          <div class="text-white font-mono font-bold text-base mb-1">Tailwind CSS</div>
-          <div class="text-[11px] text-slate-400">Responsive UI Kits</div>
+          <div class="text-white font-mono font-bold text-base mb-1">Flutter &amp; Dart</div>
+          <div class="text-[11px] text-slate-300">Mobile Apps (Android/iOS)</div>
         </div>
 
         <div class="glass-panel p-6 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.1s;">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
-            <i data-lucide="code" class="w-5 h-5"></i>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-rose-500/15 flex items-center justify-center text-rose-400">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
           </div>
-          <div class="text-white font-mono font-bold text-base mb-1">JavaScript / ES6</div>
-          <div class="text-[11px] text-slate-400">DOM &amp; Async Architecture</div>
+          <div class="text-white font-mono font-bold text-base mb-1">Gemini AI / GenAI</div>
+          <div class="text-[11px] text-slate-300">OpenRouter &amp; LLM Prompts</div>
         </div>
 
         <div class="glass-panel p-6 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.15s;">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-            <i data-lucide="database" class="w-5 h-5"></i>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-400">
+            <i data-lucide="palette" class="w-5 h-5"></i>
           </div>
-          <div class="text-white font-mono font-bold text-base mb-1">SQL Databases</div>
-          <div class="text-[11px] text-slate-400">PostgreSQL / SQL Server</div>
+          <div class="text-white font-mono font-bold text-base mb-1">Tailwind CSS</div>
+          <div class="text-[11px] text-slate-300">Responsive UI Kits</div>
         </div>
 
         <div class="glass-panel p-6 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.2s;">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
-            <i data-lucide="git-branch" class="w-5 h-5"></i>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-400">
+            <i data-lucide="database" class="w-5 h-5"></i>
           </div>
-          <div class="text-white font-mono font-bold text-base mb-1">Git / GitHub</div>
-          <div class="text-[11px] text-slate-400">CI/CD &amp; Version Control</div>
+          <div class="text-white font-mono font-bold text-base mb-1">SQL &amp; Firebase</div>
+          <div class="text-[11px] text-slate-300">SQL Server &amp; Firestore</div>
         </div>
 
         <div class="glass-panel p-6 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.25s;">
-          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-rose-500/10 flex items-center justify-center text-rose-400">
-            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-300">
+            <i data-lucide="git-branch" class="w-5 h-5"></i>
           </div>
-          <div class="text-white font-mono font-bold text-base mb-1">AI Speed Tools</div>
-          <div class="text-[11px] text-slate-400">Rapid Delivery Workflows</div>
+          <div class="text-white font-mono font-bold text-base mb-1">Git / GitHub</div>
+          <div class="text-[11px] text-slate-300">CI/CD &amp; Version Control</div>
         </div>
 
       </div>
@@ -742,34 +863,34 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Zero Hassle Process</h2>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-amber-400 font-mono mb-3">Zero Hassle Process</h2>
         <p class="text-3xl sm:text-5xl font-extrabold text-white">How We Work Together</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         
-        <div class="glass-panel p-6 rounded-2xl border border-white/5 relative reveal">
-          <div class="text-3xl font-extrabold text-indigo-500/30 font-mono mb-2">01</div>
+        <div class="glass-panel p-6 rounded-2xl border theme-border relative reveal">
+          <div class="text-3xl font-extrabold text-amber-400/40 font-mono mb-2">01</div>
           <h4 class="text-lg font-bold text-white mb-2">Requirement Brief</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">Share your idea, reference design, or required features in a quick message.</p>
+          <p class="text-slate-300 text-xs leading-relaxed">Share your vision, reference inspiration, API endpoints, or wireframes in a quick message.</p>
         </div>
 
-        <div class="glass-panel p-6 rounded-2xl border border-white/5 relative reveal" style="transition-delay: 0.1s;">
-          <div class="text-3xl font-extrabold text-indigo-500/30 font-mono mb-2">02</div>
+        <div class="glass-panel p-6 rounded-2xl border theme-border relative reveal" style="transition-delay: 0.1s;">
+          <div class="text-3xl font-extrabold text-amber-400/40 font-mono mb-2">02</div>
           <h4 class="text-lg font-bold text-white mb-2">Rapid Prototyping</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">I architect the UI &amp; code structure, delivering an interactive preview within 24 hours.</p>
+          <p class="text-slate-300 text-xs leading-relaxed">I architect the backend schema, UI layout, and deliver an interactive preview in 24 hours.</p>
         </div>
 
-        <div class="glass-panel p-6 rounded-2xl border border-white/5 relative reveal" style="transition-delay: 0.2s;">
-          <div class="text-3xl font-extrabold text-indigo-500/30 font-mono mb-2">03</div>
+        <div class="glass-panel p-6 rounded-2xl border theme-border relative reveal" style="transition-delay: 0.2s;">
+          <div class="text-3xl font-extrabold text-amber-400/40 font-mono mb-2">03</div>
           <h4 class="text-lg font-bold text-white mb-2">Review &amp; Refine</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">We test mobile responsiveness, fine-tune animations, and polish every pixel.</p>
+          <p class="text-slate-300 text-xs leading-relaxed">We test responsive touch targets, fine-tune animations, and polish every pixel to perfection.</p>
         </div>
 
-        <div class="glass-panel p-6 rounded-2xl border border-white/5 relative reveal" style="transition-delay: 0.3s;">
-          <div class="text-3xl font-extrabold text-indigo-500/30 font-mono mb-2">04</div>
+        <div class="glass-panel p-6 rounded-2xl border theme-border relative reveal" style="transition-delay: 0.3s;">
+          <div class="text-3xl font-extrabold text-amber-400/40 font-mono mb-2">04</div>
           <h4 class="text-lg font-bold text-white mb-2">Live Launch</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">Deployment to your domain, clean zip delivery, or GitHub repository handover.</p>
+          <p class="text-slate-300 text-xs leading-relaxed">Deployment to your domain, clean production zip delivery, or full GitHub repository handover.</p>
         </div>
 
       </div>
@@ -780,16 +901,16 @@
   <section id="contact" class="py-24 relative">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="glass-panel rounded-3xl p-8 sm:p-14 border border-indigo-500/30 shadow-2xl relative overflow-hidden reveal">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="glass-panel rounded-3xl p-8 sm:p-14 border theme-border shadow-2xl relative overflow-hidden reveal">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-amber-500/20 to-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="text-center max-w-xl mx-auto mb-10">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono mb-4 border border-emerald-500/20">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            Direct Inquiries &bull; Fast Response
+          <div class="theme-badge inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+            Direct Inquiries &bull; Fast Turnaround
           </div>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Have a Project or Gig in Mind?</h2>
-          <p class="text-slate-400 text-sm mt-3">Send your project details below. I respond with a clear breakdown, quote, and turnaround timeline within 2 hours.</p>
+          <p class="text-slate-300 text-sm mt-3">Send your project details below. I respond with a clear breakdown, quote, and turnaround timeline within 2 hours.</p>
         </div>
 
         <!-- Web3Forms Powered Contact Form -->
@@ -802,47 +923,48 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-2">Your Name / Company</label>
-              <input type="text" name="name" required placeholder="Sarah Miller" class="w-full px-4 py-3.5 rounded-xl bg-dark-950/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition">
+              <input type="text" name="name" required placeholder="Sarah Miller" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-white placeholder-slate-400 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-2">Your Email</label>
-              <input type="email" name="email" required placeholder="sarah@company.com" class="w-full px-4 py-3.5 rounded-xl bg-dark-950/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition">
+              <input type="email" name="email" required placeholder="sarah@company.com" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-white placeholder-slate-400 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition">
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-2">Service Required</label>
-              <select name="service" class="w-full px-4 py-3.5 rounded-xl bg-dark-950/80 border border-white/10 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition">
+              <select name="service" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-slate-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition">
                 <option value="Landing Page Design">High-Converting Landing Page (Tailwind/HTML/JS)</option>
                 <option value="C# / .NET Application">Full-Stack Web App (C# / ASP.NET / SQL)</option>
+                <option value="Flutter Mobile App">Cross-Platform Mobile App (Flutter 3.x / Firebase)</option>
                 <option value="Website Redesign">Modern Redesign &amp; Mobile Speed Optimization</option>
                 <option value="Other Contract">Custom Contract / Freelance Gig</option>
               </select>
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-2">Estimated Budget</label>
-              <select name="budget" class="w-full px-4 py-3.5 rounded-xl bg-dark-950/80 border border-white/10 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 transition">
+              <select name="budget" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-slate-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition">
                 <option value="$30 - $100">$30 – $100 (Single Page / Quick Fix)</option>
                 <option value="$100 - $300">$100 – $300 (Standard Project / Multi-page)</option>
-                <option value="$300 - $1000+">$300 – $1,000+ (Full Web App / Enterprise)</option>
+                <option value="$300 - $1000+">$300 – $1,000+ (Full Web App / Mobile)</option>
               </select>
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-2">Project Details &amp; Deadlines</label>
-            <textarea name="message" rows="4" required placeholder="Tell me about your website goals, any references or inspiration links, and desired timeline..." class="w-full px-4 py-3.5 rounded-xl bg-dark-950/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition"></textarea>
+            <textarea name="message" rows="4" required placeholder="Tell me about your project goals, references or inspiration links, and desired timeline..." class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-white placeholder-slate-400 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition"></textarea>
           </div>
 
-          <button type="submit" id="submit-btn" class="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+          <button type="submit" id="submit-btn" class="theme-btn-primary w-full py-4 rounded-xl font-bold text-sm shadow-xl transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
             <i data-lucide="send" class="w-4 h-4"></i>
             <span>Send Project Inquiry &amp; Request Quote</span>
           </button>
         </form>
 
         <!-- Dynamic Success Toast / Notification -->
-        <div id="contact-success-box" class="hidden mt-6 p-5 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-center text-sm font-medium animate-bounce">
+        <div id="contact-success-box" class="hidden mt-6 p-5 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-200 text-center text-sm font-medium animate-bounce">
           ✨ <strong>Message Received!</strong> Thank you for reaching out. I'll review your project details and get back to you in under 2 hours.
         </div>
 
@@ -850,31 +972,34 @@
     </div>
   </section>
 
-  <!-- Elite Footer -->
-  <footer class="py-12 border-t border-white/5 bg-dark-950 text-xs text-slate-500">
+  <!-- Sovereign Smoked Titanium Footer -->
+  <footer class="py-12 border-t theme-border bg-titanium-950 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-cyan-400 p-[1.5px] flex items-center justify-center flex-shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-400 p-[1.5px] flex items-center justify-center flex-shrink-0">
           <img src="profile.jpg" alt="Khadija Yaseen" class="w-full h-full rounded-[6px] object-cover object-top">
         </div>
-        <span class="text-sm font-semibold text-slate-300">Khadija Yaseen &bull; Software Engineer</span>
+        <span class="text-sm font-semibold text-slate-200">Khadija Yaseen &bull; Executive Software Architect</span>
       </div>
 
-      <div class="text-slate-500 text-center sm:text-right">
-        &copy; 2026 Khadija Yaseen. Built with modern web architecture &amp; high standards.
+      <div class="text-slate-400 text-center sm:text-right">
+        &copy; 2026 Khadija Yaseen. Sovereign Smoked Titanium Design System.
       </div>
 
-      <div class="flex items-center gap-5 text-slate-400">
-        <a href="https://lnkd.in/p/dVChg5BR" target="_blank" class="hover:text-blue-400 text-slate-300 transition flex items-center gap-1.5 font-semibold">
+      <div class="flex items-center gap-5 text-slate-300">
+        <a href="https://lnkd.in/p/dVChg5BR" target="_blank" class="hover:text-amber-300 transition flex items-center gap-1.5 font-semibold">
           <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
           <span>LinkedIn</span>
         </a>
-        <a href="https://github.com/khadijayaseen" target="_blank" class="hover:text-white text-slate-300 transition flex items-center gap-1.5 font-semibold">
+        <a href="https://github.com/khadijayaseen" target="_blank" class="hover:text-amber-300 transition flex items-center gap-1.5 font-semibold">
           <i data-lucide="github" class="w-4 h-4"></i>
           <span>GitHub</span>
         </a>
-        <a href="./demo-saas/index.html" target="_blank" class="hover:text-cyan-400 text-indigo-400 transition font-mono">Demos &rarr;</a>
+        <a href="./demo-studybuddy/index.html" target="_blank" class="hover:text-amber-300 text-amber-400 transition font-mono flex items-center gap-1">
+          <span>StudyBuddy AI</span>
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+        </a>
       </div>
 
     </div>
@@ -888,16 +1013,19 @@
     // Mobile Drawer Toggle
     const mobileBtn = document.getElementById('mobile-toggle');
     const mobileDrawer = document.getElementById('mobile-drawer');
-    mobileBtn.addEventListener('click', () => {
-      mobileDrawer.classList.toggle('hidden');
-    });
+    if (mobileBtn && mobileDrawer) {
+      mobileBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('hidden');
+      });
+    }
 
     // Dynamic Typing Headline Effect
     const phrases = [
-      "Web Applications",
-      "C# / .NET Backends",
+      "Web & Mobile Applications",
+      "C# / .NET Core Web APIs",
+      "Flutter Cross-Platform Apps",
       "High-Converting Landing Pages",
-      "Modern UI/UX Experiences"
+      "Enterprise Cloud Systems"
     ];
     let phraseIndex = 0;
     let charIndex = 0;
@@ -905,6 +1033,7 @@
     const typingElement = document.getElementById('typing-text');
 
     function typeEffect() {
+      if (!typingElement) return;
       const currentPhrase = phrases[phraseIndex];
       if (isDeleting) {
         typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
@@ -914,9 +1043,9 @@
         charIndex++;
       }
 
-      let speed = isDeleting ? 40 : 80;
+      let speed = isDeleting ? 35 : 75;
       if (!isDeleting && charIndex === currentPhrase.length) {
-        speed = 2000; // Pause at end of word
+        speed = 2200; // Pause at end of word
         isDeleting = true;
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
@@ -927,7 +1056,7 @@
     }
     typeEffect();
 
-    // Interactive Code Tab Switcher
+    // Interactive Code Tab Switcher (Developer.cs vs StudyBuddy.dart)
     const codeTabs = document.querySelectorAll('.code-tab');
     const tabCSharp = document.getElementById('code-csharp');
     const tabFrontend = document.getElementById('code-frontend');
@@ -935,10 +1064,10 @@
     codeTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         codeTabs.forEach(t => {
-          t.classList.remove('active', 'bg-indigo-600/20', 'text-indigo-300', 'border', 'border-indigo-500/30');
+          t.classList.remove('active', 'bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40', 'font-semibold');
           t.classList.add('text-slate-400');
         });
-        tab.classList.add('active', 'bg-indigo-600/20', 'text-indigo-300', 'border', 'border-indigo-500/30');
+        tab.classList.add('active', 'bg-amber-500/20', 'text-amber-300', 'border', 'border-amber-500/40', 'font-semibold');
         tab.classList.remove('text-slate-400');
 
         const codeType = tab.getAttribute('data-code');
@@ -951,6 +1080,41 @@
         }
       });
     });
+
+    // 3-Theme Sovereign Engine (Sunset Gold, Aurora Mint, Smoked Platinum)
+    const themes = [
+      { id: 'sunset', label: '✨ Sunset Gold' },
+      { id: 'emerald', label: '🌿 Aurora Mint' },
+      { id: 'platinum', label: '⚡ Smoked Platinum' }
+    ];
+
+    const themeBtn = document.getElementById('theme-selector-btn');
+    const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+    const themeLabel = document.getElementById('theme-mode-label');
+    const mobileThemeLabel = document.getElementById('mobile-theme-label');
+
+    function applyTheme(themeId) {
+      const selected = themes.find(t => t.id === themeId) || themes[0];
+      document.documentElement.setAttribute('data-theme', selected.id);
+      if (themeLabel) themeLabel.textContent = selected.label;
+      if (mobileThemeLabel) mobileThemeLabel.textContent = selected.label;
+      localStorage.setItem('portfolio-theme-palette', selected.id);
+      lucide.createIcons();
+    }
+
+    function cycleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'sunset';
+      const currentIndex = themes.findIndex(t => t.id === current);
+      const nextIndex = (currentIndex + 1) % themes.length;
+      applyTheme(themes[nextIndex].id);
+    }
+
+    if (themeBtn) themeBtn.addEventListener('click', cycleTheme);
+    if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', cycleTheme);
+
+    // Initialize saved theme or default to sunset
+    const savedTheme = localStorage.getItem('portfolio-theme-palette') || 'sunset';
+    applyTheme(savedTheme);
 
     // Scroll Reveal Animation (Intersection Observer)
     const revealElements = document.querySelectorAll('.reveal');
@@ -971,7 +1135,7 @@
 
     window.addEventListener('scroll', () => {
       const scrollPos = window.scrollY;
-      if (scrollPos > 100 && !countersStarted) {
+      if (scrollPos > 80 && !countersStarted) {
         countersStarted = true;
         counters.forEach(counter => {
           const target = +counter.getAttribute('data-target');
@@ -981,7 +1145,7 @@
             count += increment;
             if (count < target) {
               counter.textContent = Math.ceil(count);
-              setTimeout(updateCounter, 40);
+              setTimeout(updateCounter, 35);
             } else {
               counter.textContent = target;
             }
@@ -996,37 +1160,37 @@
     const submitBtn = document.getElementById('submit-btn');
     const successBox = document.getElementById('contact-success-box');
 
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `
-        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-        </svg>
-        <span>Transmitting Project Brief...</span>
-      `;
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-slate-900" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <span>Transmitting Project Brief...</span>
+        `;
 
-      const formData = new FormData(contactForm);
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: formData
-        });
-        
-        // Success handling
-        contactForm.reset();
-        contactForm.classList.add('opacity-40', 'pointer-events-none');
-        submitBtn.classList.add('hidden');
-        successBox.classList.remove('hidden');
-      } catch (err) {
-        // Fallback for offline/demo testing
-        contactForm.reset();
-        contactForm.classList.add('opacity-40', 'pointer-events-none');
-        submitBtn.classList.add('hidden');
-        successBox.classList.remove('hidden');
-      }
-    });
+        const formData = new FormData(contactForm);
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+          });
+          
+          contactForm.reset();
+          contactForm.classList.add('opacity-40', 'pointer-events-none');
+          submitBtn.classList.add('hidden');
+          successBox.classList.remove('hidden');
+        } catch (err) {
+          contactForm.reset();
+          contactForm.classList.add('opacity-40', 'pointer-events-none');
+          submitBtn.classList.add('hidden');
+          successBox.classList.remove('hidden');
+        }
+      });
+    }
   </script>
 </body>
 </html>
