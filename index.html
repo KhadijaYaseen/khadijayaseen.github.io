@@ -511,18 +511,18 @@
           </div>
         </div>
 
-        <!-- Service 3: Redesign & Optimization -->
+        <!-- Service 3: AI Integration & GenAI Systems -->
         <div class="glass-panel p-8 rounded-2xl glass-card-hover group reveal" style="transition-delay: 0.3s;">
           <div class="w-14 h-14 rounded-2xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-slate-950 transition duration-300 shadow-lg shadow-rose-500/20">
-            <i data-lucide="zap" class="w-7 h-7"></i>
+            <i data-lucide="bot" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Modern Redesign &amp; Speed Fixes</h3>
+          <h3 class="text-xl font-bold text-white mb-3">AI Integration &amp; GenAI Systems</h3>
           <p class="text-slate-300 text-sm leading-relaxed mb-6">
-            Revamping clunky, slow, outdated websites into ultra-fast, modern experiences with 100% mobile perfection and smooth interactive animations.
+            Embedding cutting-edge generative AI capabilities into web and mobile apps: Google Gemini 1.5 Flash, OpenRouter APIs, dynamic flashcards, intelligent bots, and automated study workflows.
           </p>
           <div class="pt-4 border-t theme-border flex items-center justify-between text-xs font-mono">
-            <span class="text-slate-400">Optimization:</span>
-            <span class="text-amber-300 font-bold">Core Web Vitals &amp; SEO</span>
+            <span class="text-slate-400">GenAI Stack:</span>
+            <span class="text-amber-300 font-bold">Gemini 1.5 &amp; OpenRouter</span>
           </div>
         </div>
 
@@ -934,20 +934,24 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-2">Service Required</label>
-              <select name="service" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-slate-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition">
+              <select id="service-select" name="service" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-slate-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition cursor-pointer">
                 <option value="Landing Page Design">High-Converting Landing Page (Tailwind/HTML/JS)</option>
                 <option value="C# / .NET Application">Full-Stack Web App (C# / ASP.NET / SQL)</option>
                 <option value="Flutter Mobile App">Cross-Platform Mobile App (Flutter 3.x / Firebase)</option>
-                <option value="Website Redesign">Modern Redesign &amp; Mobile Speed Optimization</option>
+                <option value="AI Integration & GenAI Features">AI Integration &amp; GenAI Features (Gemini / LLM / OpenRouter)</option>
                 <option value="Other Contract">Custom Contract / Freelance Gig</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-2">Estimated Budget</label>
-              <select name="budget" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-slate-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition">
-                <option value="$30 - $100">$30 – $100 (Single Page / Quick Fix)</option>
-                <option value="$100 - $300">$100 – $300 (Standard Project / Multi-page)</option>
-                <option value="$300 - $1000+">$300 – $1,000+ (Full Web App / Mobile)</option>
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs font-semibold text-slate-300">Estimated Budget</label>
+                <span class="text-[10px] font-mono text-amber-400 font-medium">⚡ Tailored to Service</span>
+              </div>
+              <select id="budget-select" name="budget" class="w-full px-4 py-3.5 rounded-xl bg-titanium-950/90 border theme-border text-slate-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition cursor-pointer">
+                <!-- Dynamically populated based on service selection -->
+                <option value="$60 - $120">$60 – $120 (Starter / Single-Page Fast Delivery)</option>
+                <option value="$120 - $250" selected>$120 – $250 (Standard / High-Converting + Form)</option>
+                <option value="$250 - $500+">$250 – $500+ (Premium / Multi-Section + Custom Theme)</option>
               </select>
             </div>
           </div>
@@ -1154,6 +1158,61 @@
         });
       }
     });
+
+    // Dynamic Service-Based Budget Engine
+    const serviceBudgets = {
+      "Landing Page Design": [
+        { value: "$60 - $120", label: "$60 – $120 (Starter / Single-Page Fast Delivery)" },
+        { value: "$120 - $250", label: "$120 – $250 (Standard / High-Converting + Form)" },
+        { value: "$250 - $500+", label: "$250 – $500+ (Premium / Multi-Section + Custom Theme)" }
+      ],
+      "C# / .NET Application": [
+        { value: "$350 - $700", label: "$350 – $700 (MVP / Secure REST API + Auth)" },
+        { value: "$700 - $1500", label: "$700 – $1,500 (Production System / SQL Database + ERP Portal)" },
+        { value: "$1500 - $3500+", label: "$1,500 – $3,500+ (Enterprise System / Multi-Tenant + CI/CD)" }
+      ],
+      "Flutter Mobile App": [
+        { value: "$400 - $800", label: "$400 – $800 (Starter App / 3–5 Screens + Firebase)" },
+        { value: "$800 - $1800", label: "$800 – $1,800 (Full Mobile App / State Mgmt + Offline Sync)" },
+        { value: "$1800 - $3500+", label: "$1,800 – $3,500+ (Production App / Gemini AI + App Store Deploy)" }
+      ],
+      "AI Integration & GenAI Features": [
+        { value: "$150 - $300", label: "$150 – $300 (AI Prompt Architecture & OpenRouter API Setup)" },
+        { value: "$300 - $750", label: "$300 – $750 (Smart AI Chatbot / Dynamic Quiz & Flashcards)" },
+        { value: "$750 - $1800+", label: "$750 – $1,800+ (Full Multimodal AI Assistant / Autonomous Pipeline)" }
+      ],
+      "Other Contract": [
+        { value: "$250 - $600", label: "$250 – $600 (Sprint / 1–2 Weeks Dedicated Delivery)" },
+        { value: "$600 - $1500", label: "$600 – $1,500 (Milestone Feature Contract)" },
+        { value: "$1500 - $4500+", label: "$1,500 – $4,500+ (Monthly Retainer / Ongoing Tech Partner)" }
+      ]
+    };
+
+    const serviceSelect = document.getElementById('service-select');
+    const budgetSelect = document.getElementById('budget-select');
+
+    function updateBudgetOptions() {
+      if (!serviceSelect || !budgetSelect) return;
+      const selectedService = serviceSelect.value;
+      const options = serviceBudgets[selectedService] || serviceBudgets["Landing Page Design"];
+      
+      budgetSelect.innerHTML = '';
+      options.forEach((opt, idx) => {
+        const optionEl = document.createElement('option');
+        optionEl.value = opt.value;
+        optionEl.textContent = opt.label;
+        if (idx === 1) optionEl.selected = true; // Recommend middle tier by default
+        budgetSelect.appendChild(optionEl);
+      });
+
+      // Quick visual feedback on update
+      budgetSelect.classList.add('border-amber-400');
+      setTimeout(() => budgetSelect.classList.remove('border-amber-400'), 400);
+    }
+
+    if (serviceSelect) {
+      serviceSelect.addEventListener('change', updateBudgetOptions);
+    }
 
     // Contact Form AJAX Handler with Web3Forms & Fallback
     const contactForm = document.getElementById('portfolio-contact-form');
