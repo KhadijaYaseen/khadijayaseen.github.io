@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NovaPulse — Next-Gen Autonomous AI Analytics &amp; Revenue Intelligence</title>
-  <meta name="description" content="Turn complex customer data into actionable growth strategies in real-time with AI-powered predictive intelligence.">
+  <title>NovaPulse — Autonomous AI Analytics &amp; Revenue Intelligence SaaS</title>
+  <meta name="description" content="Next-generation autonomous AI revenue intelligence and analytics SaaS. Turn complex customer data into predictable, compounding ARR in real time.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
@@ -25,37 +24,33 @@
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            titanium: {
-              950: '#05090b',
-              900: '#091014',
-              850: '#0e181e',
-              800: '#14222b',
-              700: '#1c2e3a',
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+              900: '#312E81',
             },
-            mint: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
+            tealAccent: {
+              50: '#F0FDFA',
+              100: '#CCFBF1',
+              400: '#2DD4BF',
+              500: '#14B8A6',
+              600: '#0D9488',
+              700: '#0F766E',
             }
           },
           animation: {
-            'blob': 'blob 8s infinite',
             'float': 'float 5s ease-in-out infinite',
-            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float-slow': 'float 8s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           },
           keyframes: {
-            blob: {
-              '0%': { transform: 'translate(0px, 0px) scale(1)' },
-              '33%': { transform: 'translate(25px, -35px) scale(1.08)' },
-              '66%': { transform: 'translate(-20px, 20px) scale(0.92)' },
-              '100%': { transform: 'translate(0px, 0px) scale(1)' },
-            },
             float: {
               '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-8px)' },
+              '50%': { transform: 'translateY(-10px)' },
             }
           }
         }
@@ -64,240 +59,441 @@
   </script>
 
   <style>
-    /* Unique Emerald & Mint Glass Styling */
-    .glass-emerald-panel {
-      background: rgba(10, 20, 24, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(16, 185, 129, 0.15);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
     }
-    .glass-card-hover {
+
+    /* Ambient Office Motion Backdrop */
+    @keyframes officeSubtleMotion {
+      0% { transform: scale(1.02) translate(0px, 0px); }
+      50% { transform: scale(1.06) translate(-12px, -8px); }
+      100% { transform: scale(1.02) translate(8px, 4px); }
+    }
+    .office-ambient-motion {
+      animation: officeSubtleMotion 32s ease-in-out infinite alternate;
+    }
+
+    /* Floating moving coworker animations */
+    @keyframes glideTeammate {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-35px, 15px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .animate-teammate-1 {
+      animation: glideTeammate 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes glideTeammate2 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(40px, -18px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .animate-teammate-2 {
+      animation: glideTeammate2 24s ease-in-out infinite alternate;
+    }
+
+    /* Collaborative wandering cursors (Figma/Miro style live presence) */
+    @keyframes cursorPath1 {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(45px, 30px); }
+      50% { transform: translate(80px, 10px); }
+      75% { transform: translate(25px, 50px); }
+      100% { transform: translate(0, 0); }
+    }
+    .animate-cursor-1 {
+      animation: cursorPath1 18s ease-in-out infinite;
+    }
+
+    @keyframes cursorPath2 {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-50px, 20px); }
+      50% { transform: translate(-20px, -35px); }
+      75% { transform: translate(-60px, -15px); }
+      100% { transform: translate(0, 0); }
+    }
+    .animate-cursor-2 {
+      animation: cursorPath2 22s ease-in-out infinite;
+    }
+
+    /* Premium Light-to-Medium Glassmorphic Cards */
+    .glass-saas-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.9);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .glass-card-hover:hover {
-      transform: translateY(-5px);
-      border-color: rgba(52, 211, 153, 0.55);
-      box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.28);
+    .glass-saas-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.12), 0 0 0 1px rgba(99, 102, 241, 0.2);
     }
-    .gradient-emerald-hero {
-      background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 30%, #34d399 70%, #06b6d4 100%);
+
+    /* Gradient Hero Text */
+    .gradient-hero-title {
+      background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 35%, #4338CA 70%, #0D9488 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .gradient-mint-text {
-      background: linear-gradient(135deg, #6ee7b7 0%, #10b981 50%, #14b8a6 100%);
+    .gradient-accent-text {
+      background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 50%, #10B981 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .emerald-grid {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
-    }
+
+    /* Scroll Reveal */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(24px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
-    /* Scrollbar */
+
+    /* Modern Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: #05090b;
+      background: #F1F5F9;
     }
     ::-webkit-scrollbar-thumb {
-      background: #14222b;
+      background: #CBD5E1;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #10b981;
+      background: #4F46E5;
     }
   </style>
 </head>
-<body class="bg-titanium-950 text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-emerald-500 selection:text-titanium-950 emerald-grid">
+<body class="font-sans antialiased selection:bg-brand-500 selection:text-white relative min-h-screen overflow-x-hidden">
 
-  <!-- Ambient Dynamic Emerald & Teal Glowing Background -->
+  <!-- ======================================================== -->
+  <!-- WORKING TEAM & MODERN TECH WORKSPACE BACKGROUND          -->
+  <!-- ======================================================== -->
   <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[750px] h-[550px] bg-emerald-600/15 rounded-full blur-[140px] animate-blob"></div>
-    <div class="absolute top-[45%] -left-48 w-[550px] h-[550px] bg-teal-600/12 rounded-full blur-[150px] animate-blob" style="animation-delay: 2s;"></div>
-    <div class="absolute bottom-10 -right-48 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[150px] animate-blob" style="animation-delay: 4s;"></div>
+    <!-- Real High-Res Tech Office Working Coworkers Backdrop with Gentle Motion -->
+    <div class="absolute inset-0 bg-cover bg-center office-ambient-motion opacity-30"
+         style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2400&q=80');">
+    </div>
+
+    <!-- Frosted Light-to-Medium Wash Overlay for High-End Readability & Depth -->
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-50/94 via-[#F3F6FB]/90 to-white/95 backdrop-blur-[2px]"></div>
+
+    <!-- Soft Ambient Light Glows -->
+    <div class="absolute -top-36 left-1/3 w-[650px] h-[550px] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse-slow"></div>
+    <div class="absolute top-[40%] -right-24 w-[550px] h-[550px] bg-teal-500/12 rounded-full blur-[150px] animate-float"></div>
+    <div class="absolute bottom-10 -left-28 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[130px]"></div>
+
+    <!-- ======================================================== -->
+    <!-- LIVE MOVING EMPLOYEES & WORKSPACE ACTIVITY WIDGETS       -->
+    <!-- ======================================================== -->
+    
+    <!-- Moving Coworker 1: Lead ML Architect (Top Corridor) -->
+    <div class="absolute top-24 right-[12%] animate-teammate-1 opacity-90 hidden lg:flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm">
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Maya Lin" class="w-8 h-8 rounded-full object-cover border-2 border-indigo-500">
+        <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+      </div>
+      <div class="text-[11px] leading-snug">
+        <div class="font-bold text-slate-900">Maya Lin <span class="text-indigo-600 font-medium">&bull; ML Lead</span></div>
+        <div class="text-slate-500 text-[10px] flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span>
+          <span>ARR Prediction Weights: 99.4%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moving Coworker 2: VP of Growth (Mid Office Floor) -->
+    <div class="absolute top-[48%] left-[4%] animate-teammate-2 opacity-85 hidden xl:flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm">
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Liam Vance" class="w-8 h-8 rounded-full object-cover border-2 border-teal-500">
+        <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+      </div>
+      <div class="text-[11px] leading-snug">
+        <div class="font-bold text-slate-900">Liam Vance <span class="text-teal-600 font-medium">&bull; VP Growth</span></div>
+        <div class="text-emerald-700 text-[10px] font-semibold">+$42.5K New MRR Pipeline Added</div>
+      </div>
+    </div>
+
+    <!-- Moving Coworker 3: Senior Cloud Engineer (Platform Tier) -->
+    <div class="absolute top-[78%] right-[8%] animate-float opacity-85 hidden lg:flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-sm">
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80" alt="Elena" class="w-8 h-8 rounded-full object-cover border-2 border-emerald-500">
+        <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+      </div>
+      <div class="text-[11px] leading-snug">
+        <div class="font-bold text-slate-900">Elena Rostova <span class="text-emerald-600 font-medium">&bull; DevOps</span></div>
+        <div class="text-slate-500 font-mono text-[10px]">Cloud Latency: 14ms &bull; Zero Churn</div>
+      </div>
+    </div>
+
+    <!-- Live Real-Time Collaboration Cursors (Figma Style Live Presence) -->
+    <div class="absolute top-[18%] left-[16%] animate-cursor-1 hidden md:block opacity-90">
+      <svg class="w-4 h-4 text-indigo-600 transform -rotate-12 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.428z"/>
+      </svg>
+      <div class="ml-3 -mt-2 px-2.5 py-0.5 rounded-full bg-indigo-600 text-white text-[10px] font-bold shadow-md whitespace-nowrap">
+        Zayn (Ops) &bull; Reviewing MRR
+      </div>
+    </div>
+
+    <div class="absolute top-[62%] right-[24%] animate-cursor-2 hidden md:block opacity-90">
+      <svg class="w-4 h-4 text-teal-600 transform -rotate-12 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.428z"/>
+      </svg>
+      <div class="ml-3 -mt-2 px-2.5 py-0.5 rounded-full bg-teal-600 text-white text-[10px] font-bold shadow-md whitespace-nowrap">
+        Khadija &bull; Optimizing Funnel
+      </div>
+    </div>
   </div>
 
-  <!-- Top Demo Banner & Back to Portfolio Link -->
-  <div class="bg-gradient-to-r from-emerald-950/90 via-titanium-900 to-teal-950/90 border-b border-emerald-500/20 py-2.5 px-4 text-xs font-medium text-slate-300">
+  <!-- ======================================================== -->
+  <!-- TOP DEMO NAVIGATION BAR                                  -->
+  <!-- ======================================================== -->
+  <div class="bg-white/95 border-b border-slate-200/90 py-2.5 px-4 text-xs font-medium text-slate-600 shadow-xs">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span class="text-emerald-300 font-bold font-mono">SAAS PRODUCT DEMO</span>
-        <span class="hidden sm:inline text-slate-400">&bull; Designed &amp; Developed by Khadija Yaseen</span>
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-[11px]">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Enterprise SaaS Live Sandbox
+        </span>
+        <span class="hidden sm:inline text-slate-400">&bull;</span>
+        <span class="hidden sm:inline text-slate-600 font-medium">Architected &amp; Engineered by <strong>Khadija Yaseen</strong></span>
       </div>
-      <a href="../index.html" class="flex items-center gap-1.5 text-emerald-300 hover:text-white font-semibold underline transition">
+      <a href="../index.html" class="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-slate-200 hover:border-brand-400 bg-slate-50 hover:bg-white text-slate-700 hover:text-brand-700 font-semibold text-xs transition shadow-xs">
         <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
         <span>Return to Khadija's Portfolio</span>
       </a>
     </div>
   </div>
 
-  <!-- Main Navbar -->
-  <nav class="sticky top-0 z-50 glass-emerald-panel border-b border-emerald-500/15 transition-all duration-300">
+  <!-- ======================================================== -->
+  <!-- MAIN NAVBAR                                              -->
+  <!-- ======================================================== -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 transition-all duration-300 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
         <!-- Brand Logo -->
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-500/30">
-            <i data-lucide="activity" class="w-5 h-5 text-titanium-950"></i>
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-600 to-tealAccent-500 flex items-center justify-center text-white shadow-md shadow-brand-500/25">
+            <i data-lucide="activity" class="w-5 h-5"></i>
           </div>
-          <span class="text-xl font-extrabold tracking-tight text-white">Nova<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Pulse</span></span>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xl font-extrabold tracking-tight text-slate-900 leading-none">Nova<span class="text-brand-600">Pulse</span></span>
+              <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 text-[10px] font-bold">
+                AI REVENUE 2.4
+              </span>
+            </div>
+            <span class="text-[10px] text-slate-500 font-medium">Autonomous Revenue Intelligence</span>
+          </div>
         </div>
 
         <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <a href="#features" class="hover:text-emerald-400 transition">Features</a>
-          <a href="#demo-preview" class="hover:text-emerald-400 transition">Live Metrics</a>
-          <a href="#pricing" class="hover:text-emerald-400 transition">Pricing</a>
-          <a href="#testimonials" class="hover:text-emerald-400 transition">Reviews</a>
-          <a href="#faq" class="hover:text-emerald-400 transition">FAQ</a>
+        <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+          <a href="#features" class="hover:text-brand-600 transition">Features</a>
+          <a href="#demo-preview" class="hover:text-brand-600 transition">Live Dashboard</a>
+          <a href="#pricing" class="hover:text-brand-600 transition">Pricing</a>
+          <a href="#testimonials" class="hover:text-brand-600 transition">Case Studies</a>
+          <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
         </div>
 
         <!-- Action CTAs -->
-        <div class="hidden md:flex items-center gap-4">
-          <a href="#contact" class="text-sm font-medium text-slate-300 hover:text-white transition">Sign In</a>
-          <a href="#pricing" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-titanium-950 text-sm font-extrabold shadow-lg shadow-emerald-500/25 transition transform hover:-translate-y-0.5">
-            Start Free Trial
+        <div class="hidden md:flex items-center gap-3">
+          <a href="#contact" class="px-4 py-2 rounded-xl text-sm font-bold text-slate-700 hover:text-slate-900 transition">Sign In</a>
+          <a href="#pricing" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-tealAccent-600 hover:from-brand-500 hover:to-tealAccent-500 text-white text-sm font-bold shadow-md shadow-brand-500/25 transition transform hover:-translate-y-0.5 flex items-center gap-1.5">
+            <span>Start Free Pilot</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden">
-          <button id="mobile-toggle" class="p-2.5 rounded-xl text-gray-400 hover:text-white bg-white/5 border border-white/10">
-            <i data-lucide="menu" class="w-6 h-6"></i>
+          <button id="mobile-toggle" class="p-2.5 rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100 border border-slate-200">
+            <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
         </div>
       </div>
     </div>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-drawer" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 glass-emerald-panel border-t border-emerald-500/15">
-      <a href="#features" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm">Features</a>
-      <a href="#demo-preview" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm">Live Metrics</a>
-      <a href="#pricing" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm">Pricing</a>
-      <a href="#testimonials" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm">Reviews</a>
-      <a href="#faq" class="block px-3 py-2 rounded-lg hover:bg-white/5 text-sm">FAQ</a>
-      <a href="#contact" class="block w-full text-center px-4 py-2.5 rounded-xl bg-emerald-500 text-titanium-950 text-sm font-extrabold">
-        Start Free Trial
+    <div id="mobile-drawer" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-white border-t border-slate-200 shadow-lg">
+      <a href="#features" class="block px-3 py-2 rounded-lg hover:bg-slate-50 text-sm font-semibold text-slate-800">Features</a>
+      <a href="#demo-preview" class="block px-3 py-2 rounded-lg hover:bg-slate-50 text-sm font-semibold text-slate-800">Live Dashboard</a>
+      <a href="#pricing" class="block px-3 py-2 rounded-lg hover:bg-slate-50 text-sm font-semibold text-slate-800">Pricing</a>
+      <a href="#testimonials" class="block px-3 py-2 rounded-lg hover:bg-slate-50 text-sm font-semibold text-slate-800">Case Studies</a>
+      <a href="#faq" class="block px-3 py-2 rounded-lg hover:bg-slate-50 text-sm font-semibold text-slate-800">FAQ</a>
+      <a href="#contact" class="block w-full text-center px-4 py-2.5 rounded-xl bg-brand-600 text-white text-sm font-bold shadow-sm">
+        Start Free Pilot
       </a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="relative pt-20 pb-28 md:pt-28 md:pb-36 overflow-hidden">
+  <!-- ======================================================== -->
+  <!-- HERO SECTION                                             -->
+  <!-- ======================================================== -->
+  <section class="relative pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- Top Pill -->
-      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-emerald-panel text-xs font-semibold text-emerald-300 mb-8 border border-emerald-500/30 shadow-inner reveal">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>Introducing NovaPulse 2.0 with Real-Time Predictive Intelligence</span>
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md text-xs font-semibold text-brand-700 mb-8 border border-indigo-200 shadow-sm reveal">
+        <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+        <span class="font-bold">Next-Gen SaaS Architecture</span>
+        <span class="text-slate-300">&bull;</span>
+        <span>Real-Time Predictive ARR Models</span>
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.12] reveal">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 max-w-5xl mx-auto leading-[1.12] reveal">
         Scale Revenue Faster with <br class="hidden sm:inline">
-        <span class="gradient-emerald-hero">Autonomous AI Analytics</span>
+        <span class="gradient-hero-title">Autonomous AI Analytics</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed reveal">
-        Stop drowning in noisy data. NovaPulse turns complex user actions into predictive growth strategies, forecasting customer churn before it ever happens.
+      <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed reveal">
+        Stop drowning in fragmented metrics. NovaPulse unifies user behavioral telemetry into automated ARR growth projections, detecting customer churn weeks in advance.
       </p>
 
       <!-- Action Buttons -->
       <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
-        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-titanium-950 font-black text-base shadow-xl shadow-emerald-500/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-          <span>Claim 14-Day Free Trial</span>
+        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-tealAccent-600 hover:from-brand-500 hover:to-tealAccent-500 text-white font-black text-base shadow-xl shadow-brand-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+          <span>Claim 14-Day Free Pilot</span>
           <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </a>
-        <a href="#demo-preview" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-emerald-panel hover:bg-white/10 text-slate-200 font-semibold text-base transition flex items-center justify-center gap-2">
-          <i data-lucide="play" class="w-4 h-4 text-emerald-400 fill-emerald-400"></i>
-          <span>Live Metrics Dashboard</span>
+        <a href="#demo-preview" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/90 hover:bg-white text-slate-800 font-bold text-base transition border border-slate-200 shadow-sm flex items-center justify-center gap-2">
+          <i data-lucide="play" class="w-4 h-4 text-brand-600 fill-brand-600"></i>
+          <span>Interactive Live Sandbox</span>
         </a>
       </div>
 
-      <p class="mt-6 text-xs text-slate-500 font-mono reveal">✨ 2-minute setup &bull; No credit card required &bull; Cancel anytime</p>
+      <div class="mt-6 flex items-center justify-center gap-6 text-xs text-slate-500 font-medium reveal">
+        <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> 2-Minute Onboarding</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> No Credit Card Required</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> SOC2 Type II Certified</span>
+      </div>
 
-      <!-- Hero Dashboard Visual Simulation Preview -->
+      <!-- ======================================================== -->
+      <!-- HERO INTERACTIVE DASHBOARD SIMULATION                    -->
+      <!-- ======================================================== -->
       <div id="demo-preview" class="mt-16 relative max-w-5xl mx-auto reveal">
-        <div class="relative rounded-2xl glass-emerald-panel p-3 md:p-4 shadow-2xl border border-emerald-500/30 group">
+        <div class="relative rounded-2xl glass-saas-card p-3 md:p-5 shadow-2xl border border-slate-200/90 group">
           
           <!-- Window Top Bar -->
-          <div class="flex items-center justify-between pb-3 border-b border-emerald-500/10 px-2">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 px-3">
             <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
-              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
-              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
             </div>
-            <div class="text-xs text-slate-400 font-mono">dashboard.novapulse.io/revenue/telemetry</div>
-            <div class="flex items-center gap-2 text-emerald-400 text-xs font-mono">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>NEURAL ACTIVE</span>
+            <div class="text-xs text-slate-500 font-mono flex items-center gap-1.5">
+              <i data-lucide="lock" class="w-3 h-3 text-emerald-600"></i>
+              <span>app.novapulse.io/revenue/intelligence</span>
+            </div>
+            <div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold font-mono">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>LIVE AI STREAM</span>
             </div>
           </div>
 
-          <!-- Mock UI Body -->
-          <div class="bg-titanium-950 rounded-xl p-4 sm:p-6 mt-3 text-left">
+          <!-- Dashboard Body -->
+          <div class="bg-slate-50/90 rounded-xl p-4 sm:p-6 mt-3 text-left border border-slate-200/60">
+            
+            <!-- Metric Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               
-              <div class="bg-titanium-900 p-4 rounded-xl border border-emerald-500/15 hover:border-emerald-500/40 transition">
-                <div class="text-xs text-slate-400 font-medium">Monthly Recurring Revenue (MRR)</div>
-                <div class="text-2xl sm:text-3xl font-extrabold text-white mt-1">$142,890 <span class="text-xs font-semibold text-emerald-400 ml-2">↑ +28.4%</span></div>
-                <div class="w-full bg-titanium-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                  <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-4/5 rounded-full"></div>
+              <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-xs hover:border-brand-300 transition">
+                <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Monthly Recurring Revenue</div>
+                <div class="text-3xl font-extrabold text-slate-900 mt-1 flex items-baseline gap-2">
+                  <span id="metric-mrr">$142,890</span>
+                  <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">↑ +28.4%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
+                  <div id="bar-mrr" class="bg-gradient-to-r from-brand-600 to-tealAccent-500 h-full w-4/5 rounded-full transition-all duration-500"></div>
                 </div>
               </div>
 
-              <div class="bg-titanium-900 p-4 rounded-xl border border-emerald-500/15 hover:border-teal-500/40 transition">
-                <div class="text-xs text-slate-400 font-medium">AI Churn Prevention Health</div>
-                <div class="text-2xl sm:text-3xl font-extrabold text-white mt-1">98.6% <span class="text-xs font-semibold text-emerald-400 ml-2">Optimal</span></div>
-                <div class="w-full bg-titanium-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                  <div class="bg-gradient-to-r from-teal-400 to-emerald-300 h-full w-[94%] rounded-full"></div>
+              <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-xs hover:border-tealAccent-300 transition">
+                <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">AI Churn Prevention Health</div>
+                <div class="text-3xl font-extrabold text-slate-900 mt-1 flex items-baseline gap-2">
+                  <span id="metric-churn">98.6%</span>
+                  <span class="text-xs font-bold text-tealAccent-700 bg-tealAccent-50 px-2 py-0.5 rounded-full border border-tealAccent-200">Optimal</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-gradient-to-r from-tealAccent-500 to-emerald-400 h-full w-[94%] rounded-full"></div>
                 </div>
               </div>
 
-              <div class="bg-titanium-900 p-4 rounded-xl border border-emerald-500/15 hover:border-cyan-500/40 transition">
-                <div class="text-xs text-slate-400 font-medium">Autonomous Actions Executed</div>
-                <div class="text-2xl sm:text-3xl font-extrabold text-white mt-1">2,840 <span class="text-xs font-semibold text-teal-300 ml-2">Synced</span></div>
-                <div class="w-full bg-titanium-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                  <div class="bg-gradient-to-r from-cyan-400 to-emerald-400 h-full w-3/4 rounded-full"></div>
+              <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-xs hover:border-indigo-300 transition">
+                <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Autonomous Actions Executed</div>
+                <div class="text-3xl font-extrabold text-slate-900 mt-1 flex items-baseline gap-2">
+                  <span id="metric-actions">3,120</span>
+                  <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200">Real-Time</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-gradient-to-r from-brand-600 to-sky-500 h-full w-3/4 rounded-full"></div>
                 </div>
               </div>
 
             </div>
 
-            <!-- Simulated Live Revenue Graph -->
-            <div class="bg-titanium-900/60 rounded-xl p-5 border border-emerald-500/10 flex flex-col justify-between h-48 sm:h-64">
-              <div class="flex items-center justify-between">
-                <span class="text-sm font-bold text-white">Live Telemetry &amp; Revenue Projection</span>
-                <span class="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/20 text-emerald-300 font-mono">Stream: 120ms</span>
+            <!-- Simulated Live Revenue Graph & Controls -->
+            <div class="bg-white rounded-xl p-5 border border-slate-200/80 shadow-xs">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div>
+                  <span class="text-sm font-bold text-slate-900">Live ARR Forecast &amp; Predictive Influx</span>
+                  <span class="block text-xs text-slate-500">Autonomous modeling adjusting for seasonal customer expansion</span>
+                </div>
+                <!-- Interactive Controls -->
+                <div class="flex items-center gap-2">
+                  <button onclick="simulateGrowth()" class="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-brand-700 font-bold text-xs border border-indigo-200 transition flex items-center gap-1.5">
+                    <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                    <span>Simulate Growth</span>
+                  </button>
+                  <button onclick="resetMetrics()" class="px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold transition">
+                    Reset
+                  </button>
+                </div>
               </div>
 
-              <!-- Visual Dynamic Bars (Emerald Palette) -->
-              <div class="flex items-end justify-between gap-2 h-36 pt-4 px-2">
-                <div class="w-full bg-emerald-500/20 hover:bg-emerald-400 h-[45%] rounded-t transition-all cursor-pointer"></div>
-                <div class="w-full bg-emerald-500/30 hover:bg-emerald-400 h-[60%] rounded-t transition-all cursor-pointer"></div>
-                <div class="w-full bg-emerald-500/40 hover:bg-emerald-400 h-[50%] rounded-t transition-all cursor-pointer"></div>
-                <div class="w-full bg-emerald-500/50 hover:bg-emerald-400 h-[75%] rounded-t transition-all cursor-pointer"></div>
-                <div class="w-full bg-emerald-500/60 hover:bg-emerald-400 h-[65%] rounded-t transition-all cursor-pointer"></div>
-                <div class="w-full bg-emerald-500/70 hover:bg-emerald-400 h-[88%] rounded-t transition-all cursor-pointer"></div>
-                <div class="w-full bg-gradient-to-t from-emerald-500 via-teal-400 to-mint-100 h-[98%] rounded-t shadow-lg shadow-emerald-500/40 transition-all cursor-pointer"></div>
+              <!-- Interactive Visual Bars -->
+              <div class="flex items-end justify-between gap-2 sm:gap-3 h-40 pt-4 px-2 bg-slate-50/80 rounded-xl border border-slate-100">
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div class="w-full bg-indigo-200 hover:bg-indigo-400 h-[48%] rounded-t transition-all cursor-pointer" title="Jan: $92k"></div>
+                  <span class="text-[10px] text-slate-400 font-mono">Jan</span>
+                </div>
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div class="w-full bg-indigo-300 hover:bg-indigo-400 h-[58%] rounded-t transition-all cursor-pointer" title="Feb: $104k"></div>
+                  <span class="text-[10px] text-slate-400 font-mono">Feb</span>
+                </div>
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div class="w-full bg-indigo-400 hover:bg-indigo-500 h-[52%] rounded-t transition-all cursor-pointer" title="Mar: $98k"></div>
+                  <span class="text-[10px] text-slate-400 font-mono">Mar</span>
+                </div>
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div class="w-full bg-indigo-500 hover:bg-indigo-600 h-[72%] rounded-t transition-all cursor-pointer" title="Apr: $122k"></div>
+                  <span class="text-[10px] text-slate-400 font-mono">Apr</span>
+                </div>
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div class="w-full bg-indigo-600 hover:bg-indigo-700 h-[68%] rounded-t transition-all cursor-pointer" title="May: $118k"></div>
+                  <span class="text-[10px] text-slate-400 font-mono">May</span>
+                </div>
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div class="w-full bg-indigo-600 hover:bg-indigo-700 h-[85%] rounded-t transition-all cursor-pointer" title="Jun: $136k"></div>
+                  <span class="text-[10px] text-slate-400 font-mono">Jun</span>
+                </div>
+                <div class="w-full flex flex-col items-center gap-1.5 h-full justify-end">
+                  <div id="target-bar" class="w-full bg-gradient-to-t from-brand-600 to-tealAccent-500 h-[96%] rounded-t shadow-md shadow-brand-500/30 transition-all cursor-pointer" title="Jul Projected: $142k+"></div>
+                  <span class="text-[10px] text-brand-700 font-bold font-mono">Jul (AI)</span>
+                </div>
               </div>
             </div>
+
           </div>
 
         </div>
@@ -305,70 +501,74 @@
     </div>
   </section>
 
-  <!-- Key Animated Metrics Section -->
-  <section class="py-16 border-y border-emerald-500/15 bg-titanium-900/70">
+  <!-- ======================================================== -->
+  <!-- KEY PLATFORM TELEMETRY METRICS                           -->
+  <!-- ======================================================== -->
+  <section class="py-14 bg-white border-y border-slate-200/90 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
         <div>
-          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono counter" data-target="10">0</div>
-          <div class="text-xs text-slate-400 mt-1 font-medium">x Faster Analytics Processing</div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono counter" data-target="10">0</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">x Faster Query Processing</div>
         </div>
         <div>
-          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono">99.99%</div>
-          <div class="text-xs text-slate-400 mt-1 font-medium">Uptime Guarantee SLA</div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono">99.99%</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">Enterprise Uptime SLA</div>
         </div>
         <div>
-          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono counter" data-target="4">0</div>
-          <div class="text-xs text-slate-400 mt-1 font-medium">Million Events Streamed / Sec</div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono counter" data-target="4">0</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">Million Events Analyzed / Sec</div>
         </div>
         <div>
-          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono">4.9/5</div>
-          <div class="text-xs text-slate-400 mt-1 font-medium">Leader on G2 &amp; ProductHunt</div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-mono">4.9 / 5</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">Leader on G2 &amp; ProductHunt</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Core Features Grid -->
+  <!-- ======================================================== -->
+  <!-- CORE FEATURES GRID                                       -->
+  <!-- ======================================================== -->
   <section id="features" class="py-24 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3">Enterprise Capabilities</h2>
-        <p class="text-3xl sm:text-5xl font-extrabold text-white">Engineered for Rapid Scaling</p>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Enterprise Capabilities</h2>
+        <p class="text-3xl sm:text-5xl font-extrabold text-slate-900">Engineered for Predictable Scale</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Feature 1 -->
-        <div class="glass-emerald-panel rounded-2xl p-8 glass-card-hover group reveal">
-          <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-titanium-950 transition duration-300 shadow-lg shadow-emerald-500/20">
+        <div class="glass-saas-card rounded-2xl p-8 group reveal">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-brand-600 flex items-center justify-center mb-6 group-hover:bg-brand-600 group-hover:text-white transition duration-300 shadow-sm">
             <i data-lucide="cpu" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Neural Prediction Engine</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">
-            Machine learning models continuously evaluate conversion patterns, seasonal fluctuations, and high-value customer churn.
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Neural Prediction Engine</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Machine learning models continuously evaluate conversion patterns, seasonal fluctuations, and high-value customer churn risk.
           </p>
         </div>
 
         <!-- Feature 2 -->
-        <div class="glass-emerald-panel rounded-2xl p-8 glass-card-hover group reveal" style="transition-delay: 0.15s;">
-          <div class="w-14 h-14 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center mb-6 group-hover:bg-teal-500 group-hover:text-titanium-950 transition duration-300 shadow-lg shadow-teal-500/20">
+        <div class="glass-saas-card rounded-2xl p-8 group reveal" style="transition-delay: 0.15s;">
+          <div class="w-14 h-14 rounded-2xl bg-tealAccent-50 text-tealAccent-600 flex items-center justify-center mb-6 group-hover:bg-tealAccent-600 group-hover:text-white transition duration-300 shadow-sm">
             <i data-lucide="shield-check" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Military-Grade Security</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">
-            SOC2 Type II certified, GDPR compliant, with end-to-end 256-bit encryption for all sensitive enterprise client data.
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Military-Grade Security</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            SOC2 Type II certified, GDPR compliant, with end-to-end 256-bit encryption for all sensitive enterprise financial data.
           </p>
         </div>
 
         <!-- Feature 3 -->
-        <div class="glass-emerald-panel rounded-2xl p-8 glass-card-hover group reveal" style="transition-delay: 0.3s;">
-          <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-6 group-hover:bg-cyan-500 group-hover:text-titanium-950 transition duration-300 shadow-lg shadow-cyan-500/20">
+        <div class="glass-saas-card rounded-2xl p-8 group reveal" style="transition-delay: 0.3s;">
+          <div class="w-14 h-14 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-6 group-hover:bg-sky-600 group-hover:text-white transition duration-300 shadow-sm">
             <i data-lucide="workflow" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Plug &amp; Play Connectors</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">
-            Plug effortlessly into PostgreSQL, BigQuery, Stripe, Shopify, Segment, and Salesforce with zero custom backend coding required.
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Plug &amp; Play Connectors</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Integrates natively with PostgreSQL, BigQuery, Stripe Billing, Shopify, Segment, and Salesforce with zero custom glue code.
           </p>
         </div>
 
@@ -376,91 +576,102 @@
     </div>
   </section>
 
-  <!-- Interactive Pricing Section -->
-  <section id="pricing" class="py-24 bg-titanium-900/90 relative border-t border-emerald-500/15">
+  <!-- ======================================================== -->
+  <!-- INTERACTIVE PRICING MATRIX                               -->
+  <!-- ======================================================== -->
+  <section id="pricing" class="py-24 bg-slate-100/80 relative border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3">Transparent Plans</h2>
-        <p class="text-3xl sm:text-5xl font-extrabold text-white">Scale Seamlessly at Any Stage</p>
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Transparent Plans</h2>
+        <p class="text-3xl sm:text-5xl font-extrabold text-slate-900">Scale Seamlessly at Any Stage</p>
         
         <!-- Interactive Monthly vs. Yearly Switcher -->
-        <div class="mt-8 inline-flex items-center gap-3 p-1.5 rounded-xl glass-emerald-panel border border-emerald-500/20">
-          <button id="btn-monthly" class="px-5 py-2 rounded-lg text-sm font-bold bg-emerald-500 text-titanium-950 shadow transition">Monthly</button>
-          <button id="btn-yearly" class="px-5 py-2 rounded-lg text-sm font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5">
+        <div class="mt-8 inline-flex items-center gap-3 p-1.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <button id="btn-monthly" class="px-5 py-2 rounded-lg text-sm font-bold bg-brand-600 text-white shadow transition">Monthly</button>
+          <button id="btn-yearly" class="px-5 py-2 rounded-lg text-sm font-bold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
             <span>Yearly</span>
-            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/20 text-emerald-300">Save 20%</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800">Save 20%</span>
           </button>
         </div>
       </div>
 
-      <!-- Pricing Cards -->
+      <!-- Pricing Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
         
         <!-- Starter Plan -->
-        <div class="glass-emerald-panel rounded-2xl p-8 flex flex-col justify-between glass-card-hover reveal">
+        <div class="glass-saas-card rounded-2xl p-8 flex flex-col justify-between reveal">
           <div>
-            <div class="text-lg font-bold text-white">Starter</div>
-            <p class="text-xs text-slate-400 mt-1">Ideal for solo founders &amp; early startups.</p>
-            <div class="mt-6 mb-6">
-              <span class="text-4xl font-extrabold text-white" id="price-starter">$29</span>
-              <span class="text-slate-400 text-sm">/ month</span>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm font-bold text-slate-800 uppercase tracking-wider">Starter</span>
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-slate-100 text-slate-600">Seed Startups</span>
             </div>
-            <ul class="space-y-3 text-sm text-slate-300">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 25,000 monthly events</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> 3 Team seats included</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Core AI prediction models</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Standard Support</li>
+            <div class="flex items-baseline gap-1 my-4">
+              <span class="text-4xl sm:text-5xl font-extrabold text-slate-900" id="price-starter">$29</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6">Essential revenue tracking for high-velocity indie products.</p>
+            <ul class="space-y-3 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Up to $50K Monthly Tracked ARR</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Standard AI Churn Detection</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> 3 Team Seats &amp; Slack Alerts</li>
             </ul>
           </div>
-          <a href="#contact" class="mt-8 w-full py-3.5 rounded-xl glass-emerald-panel hover:bg-white/10 text-white font-bold text-sm text-center transition">
-            Start Free Trial
+          <a href="#contact" class="mt-8 block w-full text-center py-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-bold transition">
+            Start 14-Day Pilot
           </a>
         </div>
 
-        <!-- Pro Plan (Hero Highlight in Mint / Emerald) -->
-        <div class="glass-emerald-panel rounded-2xl p-8 flex flex-col justify-between border-2 border-emerald-400 relative shadow-2xl shadow-emerald-500/20 glass-card-hover reveal" style="transition-delay: 0.15s;">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 text-titanium-950 text-xs font-black uppercase tracking-wider shadow-lg">
-            Most Popular
+        <!-- Growth Plan (Most Popular) -->
+        <div class="glass-saas-card rounded-2xl p-8 flex flex-col justify-between border-2 border-brand-500 shadow-xl relative reveal" style="transition-delay: 0.1s;">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <span class="px-3.5 py-1 rounded-full text-[11px] font-extrabold bg-gradient-to-r from-brand-600 to-tealAccent-600 text-white shadow-md">
+              MOST POPULAR CHOICE
+            </span>
           </div>
           <div>
-            <div class="text-lg font-bold text-white">Professional</div>
-            <p class="text-xs text-slate-400 mt-1">For growing teams scaling operations.</p>
-            <div class="mt-6 mb-6">
-              <span class="text-4xl font-extrabold text-white" id="price-pro">$79</span>
-              <span class="text-slate-400 text-sm">/ month</span>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm font-bold text-slate-900 uppercase tracking-wider">Growth</span>
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-brand-50 text-brand-700">Scaling B2B</span>
             </div>
-            <ul class="space-y-3 text-sm text-slate-300">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Up to 250,000 monthly events</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Unlimited Team seats</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Real-time anomaly alerts</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Automated webhook workflows</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Priority 24/7 Chat Support</li>
+            <div class="flex items-baseline gap-1 my-4">
+              <span class="text-4xl sm:text-5xl font-extrabold text-slate-900" id="price-pro">$79</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6">Complete autonomous revenue intelligence with automated retention.</p>
+            <ul class="space-y-3 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Up to $250K Monthly Tracked ARR</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Predictive Churn Prevention AI</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Automated Stripe Recovery Workflows</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> 10 Team Seats &amp; Webhooks</li>
             </ul>
           </div>
-          <a href="#contact" class="mt-8 w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-titanium-950 font-black text-sm text-center shadow-lg shadow-emerald-500/30 transition">
-            Get Started Now
+          <a href="#contact" class="mt-8 block w-full text-center py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-black shadow-md shadow-brand-500/25 transition transform hover:-translate-y-0.5">
+            Start Free Growth Pilot
           </a>
         </div>
 
         <!-- Enterprise Plan -->
-        <div class="glass-emerald-panel rounded-2xl p-8 flex flex-col justify-between glass-card-hover reveal" style="transition-delay: 0.3s;">
+        <div class="glass-saas-card rounded-2xl p-8 flex flex-col justify-between reveal" style="transition-delay: 0.2s;">
           <div>
-            <div class="text-lg font-bold text-white">Enterprise</div>
-            <p class="text-xs text-slate-400 mt-1">Dedicated infrastructure &amp; custom models.</p>
-            <div class="mt-6 mb-6">
-              <span class="text-4xl font-extrabold text-white" id="price-enterprise">$249</span>
-              <span class="text-slate-400 text-sm">/ month</span>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm font-bold text-slate-800 uppercase tracking-wider">Scale Enterprise</span>
+              <span class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-slate-100 text-slate-600">Corporations</span>
             </div>
-            <ul class="space-y-3 text-sm text-slate-300">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Unlimited monthly events</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Custom fine-tuned AI models</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Dedicated Solutions Architect</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Custom SLA &amp; On-premise hosting</li>
+            <div class="flex items-baseline gap-1 my-4">
+              <span class="text-4xl sm:text-5xl font-extrabold text-slate-900" id="price-enterprise">$249</span>
+              <span class="text-slate-500 text-sm">/month</span>
+            </div>
+            <p class="text-xs text-slate-500 mb-6">Dedicated cloud isolation and custom neural forecasting pipelines.</p>
+            <ul class="space-y-3 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Unlimited Tracked ARR &amp; Events</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Dedicated Neural ML Models</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Custom BigQuery &amp; Snowflake Sync</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> 24/7 Dedicated Solutions Engineer</li>
             </ul>
           </div>
-          <a href="#contact" class="mt-8 w-full py-3.5 rounded-xl glass-emerald-panel hover:bg-white/10 text-white font-bold text-sm text-center transition">
-            Contact Enterprise Sales
+          <a href="#contact" class="mt-8 block w-full text-center py-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-bold transition">
+            Talk to Solutions Engineering
           </a>
         </div>
 
@@ -468,67 +679,74 @@
     </div>
   </section>
 
-  <!-- Interactive Testimonials -->
+  <!-- ======================================================== -->
+  <!-- REVIEWS & ENTERPRISE CASE STUDIES                        -->
+  <!-- ======================================================== -->
   <section id="testimonials" class="py-24 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3">Verified Results</h2>
-        <p class="text-3xl sm:text-5xl font-extrabold text-white">Loved by Founders &amp; Engineers</p>
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Verified Results</h2>
+        <p class="text-3xl sm:text-5xl font-extrabold text-slate-900">Trusted by Global Growth Teams</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <div class="glass-emerald-panel p-7 rounded-2xl glass-card-hover reveal">
-          <div class="flex items-center gap-1 text-emerald-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
+        <div class="glass-saas-card rounded-2xl p-7 reveal">
+          <div class="flex items-center gap-1 text-amber-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
           </div>
-          <p class="text-slate-300 text-sm italic mb-6">"NovaPulse helped us identify an abandoned funnel leak that was costing us $22,000 every month. Recovered in under 48 hours."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center font-black text-titanium-950 text-sm">SJ</div>
+          <p class="text-slate-700 text-xs leading-relaxed mb-6 font-medium">
+            "NovaPulse's autonomous retention workflows recovered $38,000 in monthly churned MRR in our first 45 days. The UI is ridiculously snappy."
+          </p>
+          <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Sarah J" class="w-9 h-9 rounded-full object-cover">
             <div>
-              <div class="text-sm font-bold text-white">Sarah Jenkins</div>
-              <div class="text-xs text-slate-400">CTO at StackFlow</div>
+              <div class="text-xs font-bold text-slate-900">Sarah Jenkins</div>
+              <div class="text-[10px] text-slate-500">Head of Growth, CloudScale</div>
             </div>
           </div>
         </div>
 
-        <div class="glass-emerald-panel p-7 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.15s;">
-          <div class="flex items-center gap-1 text-emerald-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
+        <div class="glass-saas-card rounded-2xl p-7 reveal" style="transition-delay: 0.15s;">
+          <div class="flex items-center gap-1 text-amber-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
           </div>
-          <p class="text-slate-300 text-sm italic mb-6">"The cleanest UI I've seen in any analytics tool. Integration took 3 lines of JavaScript and our investors are blown away."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-teal-500 to-cyan-500 flex items-center justify-center font-black text-titanium-950 text-sm">MR</div>
+          <p class="text-slate-700 text-xs leading-relaxed mb-6 font-medium">
+            "We replaced four disparate analytics dashboards with NovaPulse. The sub-second queries and predictive forecasting are genuinely game changing."
+          </p>
+          <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Marcus" class="w-9 h-9 rounded-full object-cover">
             <div>
-              <div class="text-sm font-bold text-white">Marcus Reed</div>
-              <div class="text-xs text-slate-400">Head of Growth at HyperLaunch</div>
+              <div class="text-xs font-bold text-slate-900">Marcus Thorne</div>
+              <div class="text-[10px] text-slate-500">CTO, Vantrix Tech</div>
             </div>
           </div>
         </div>
 
-        <div class="glass-emerald-panel p-7 rounded-2xl glass-card-hover reveal" style="transition-delay: 0.3s;">
-          <div class="flex items-center gap-1 text-emerald-400 mb-4">
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
-            <i data-lucide="star" class="w-4 h-4 fill-emerald-400"></i>
+        <div class="glass-saas-card rounded-2xl p-7 reveal" style="transition-delay: 0.3s;">
+          <div class="flex items-center gap-1 text-amber-400 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
           </div>
-          <p class="text-slate-300 text-sm italic mb-6">"Saved our engineering team at least 3 months of internal dashboard development. Absolutely indispensable."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center font-black text-titanium-950 text-sm">AL</div>
+          <p class="text-slate-700 text-xs leading-relaxed mb-6 font-medium">
+            "Clean architecture, flawless mobile responsiveness, and zero fluff. This is how modern B2B SaaS software should be built."
+          </p>
+          <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Elena" class="w-9 h-9 rounded-full object-cover">
             <div>
-              <div class="text-sm font-bold text-white">Alexandre Laurent</div>
-              <div class="text-xs text-slate-400">Co-Founder, CloudPulse France</div>
+              <div class="text-xs font-bold text-slate-900">Elena Rostova</div>
+              <div class="text-[10px] text-slate-500">VP Product, FintechFlow</div>
             </div>
           </div>
         </div>
@@ -537,44 +755,45 @@
     </div>
   </section>
 
-  <!-- Interactive FAQ Accordion -->
-  <section id="faq" class="py-24 bg-titanium-900/60 border-t border-emerald-500/15">
+  <!-- ======================================================== -->
+  <!-- FAQ ACCORDION SECTION                                    -->
+  <!-- ======================================================== -->
+  <section id="faq" class="py-24 bg-slate-50/80 relative border-t border-slate-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center mb-16 reveal">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3">Common Questions</h2>
-        <p class="text-3xl sm:text-5xl font-extrabold text-white">Frequently Answered</p>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Got Questions?</h2>
+        <p class="text-3xl sm:text-5xl font-extrabold text-slate-900">Frequently Asked Questions</p>
       </div>
 
-      <div class="space-y-4">
+      <div class="space-y-4 reveal">
         
-        <div class="glass-emerald-panel rounded-xl overflow-hidden border border-emerald-500/15 reveal">
-          <button class="faq-toggle w-full p-5 text-left flex items-center justify-between text-white font-bold text-base">
-            <span>How fast can I integrate NovaPulse with my website?</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300 text-emerald-400"></i>
+        <div class="glass-saas-card rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>How fast can our engineering team connect NovaPulse?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-emerald-500/10 pt-3">
-            Integration takes under 5 minutes. You can paste a single script tag into your HTML header or install our official SDK with 3 lines of code.
+          <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+            Most teams complete integration in under 5 minutes. You can either paste our lightweight JavaScript SDK tag or connect via our 1-click native Stripe &amp; Segment webhooks.
           </div>
         </div>
 
-        <div class="glass-emerald-panel rounded-xl overflow-hidden border border-emerald-500/15 reveal" style="transition-delay: 0.1s;">
-          <button class="faq-toggle w-full p-5 text-left flex items-center justify-between text-white font-bold text-base">
-            <span>Can I test without providing credit card details?</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300 text-emerald-400"></i>
+        <div class="glass-saas-card rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>How does the AI predict customer churn before it occurs?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-emerald-500/10 pt-3">
-            Yes! All new users enjoy a full 14-day unrestricted trial of the Professional plan without entering any payment credentials.
+          <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+            Our model tracks feature decay curves, login intervals, support sentiment, and payment velocity to flag accounts displaying at-risk behaviors 14–21 days prior to cancellation.
           </div>
         </div>
 
-        <div class="glass-emerald-panel rounded-xl overflow-hidden border border-emerald-500/15 reveal" style="transition-delay: 0.2s;">
-          <button class="faq-toggle w-full p-5 text-left flex items-center justify-between text-white font-bold text-base">
-            <span>Can I export reports and sync to Snowflake or BigQuery?</span>
-            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300 text-emerald-400"></i>
+        <div class="glass-saas-card rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-brand-600 transition">
+            <span>Can I export reports and raw forecast data to BigQuery or CSV?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-emerald-500/10 pt-3">
-            Yes. Full REST, GraphQL, and webhook APIs allow automated 1-click synchronizations to Snowflake, BigQuery, PostgreSQL, and PowerBI.
+          <div class="faq-content hidden px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+            Yes! All raw forecast arrays, telemetry points, and audit logs can be exported via REST API endpoints, scheduled webhook dumps, or instant 1-click CSV/JSON downloads.
           </div>
         </div>
 
@@ -582,78 +801,97 @@
     </div>
   </section>
 
-  <!-- Interactive Contact & Lead Capture Form (Web3Forms Supported) -->
-  <section id="contact" class="py-24 relative">
+  <!-- ======================================================== -->
+  <!-- PILOT REQUEST & LEAD CAPTURE SECTION                     -->
+  <!-- ======================================================== -->
+  <section id="contact" class="py-24 relative bg-white border-t border-slate-200">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="glass-emerald-panel rounded-3xl p-8 sm:p-14 border border-emerald-500/30 shadow-2xl relative overflow-hidden reveal">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
+      <div class="glass-saas-card rounded-3xl p-8 sm:p-12 shadow-2xl border-2 border-indigo-100 reveal">
+        
         <div class="text-center mb-8">
-          <h2 class="text-3xl font-extrabold text-white">Ready to elevate your analytics?</h2>
-          <p class="text-slate-400 text-sm mt-2">Get in touch with our solutions team or schedule a live enterprise demo.</p>
+          <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-50 text-brand-700 border border-indigo-200">
+            14-Day Free Pilot
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Unlock Instant Sandbox Access</h2>
+          <p class="text-sm text-slate-600 mt-2">Test your revenue stream against our predictive AI models.</p>
         </div>
 
-        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-          <!-- Web3Forms Access Key -->
-          <input type="hidden" name="access_key" value="c1acd5f8-f587-4ad2-b067-0eba67e2e516">
-          <input type="hidden" name="subject" value="New Lead Submission - NovaPulse Demo">
+        <form id="contact-form" class="space-y-4">
+          <input type="hidden" name="access_key" value="e6cfbfb8-9366-419b-bb99-31fffc05e3ec">
+          <input type="hidden" name="subject" value="New Pilot Submission - NovaPulse Demo">
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Full Name</label>
-              <input type="text" name="name" required placeholder="Alex Morgan" class="w-full px-4 py-3 rounded-xl bg-titanium-950 border border-emerald-500/20 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-400 transition">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">Full Name</label>
+              <input type="text" name="name" required placeholder="Alex Morgan" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:bg-white transition">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Work Email</label>
-              <input type="email" name="email" required placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl bg-titanium-950 border border-emerald-500/20 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-400 transition">
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">Work Email</label>
+              <input type="email" name="email" required placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:bg-white transition">
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Company Website / Domain</label>
-            <input type="text" name="company" placeholder="https://yourcompany.com" class="w-full px-4 py-3 rounded-xl bg-titanium-950 border border-emerald-500/20 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-400 transition">
+            <label class="block text-xs font-bold text-slate-700 mb-1.5">Company Domain</label>
+            <input type="text" name="company" placeholder="https://yourcompany.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:bg-white transition">
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Project Goals / Data Volume</label>
-            <textarea name="message" rows="3" placeholder="Describe your monthly active user volume and analytics goals..." class="w-full px-4 py-3 rounded-xl bg-titanium-950 border border-emerald-500/20 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-400 transition"></textarea>
+            <label class="block text-xs font-bold text-slate-700 mb-1.5">Monthly Active Users / Target Volume</label>
+            <textarea name="message" rows="3" placeholder="Tell us about your analytics goals and current database infrastructure..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-brand-500 focus:bg-white transition"></textarea>
           </div>
 
-          <button type="submit" id="novapulse-submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-titanium-950 font-black text-sm shadow-xl shadow-emerald-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+          <button type="submit" id="novapulse-submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-tealAccent-600 hover:from-brand-500 hover:to-tealAccent-500 text-white font-extrabold text-sm shadow-xl shadow-brand-500/25 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
             <i data-lucide="send" class="w-4 h-4"></i>
-            <span>Send Inquiry &amp; Access Dashboard</span>
+            <span>Send Request &amp; Open Live Sandbox</span>
           </button>
         </form>
 
-        <div id="form-success" class="hidden mt-6 p-5 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-sm text-center font-medium animate-bounce">
-          🎉 <strong>Demo Request Received!</strong> Our team will unlock your dashboard access within 15 minutes.
+        <div id="form-success" class="hidden mt-6 p-5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-sm text-center font-bold">
+          🎉 <strong>Pilot Request Confirmed!</strong> Sandbox access credentials have been dispatched to your email.
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-12 border-t border-emerald-500/15 bg-titanium-950 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-lg bg-emerald-500 flex items-center justify-center text-titanium-950">
-          <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+  <!-- ======================================================== -->
+  <!-- MODERN TRENDING FOOTER                                   -->
+  <!-- ======================================================== -->
+  <footer class="py-10 bg-slate-50 border-t border-slate-200 text-xs text-slate-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Brand & Dev Credit -->
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-brand-600 to-tealAccent-600 flex items-center justify-center text-white shadow-xs">
+            <i data-lucide="activity" class="w-4 h-4"></i>
+          </div>
+          <span class="text-sm font-extrabold text-slate-900">NovaPulse SaaS Platform</span>
+          <span class="text-slate-300">&bull;</span>
+          <span>Architected by <a href="https://khadijayaseen.github.io" class="text-brand-600 font-bold hover:underline">Khadija Yaseen</a></span>
         </div>
-        <span class="text-sm font-bold text-slate-300">NovaPulse Technologies &bull; Demo Site</span>
-      </div>
-      <div>
-        &copy; 2026 NovaPulse. Built with modern web performance standards.
-      </div>
-      <div class="flex items-center gap-4 text-slate-400">
-        <a href="../index.html" class="hover:text-white transition font-mono text-emerald-400">&larr; Back to Khadija's Portfolio</a>
+
+        <!-- Telemetry Status -->
+        <div class="flex items-center gap-3 text-slate-500 text-[11px]">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Telemetry Operational &bull; 14ms
+          </span>
+          <span class="hidden sm:inline text-slate-300">&bull;</span>
+          <a href="../index.html" class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+            <span>&larr; Khadija's Portfolio</span>
+          </a>
+        </div>
+
       </div>
     </div>
   </footer>
 
-  <!-- Interactive JavaScript Logic -->
+  <!-- ======================================================== -->
+  <!-- INTERACTIVE JAVASCRIPT LOGIC                             -->
+  <!-- ======================================================== -->
   <script>
     lucide.createIcons();
 
@@ -672,10 +910,8 @@
     const priceEnterprise = document.getElementById('price-enterprise');
 
     btnYearly.addEventListener('click', () => {
-      btnYearly.classList.add('bg-emerald-500', 'text-titanium-950', 'shadow');
-      btnYearly.classList.remove('text-slate-400');
-      btnMonthly.classList.remove('bg-emerald-500', 'text-titanium-950', 'shadow');
-      btnMonthly.classList.add('text-slate-400');
+      btnYearly.className = "px-5 py-2 rounded-lg text-sm font-bold bg-brand-600 text-white shadow transition flex items-center gap-1.5";
+      btnMonthly.className = "px-5 py-2 rounded-lg text-sm font-bold text-slate-600 hover:text-slate-900 transition";
 
       priceStarter.textContent = '$23';
       pricePro.textContent = '$63';
@@ -683,15 +919,42 @@
     });
 
     btnMonthly.addEventListener('click', () => {
-      btnMonthly.classList.add('bg-emerald-500', 'text-titanium-950', 'shadow');
-      btnMonthly.classList.remove('text-slate-400');
-      btnYearly.classList.remove('bg-emerald-500', 'text-titanium-950', 'shadow');
-      btnYearly.classList.add('text-slate-400');
+      btnMonthly.className = "px-5 py-2 rounded-lg text-sm font-bold bg-brand-600 text-white shadow transition";
+      btnYearly.className = "px-5 py-2 rounded-lg text-sm font-bold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5";
 
       priceStarter.textContent = '$29';
       pricePro.textContent = '$79';
       priceEnterprise.textContent = '$249';
     });
+
+    // Live Dashboard Simulation Functions
+    function simulateGrowth() {
+      const mrrEl = document.getElementById('metric-mrr');
+      const churnEl = document.getElementById('metric-churn');
+      const actionsEl = document.getElementById('metric-actions');
+      const targetBar = document.getElementById('target-bar');
+
+      mrrEl.textContent = '$184,250';
+      mrrEl.classList.add('text-brand-600');
+      churnEl.textContent = '99.8%';
+      actionsEl.textContent = '4,890';
+      targetBar.style.height = '100%';
+      targetBar.classList.add('shadow-lg', 'shadow-tealAccent-500/50');
+    }
+
+    function resetMetrics() {
+      const mrrEl = document.getElementById('metric-mrr');
+      const churnEl = document.getElementById('metric-churn');
+      const actionsEl = document.getElementById('metric-actions');
+      const targetBar = document.getElementById('target-bar');
+
+      mrrEl.textContent = '$142,890';
+      mrrEl.classList.remove('text-brand-600');
+      churnEl.textContent = '98.6%';
+      actionsEl.textContent = '3,120';
+      targetBar.style.height = '96%';
+      targetBar.classList.remove('shadow-lg', 'shadow-tealAccent-500/50');
+    }
 
     // FAQ Accordion Logic
     document.querySelectorAll('.faq-toggle').forEach(button => {
@@ -722,7 +985,7 @@
     }, { threshold: 0.1 });
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Contact Form AJAX Handler with Web3Forms & Fallback
+    // Pilot Form Handler
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('novapulse-submit');
     const formSuccess = document.getElementById('form-success');
@@ -731,11 +994,11 @@
       e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
-        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-titanium-950" fill="none" viewBox="0 0 24 24">
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
         </svg>
-        <span>Processing Request...</span>
+        <span>Provisioning Sandbox...</span>
       `;
 
       const formData = new FormData(contactForm);
