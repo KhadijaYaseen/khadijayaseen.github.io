@@ -78,31 +78,27 @@
         
         <!-- Left: Hospital Monogram & Clinic Brand -->
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
-            <i data-lucide="cross" class="w-5 h-5 text-white"></i>
+          <div class="w-10 h-10 rounded-xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-center overflow-hidden p-0.5">
+            <img src="images/carepulse-emblem.png" alt="CarePulse Logo" class="w-full h-full object-contain rounded-lg">
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">CarePulse MediCore</span>
-              <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold">
+              <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">CarePulse <span class="text-brand-600">MediCore</span></span>
+              <span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 St. Jude Wing Alpha
               </span>
             </div>
-            <span class="text-[11px] text-slate-500 font-medium">Enterprise Hospital ERP &bull; ASP.NET Core 8 &bull; SQL Server &amp; MySQL</span>
+            <span class="text-[11px] text-slate-500 font-medium">Smart Hospital ERP System</span>
           </div>
         </div>
 
-        <!-- Right: Actions & Profile -->
-        <div class="flex items-center gap-2.5">
-          <a href="https://github.com/KhadijaYaseen/CarePulseERP" target="_blank" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition">
-            <i data-lucide="github" class="w-4 h-4 text-slate-800"></i>
-            <span>GitHub Repo</span>
-          </a>
-          <a href="../index.html" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition">
-            <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-slate-600"></i>
-            <span>Portfolio</span>
-          </a>
+        <!-- Right: Actions & Profile (Clinical System Only - Zero External Links) -->
+        <div class="flex items-center gap-3">
+          <div class="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 text-[11px] text-slate-600 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Hospital Network Live</span>
+          </div>
           <button onclick="openAddPatientModal()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-sm shadow-brand-600/25 transition">
             <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
             <span>Admit Patient</span>
@@ -111,7 +107,7 @@
           <!-- Doctor / Admin Avatar -->
           <div class="h-8 w-px bg-slate-200 mx-1 hidden sm:block"></div>
           <div class="flex items-center gap-2">
-            <div class="w-9 h-9 rounded-full bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-700 font-bold text-xs">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-brand-600 to-teal-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">
               KY
             </div>
             <div class="hidden md:block text-left">
@@ -553,19 +549,53 @@ CREATE TABLE StaffMembers (
   </div>
 
   <!-- ======================================================== -->
-  <!-- FOOTER                                                   -->
+  <!-- MODERN TRENDING CLINICAL FOOTER                          -->
   <!-- ======================================================== -->
-  <footer class="mt-auto bg-white border-t border-slate-200 py-6 text-slate-500 text-xs text-center">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div>
-        <strong>CarePulse MediCore ERP</strong> &bull; Developed by <a href="https://khadijayaseen.github.io" class="text-brand-600 font-bold hover:underline">Khadija Yaseen</a>
-      </div>
-      <div class="flex items-center gap-4 text-[11px]">
-        <span>ASP.NET Core 8 Web API</span>
-        <span>&bull;</span>
-        <span>Microsoft SQL Server / MySQL</span>
-        <span>&bull;</span>
-        <span>EF Core 8</span>
+  <footer class="mt-auto bg-white border-t border-slate-200/90 py-5 text-slate-600 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Bottom Left: Recruiter & Developer Links (Relocated from Top Header) -->
+        <div class="flex items-center gap-2">
+          <a href="https://khadijayaseen.github.io" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-brand-400 bg-slate-50 hover:bg-white text-slate-700 hover:text-brand-700 text-xs font-semibold shadow-xs transition">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-slate-500"></i>
+            <span>Portfolio</span>
+          </a>
+          <a href="https://github.com/KhadijaYaseen/CarePulseERP" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 bg-slate-50 hover:bg-white text-slate-700 text-xs font-semibold shadow-xs transition">
+            <i data-lucide="github" class="w-3.5 h-3.5 text-slate-800"></i>
+            <span>GitHub Repo</span>
+          </a>
+        </div>
+
+        <!-- Center: Clean Brand & Creator Attribution -->
+        <div class="flex flex-col sm:flex-row items-center gap-2 text-center text-slate-500 text-xs">
+          <div class="flex items-center gap-1.5">
+            <img src="images/carepulse-emblem.png" alt="Logo" class="w-4 h-4 object-contain">
+            <span class="font-bold text-slate-800">CarePulse MediCore</span>
+            <span class="text-slate-400">&bull;</span>
+            <span>Smart Hospital ERP</span>
+          </div>
+          <span class="hidden sm:inline text-slate-300">&bull;</span>
+          <div>
+            Architected &amp; Developed by <a href="https://khadijayaseen.github.io" class="text-brand-600 font-bold hover:underline">Khadija Yaseen</a>
+          </div>
+        </div>
+
+        <!-- Bottom Right: Modern SaaS Telemetry & Security -->
+        <div class="flex items-center gap-3 text-[11px] text-slate-500">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Operational • 18ms
+          </span>
+          <span class="hidden lg:inline text-slate-300">&bull;</span>
+          <span class="hidden lg:inline font-mono text-slate-500">v2.4.0-prod</span>
+          <span class="hidden sm:inline text-slate-300">&bull;</span>
+          <span class="inline-flex items-center gap-1 text-slate-600 font-medium">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-teal-600"></i>
+            HL7 / HIPAA Ready
+          </span>
+        </div>
+
       </div>
     </div>
   </footer>
